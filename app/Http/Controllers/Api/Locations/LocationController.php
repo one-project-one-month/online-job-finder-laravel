@@ -3,31 +3,31 @@
 namespace App\Http\Controllers\Api\Locations;
 
 use App\Http\Controllers\Controller;
-use App\Models\Location\Location;
-use App\Repositories\Locations\LocationRepositoryInterface;
+use App\Http\Resources\LocationResource;
+use App\Services\Locations\LocationService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 
 class LocationController extends Controller
 {
-    private $locationRepository;
+    private $locationService;
 
-    public function __construct(LocationRepositoryInterface $locationRepository)
+    public function __construct(LocationService $locationService)
     {
-        $this->locationRepository = $locationRepository;
+        $this->locationService = $locationService;
     }
 
     public function index()
     {
-        $locations = $this->locationRepository->getAllLocations();
+        $locations = $this->locationService->getAll();
         return response()->json($locations);
     }
 
     public function show($id)
     {
         try {
-            $location = $this->locationRepository->getLocationById($id);
+            $location = $this->locationService->show($id);
             return response()->json($location);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Location not found'], 404);
@@ -36,34 +36,43 @@ class LocationController extends Controller
 
     public function store(Request $request)
     {
+        $data  = $request->validate([
+            'name' => 'required|unique:locations|max:255',
+            'description' => 'required'
+        ]);
         try {
-            $validatedData = $request->validate([
-                'name' => 'required|unique:locations|max:255',
-                'description' => 'required',
-            ]);
 
-            $location = $this->locationRepository->createLocation($validatedData);
-            return response()->json($location, 201);
-        } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
+            $location = $this->locationService->create($data);
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'message' => 'Location created successfully',
+                    'location' => new LocationResource($location)
+                ]
+            );
+        } catch (\Exception $e) {
+            return response()->json(['message' => $e->getMessage()]);
         }
     }
 
     public function update(Request $request, $id)
     {
+        $data  = $request->validate([
+            'name' => 'required|unique:locations|max:255',
+            'description' => 'required'
+        ]);
+
         
         try {
             
-            $validatedData = $request->validate([
-                'name' => 'required|unique:locations|max:255',
-                'description' => 'required',
-                'lock_version' => 'required|integer',
-            ]);
-
+            $this->locationService->update($id, $data);
             
-
-            $location = $this->locationRepository->updateLocation($id, $validatedData);
-            return response()->json($location);
+            return response()->json(
+                [
+                    'status' => 'success',
+                    'message' => 'Location updated successfully'
+                ]
+            );
         } catch (ValidationException $e) {
             return response()->json(['errors' => $e->errors()], 422);
         } catch (\Exception $e) {
@@ -74,8 +83,15 @@ class LocationController extends Controller
     public function destroy($id)
     {
         try {
-            $this->locationRepository->deleteLocation($id);
-            return response()->json(null, 204);
+            
+            $this->locationService->delete($id);
+            
+            return response()->json([
+                'status'=>'success',
+                'message'=>'Deleted successfully'
+                
+                
+               ],200);
         } catch (ModelNotFoundException $e) {
             return response()->json(['message' => 'Location not found'], 404);
         }

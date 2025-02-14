@@ -5,41 +5,29 @@ namespace App\Repositories\Locations;
 use App\Models\Locations\Location;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 
-class LocationRepository implements LocationRepositoryInterface
-{
-    public function getAllLocations()
-    {
-        return Location::all();
+class LocationRepository {
+    public function create (array $data) {
+       return Location::create($data);
     }
 
-    public function getLocationById($id)
-    {
-        return Location::findOrFail($id);
+    public function show ($id) {
+       return Location::findOrFail($id);
     }
 
-    public function createLocation(array $data)
-    {
-        return Location::create($data);
+    public function getAll () {
+       return Location::all();
     }
 
-    public function updateLocation($id, array $data)
-    {
+    public function update ($id, array $data) {
         
-        $location = $this->getLocationById($id);
+        $location = Location::findOrFail($id);
         
-        
-        
-        $location->update($data);
-        $data['lock_version']++;
-        
-        return $location;
+        return $location->update($data);
     }
 
-    public function deleteLocation($id)
-    {
-        $location = $this->getLocationById($id);
-        $location->delete();
-        return true;
+    public function delete ($id) {
+        
+        $location = Location::findOrFail($id);
+       return $location->delete();
     }
 }
-
