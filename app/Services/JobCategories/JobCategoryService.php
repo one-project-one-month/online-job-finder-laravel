@@ -1,9 +1,41 @@
 <?php
 
+// app/Services/JobCategoryService.php
+
 namespace App\Services\JobCategories;
 
-use App\Models\JobCategory\JobCategory;
+use App\Repositories\JobCategory\JobCategoryRepository;
 
-class JobCategoryService{
+
+class JobCategoryService
+{
+    protected $jobCategoryRepo;
+
+    public function __construct(JobCategoryRepository $jobCategoryRepo)
+    {
+        $this->jobCategoryRepo = $jobCategoryRepo;
+    }
+
+    public function createJobCategory(array $data)
+    {
+        return $this->jobCategoryRepo->create($data); // Calls the repository to create a new JobCategory
+    }
+
+    public function getAllJobCategories()
+    {
+        return $this->jobCategoryRepo->all(); // Calls the repository to get all JobCategories
+    }
+
+    public function getJobCategory($id)
+    {
+        return $this->jobCategoryRepo->find($id); // Calls the repository to get JobCategory by id
+    }
+
+    public function updateJobCategory(array $data, $id)
+    {
+        $jobCategory = $this->jobCategoryRepo->find($id); // Find the JobCategory by id
+        $jobCategory->update($data); // Update the JobCategory record
+        return $jobCategory; // Return the updated JobCategory
+    }
 
 }
