@@ -51,16 +51,16 @@ class LocationController extends Controller
 
     public function update(Request $request, $id)
     {
-        
+
         try {
-            
+
             $validatedData = $request->validate([
                 'name' => 'required|unique:locations|max:255',
                 'description' => 'required',
-                'lock_version' => 'required|integer',
+
             ]);
 
-            
+
 
             $location = $this->locationRepository->updateLocation($id, $validatedData);
             return response()->json($location);
