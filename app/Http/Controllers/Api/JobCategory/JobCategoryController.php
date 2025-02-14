@@ -101,7 +101,7 @@ class JobCategoryController extends Controller
     public function destroy(jobCategory $jobCategory)
     {
         try {
-            $jobCategory = $this->jobCategoryService->getJobCategory($jobCategory->id);
+            $jobCategory = $this->jobCategoryService->deleteJobCategory($jobCategory->id);
             return response()->json([
                 'status'=>'success',
                 'message'=>'deleted successful',
