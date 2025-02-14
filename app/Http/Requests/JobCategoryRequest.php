@@ -18,7 +18,7 @@ class JobCategoryRequest extends FormRequest
     {
         return [
             'industry' => 'required|string|max:255',
-            'description' => 'required|string|max:500',
+            'description' => 'nullable|string|max:500',
         ];
     }
 }
