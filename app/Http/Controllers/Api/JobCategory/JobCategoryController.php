@@ -5,11 +5,14 @@
 namespace App\Http\Controllers\Api\JobCategory; // Add this if it's inside the Api folder
 
 
+use App\Models\JobCategory\JobCategory;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\JobCategoryRequest;
 use App\Http\Resources\JobCategoryResource;
 use App\Services\JobCategories\JobCategoryService;
+use Request;
 
 
 class JobCategoryController extends Controller
@@ -21,37 +24,95 @@ class JobCategoryController extends Controller
         $this->jobCategoryService = $jobCategoryService;
     }
 
-    public function create(JobCategoryRequest $request)
+    public function store(JobCategoryRequest $request)
     {
-        $data = $request->validated(); // Validate the request data
-        $jobCategory = $this->jobCategoryService->createJobCategory($data); // Call service to create JobCategory
-        return new JobCategoryResource($jobCategory); // Return the created JobCategory resource
+      try {
+        $jobCategory = $this->jobCategoryService->createJobCategory($request->toArray());
+
+        return response()->json(
+            [
+                'status'=>'success',
+                'message'=>'Job Category created successful',
+                'jobCategory'=> new JobCategoryResource($jobCategory)
+            ],201
+            );
+      } catch (\Exception $e) {
+        return response()->json(
+            [
+               'message'=>$e->getMessage(),
+
+            ],500
+            );
+      }
     }
 
-    public function getall()
+    public function index()
     {
-        $jobCategories = $this->jobCategoryService->getAllJobCategories(); // Call service to get all JobCategories
-        return JobCategoryResource::collection($jobCategories); // Return the JobCategories resource
+       try {
+        $jobCategories = $this->jobCategoryService->getAllJobCategories();
+        return response()->json([
+           'status'=>'success',
+           'message'=>'fetching successful',
+           'jobCategories'=> JobCategoryResource::collection($jobCategories)
+        ],200);
+       } catch (\Exception $e) {
+        return response()->json([
+            'status'=>'false',
+            'message'=>$e->getMessage(),
+
+         ],500);
+       }
     }
 
-    public function get($id)
+    public function show($id)
     {
+       try {
         $jobCategory = $this->jobCategoryService->getJobCategory($id); // Call service to get JobCategory by id
-        return new JobCategoryResource($jobCategory); // Return the JobCategory resource
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Fetching successful',
+            'jobCategory' => new JobCategoryResource($jobCategory),
+        ], 200);
+       } catch (\Exception $e) {
+       return response()->json([
+        'status'=>'error',
+        'message'=>$e->getMessage(),
+       ],500);
+       }
     }
 
-    public function update(JobCategoryRequest $request, $id)
+    public function update(JobCategoryRequest $request,JobCategory $jobCategory)
     {
-        $data = $request->validated(); // Validate the request data
-        $jobCategory = $this->jobCategoryService->updateJobCategory($data, $id); // Call service to update JobCategory
-        return new JobCategoryResource($jobCategory); // Return the updated JobCategory resource
+      try {
+        $jobCategory = $this->jobCategoryService->updateJobCategory($request->toArray(), $jobCategory->id); // Call service to update JobCategory
+       return response()->json([
+        'status'=>'success',
+        'message'=>'update successful',
+        'jobCategory'=> new JobCategoryResource($jobCategory)
+       ],200);
+      } catch (\Exception $e) {
+        return response()->json([
+            'status'=>'error',
+            'message'=>$e->getMessage()
+        ],500);
+      }
     }
 
-    public function delete($id)
+    public function destroy(jobCategory $jobCategory)
     {
-        $jobCategory = $this->jobCategoryService->getJobCategory($id); // Call service to get JobCategory by id
-        $jobCategory->delete(); // Delete the JobCategory record
-        return response()->json(null, Response::HTTP_NO_CONTENT); // Return no content
+        try {
+            $jobCategory = $this->jobCategoryService->getJobCategory($jobCategory->id);
+            return response()->json([
+                'status'=>'success',
+                'message'=>'deleted successful',
+                'jobCategory'=> new JobCategoryResource($jobCategory)
+               ],200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'=>'error',
+                'message'=>$e->getMessage()
+            ],500);
+        }
     }
 
 }

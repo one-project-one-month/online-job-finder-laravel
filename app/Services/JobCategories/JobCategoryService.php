@@ -33,9 +33,12 @@ class JobCategoryService
 
     public function updateJobCategory(array $data, $id)
     {
-        $jobCategory = $this->jobCategoryRepo->find($id); // Find the JobCategory by id
-        $jobCategory->update($data); // Update the JobCategory record
-        return $jobCategory; // Return the updated JobCategory
+        return $this->jobCategoryRepo->update($data, $id);
+
+    }
+
+    public function deleteJobCategory($id){
+        return $this->jobCategoryRepo->delete($id);
     }
 
 }
