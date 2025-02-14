@@ -1521,6 +1521,7 @@
         },
         {
             "name": "lcobucci/clock",
+
             "version": "2.2.0",
             "source": {
                 "type": "git",
@@ -1566,7 +1567,9 @@
             "description": "Yet another clock abstraction",
             "support": {
                 "issues": "https://github.com/lcobucci/clock/issues",
+
                 "source": "https://github.com/lcobucci/clock/tree/2.2.0"
+
             },
             "funding": [
                 {
@@ -1578,7 +1581,9 @@
                     "type": "patreon"
                 }
             ],
+
             "time": "2022-04-19T19:34:17+00:00"
+
         },
         {
             "name": "lcobucci/jwt",
@@ -9490,12 +9495,12 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
         "php": "^8.2"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }
