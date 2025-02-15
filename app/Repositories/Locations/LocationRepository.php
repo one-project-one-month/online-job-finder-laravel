@@ -3,31 +3,33 @@
 namespace App\Repositories\Locations;
 
 use App\Models\Locations\Location;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
 
 class LocationRepository {
     public function create (array $data) {
-       return Location::create($data);
+       $location= Location::create($data);
+       return $location;
     }
 
     public function show ($id) {
-       return Location::findOrFail($id);
+       $location= Location::findOrFail($id);
+       return $location;
     }
 
     public function getAll () {
-       return Location::all();
+       $location= Location::latest()->get();
+        return $location;
     }
 
-    public function update ($id, array $data) {
-        
+    public function update (array $data ,$id) {
         $location = Location::findOrFail($id);
-        
-        return $location->update($data);
+         $location->update($data);
+         return $location;
     }
 
     public function delete ($id) {
-        
+
         $location = Location::findOrFail($id);
-       return $location->delete();
+        $location->delete();
+        return $location;
     }
 }
