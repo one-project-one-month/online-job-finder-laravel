@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SkillRequest extends FormRequest
+class locationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,8 +22,8 @@ class SkillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ' required | string',
-            'description' => 'nullable | string',
+            'name'=>'required|string|max:255|unique:locations,name',
+            'description'=>'nullable|string|max:255'
         ];
     }
 }

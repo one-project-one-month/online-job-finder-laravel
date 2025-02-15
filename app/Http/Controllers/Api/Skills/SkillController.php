@@ -11,7 +11,7 @@ use Illuminate\Http\Request;
 
 class SkillController extends Controller
 {
-    protected $skillService;
+    private $skillService;
 
     public function __construct(SkillService $skillService)
     {
@@ -31,7 +31,7 @@ class SkillController extends Controller
         catch(\Exception $e)
         {
             return response()->json([
-                'status'=>'false',
+                'status'=>'error',
                 'message' => $e->getMessage()
             ],500);
         }
@@ -50,6 +50,7 @@ class SkillController extends Controller
         catch(\Exception $e)
         {
             return response()->json([
+                'status'=>'error',
                 'message' => $e->getMessage()
             ],500);
         }

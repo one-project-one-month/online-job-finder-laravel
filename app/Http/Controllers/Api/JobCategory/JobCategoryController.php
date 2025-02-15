@@ -17,7 +17,7 @@ use Request;
 
 class JobCategoryController extends Controller
 {
-    protected $jobCategoryService;
+    private $jobCategoryService;
 
     public function __construct(JobCategoryService $jobCategoryService)
     {

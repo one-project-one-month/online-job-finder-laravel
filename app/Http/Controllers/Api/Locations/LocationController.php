@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api\Locations;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\locationRequest;
 use App\Http\Resources\LocationResource;
+use App\Models\Locations\Location;
 use App\Services\Locations\LocationService;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\Request;
@@ -20,8 +22,19 @@ class LocationController extends Controller
 
     public function index()
     {
-        $locations = $this->locationService->getAll();
-        return response()->json($locations);
+        try {
+            $locations = $this->locationService->getAll();
+            return response()->json([
+                'message'=>'fetching successful',
+                'status'=>'success',
+                'locations'=> LocationResource::collection($locations)
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'=>$e->getMessage(),
+                'status'=>'error'
+            ],500);
+        }
     }
 
     public function show($id)
@@ -29,20 +42,19 @@ class LocationController extends Controller
         try {
             $location = $this->locationService->show($id);
             return response()->json($location);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Location not found'], 404);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message' => $e->getMessage(),
+                'status'=>'error'
+            ],500);
         }
     }
 
-    public function store(Request $request)
+    public function store(locationRequest $request)
     {
-        $data  = $request->validate([
-            'name' => 'required|unique:locations|max:255',
-            'description' => 'required'
-        ]);
         try {
 
-            $location = $this->locationService->create($data);
+            $location = $this->locationService->create($request->toArray());
             return response()->json(
                 [
                     'status' => 'success',
@@ -51,49 +63,51 @@ class LocationController extends Controller
                 ]
             );
         } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()]);
+            return response()->json([
+                'message' => $e->getMessage(),
+                'status'=>'error'
+            ],500);
         }
     }
 
-    public function update(Request $request, $id)
+    public function update(locationRequest $request, Location $location)
     {
-        $data  = $request->validate([
-            'name' => 'required|unique:locations|max:255',
-            'description' => 'required'
-        ]);
 
-        
+
         try {
-            
-            $this->locationService->update($id, $data);
-            
+           $location= $this->locationService->update($request->toArray(),$location->id);
+
             return response()->json(
                 [
                     'status' => 'success',
-                    'message' => 'Location updated successfully'
+                    'message' => 'Location updated successfully',
+                    'location'=>new LocationResource($location)
                 ]
             );
-        } catch (ValidationException $e) {
-            return response()->json(['errors' => $e->errors()], 422);
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 409);
+        }  catch (\Exception $e) {
+            return response()->json(
+                ['message' => $e->getMessage(),
+                'status'=>'error'
+                ] , 500);
         }
     }
 
-    public function destroy($id)
+    public function destroy(Location $location)
     {
         try {
-            
-            $this->locationService->delete($id);
-            
+
+            $this->locationService->delete( $location->id );
+
             return response()->json([
                 'status'=>'success',
                 'message'=>'Deleted successfully'
-                
-                
                ],200);
-        } catch (ModelNotFoundException $e) {
-            return response()->json(['message' => 'Location not found'], 404);
+        } catch (\Exception $e) {
+            return response()->json(
+                [
+                    'message' => $e->getMessage(),
+                    'status'=>'error'
+                ] , 500);
         }
     }
 }

@@ -13,12 +13,13 @@ class SkillRepository{
 
     public function find($id)
     {
-        return Skill::findOrFail($id);
+        $skill= Skill::findOrFail($id);
+        return $skill;
     }
 
     public function destroy($id)
     {
-        $skill = Skill::findorFail($id);
+        $skill = Skill::findOrFail($id);
         $skill->delete();
         return $skill;
     }
@@ -32,7 +33,7 @@ class SkillRepository{
 
     public function all()
     {
-        $skills = Skill::all();
+        $skills = Skill::latest()->get();
         return $skills;
     }
 

@@ -13,11 +13,8 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::resource('jobCategories',JobCategoryController::class);
-
-Route::resource('skills',SkillController::class);
-
-
-
-
-Route::apiResource('locations', LocationController::class);
+Route::prefix('admin/me')->group(function (){
+    Route::resource('jobCategories',JobCategoryController::class);
+    Route::resource('skills',SkillController::class);
+    Route::apiResource('locations', LocationController::class);
+});

@@ -21,18 +21,17 @@ class LocationService{
     }
 
     public function show ($id) {
-        
+
         return $this->locationRepository->show($id);
     }
 
-    public function  update($id, array $data)  {
-        
-        return $this->locationRepository->update($id, $data);
+    public function  update(array $data , $id)  {
+        return $this->locationRepository->update($data ,$id);
     }
 
     public function delete ($id) {
-       
+
         return $this->locationRepository->delete($id);
     }
-    
+
 }
