@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Api\Auth;
 
-use App\Http\Requests\changePasswordRequest;
+use App\Http\Requests\PasswordChangeRequest;
 use App\Http\Requests\LoginRequest;
 use App\Http\Resources\LoginResource;
 use App\Http\Resources\RegisterResource;
@@ -113,5 +113,31 @@ class AuthController extends Controller
         return response()->json([
             'message'=>'Signout successful'
         ]);
+    }
+
+    public function changePassword(PasswordChangeRequest $request){
+        $user = JWTAuth::parseToken()->authenticate();
+
+        if (!Hash::check($request->current_password, $user->password)) {
+            return response()->json([
+                'message' => 'Current password is incorrect',
+                'status' => 'error',
+            ], 400);
+        }
+
+        $user->password = Hash::make($request->new_password);
+        $user->save();
+
+        JWTAuth::invalidate(JWTAuth::getToken());
+        $newToken = JWTAuth::fromUser($user);
+
+        return response()->json([
+            'message'=>'Password changed successfully',
+            'status'=>'success',
+            'data'=>[
+                'user'=>new UserResource($user),
+                'token'=>$newToken
+            ],
+        ], 200);
     }
 }
