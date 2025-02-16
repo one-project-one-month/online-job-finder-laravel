@@ -33,7 +33,9 @@ class JobCategoryController extends Controller
             [
                 'status'=>'success',
                 'message'=>'Job Category created successful',
-                'jobCategory'=> new JobCategoryResource($jobCategory)
+                'data'=>[
+                    'jobCategory'=> new JobCategoryResource($jobCategory)
+                ]
             ],201
             );
       } catch (\Exception $e) {
@@ -53,7 +55,9 @@ class JobCategoryController extends Controller
         return response()->json([
            'status'=>'success',
            'message'=>'fetching successful',
-           'jobCategories'=> JobCategoryResource::collection($jobCategories)
+           'data'=>[
+            'jobCategories'=> JobCategoryResource::collection($jobCategories)
+           ]
         ],200);
        } catch (\Exception $e) {
         return response()->json([
@@ -71,7 +75,9 @@ class JobCategoryController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Fetching successful',
-            'jobCategory' => new JobCategoryResource($jobCategory),
+            'data'=>[
+                'jobCategory' => new JobCategoryResource($jobCategory),
+            ]
         ], 200);
        } catch (\Exception $e) {
        return response()->json([
@@ -88,7 +94,9 @@ class JobCategoryController extends Controller
        return response()->json([
         'status'=>'success',
         'message'=>'update successful',
-        'jobCategory'=> new JobCategoryResource($jobCategory)
+        'data'=>[
+            'jobCategory'=> new JobCategoryResource($jobCategory)
+        ]
        ],200);
       } catch (\Exception $e) {
         return response()->json([
@@ -105,7 +113,6 @@ class JobCategoryController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'deleted successful',
-                'jobCategory'=> new JobCategoryResource($jobCategory)
                ],200);
         } catch (\Exception $e) {
             return response()->json([

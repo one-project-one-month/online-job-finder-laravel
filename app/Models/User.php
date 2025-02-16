@@ -74,4 +74,8 @@ class User extends Authenticatable implements JWTSubject
     public function role(){
         return $this->belongsTo(Role::class);
     }
+
+    public function isAdmin(){
+        return $this->role_id==2;
+    }
 }

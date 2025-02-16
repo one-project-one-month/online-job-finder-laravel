@@ -17,7 +17,7 @@ class JobCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'industry' => 'required|string|max:255',
+            'industry' => 'required|string|max:255|unique:job_categories,industry',
             'description' => 'nullable|string|max:500',
         ];
     }
