@@ -19,12 +19,12 @@ Route::get('/user', function (Request $request) {
 Route::prefix('/auth')->group(function(){
     Route::post('signup',[AuthController::class,'register']);
     Route::post('signin',[AuthController::class,'login']);
-    Route::post('change-password',[AuthController::class,'changePassword']);
 });
 
 Route::middleware(JWTMiddleware::class)->group(function(){
     Route::get('users',[AuthController::class,'getUser']);
     Route::post('signout',[AuthController::class,'logout']);
+    Route::post('password/change',[AuthController::class,'changePassword']);
 });
 
 

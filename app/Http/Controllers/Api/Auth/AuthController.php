@@ -116,7 +116,7 @@ class AuthController extends Controller
     }
 
     public function changePassword(PasswordChangeRequest $request){
-        $user = JWTAuth::parseToken()->authenticate();
+        $user =User::with('role')->where('id',auth()->user()->id)->first();
 
         if (!Hash::check($request->current_password, $user->password)) {
             return response()->json([
