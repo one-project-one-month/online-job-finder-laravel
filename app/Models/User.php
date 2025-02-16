@@ -7,12 +7,14 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Reshadman\OptimisticLocking\OptimisticLocking;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Traits\HasRoles;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
-    use HasFactory, Notifiable ,OptimisticLocking;
+    use HasFactory, Notifiable ,OptimisticLocking ,HasRoles;
 
     /**
      * The attributes that are mass assignable.
@@ -20,9 +22,15 @@ class User extends Authenticatable implements JWTSubject
      * @var list<string>
      */
     protected $fillable = [
-        'name',
+        'username',
         'email',
         'password',
+        'role_id',
+        'is_activated',
+        'is_information_completed',
+        'profile_photo',
+        'role_id',
+        'lock_version',
     ];
 
     /**
@@ -61,5 +69,9 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function role(){
+        return $this->belongsTo(Role::class);
     }
 }
