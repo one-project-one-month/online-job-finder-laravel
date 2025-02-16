@@ -25,7 +25,9 @@ class SkillController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'fetching successful',
+               'data'=>[
                 'skills'=> SkillResource::collection($skills)
+               ]
             ],200);
         }
         catch(\Exception $e)
@@ -44,7 +46,9 @@ class SkillController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'Skill created successful',
-                'skill'=> new SkillResource($skill)
+                'data'=>[
+                    'skill'=> new SkillResource($skill)
+                ]
             ],201);
         }
         catch(\Exception $e)
@@ -80,7 +84,9 @@ class SkillController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'Skill fetched successful',
-                'skill'=> new SkillResource($skill)
+                'data'=>[
+                    'skill'=> new SkillResource($skill)
+                ]
             ],200);
         }
         catch(\Exception $e)
@@ -99,7 +105,9 @@ class SkillController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'Skill updated successful',
-                'skill'=> new SkillResource($skill)
+                'data'=>[
+                    'skill'=> new SkillResource($skill)
+                ]
             ],200);
         }
         catch(\Exception $e)

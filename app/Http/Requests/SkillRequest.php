@@ -22,7 +22,7 @@ class SkillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ' required | string',
+            'name' => ' required | string|unique:skills,name|max:255',
             'description' => 'nullable | string',
         ];
     }

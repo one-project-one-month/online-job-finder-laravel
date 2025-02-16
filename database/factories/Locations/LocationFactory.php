@@ -24,7 +24,6 @@ class LocationFactory extends Factory
         return [
             'name' => $this->faker->unique()->city,
             'description' => $this->faker->paragraph(3),
-            'lock_version' => 0,
         ];
     }
 }

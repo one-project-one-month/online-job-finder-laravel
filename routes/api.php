@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\JWTMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -22,13 +23,14 @@ Route::prefix('/auth')->group(function(){
 
 Route::middleware(JWTMiddleware::class)->group(function(){
     Route::get('users',[AuthController::class,'getUser']);
+    Route::post('signout',[AuthController::class,'logout']);
 });
 
 
 
 
-Route::prefix('admin/me')->group(function (){
-    Route::resource('jobCategories',JobCategoryController::class);
+Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
+    Route::resource('jobCategories',JobCategoryController::class)->middleware(CheckAdminMiddleware::class);
     Route::resource('skills',SkillController::class);
-    Route::apiResource('locations', LocationController::class);
+    Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });

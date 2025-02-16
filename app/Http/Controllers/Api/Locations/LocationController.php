@@ -27,7 +27,9 @@ class LocationController extends Controller
             return response()->json([
                 'message'=>'fetching successful',
                 'status'=>'success',
+               'data'=>[
                 'locations'=> LocationResource::collection($locations)
+               ]
             ]);
         } catch (\Exception $e) {
             return response()->json([
@@ -41,7 +43,13 @@ class LocationController extends Controller
     {
         try {
             $location = $this->locationService->show($id);
-            return response()->json($location);
+            return response()->json([
+                'message'=>'fetching location success',
+                'status'=>'success',
+                'data'=>[
+                    'location'=>new LocationResource($location)
+                ]
+                ]);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
@@ -59,7 +67,9 @@ class LocationController extends Controller
                 [
                     'status' => 'success',
                     'message' => 'Location created successfully',
-                    'location' => new LocationResource($location)
+                    'data'=>[
+                        'location' => new LocationResource($location)
+                    ]
                 ]
             );
         } catch (\Exception $e) {
@@ -81,7 +91,9 @@ class LocationController extends Controller
                 [
                     'status' => 'success',
                     'message' => 'Location updated successfully',
+                   'data'=>[
                     'location'=>new LocationResource($location)
+                   ]
                 ]
             );
         }  catch (\Exception $e) {
