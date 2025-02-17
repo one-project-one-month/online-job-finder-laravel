@@ -52,6 +52,7 @@ class JobCategoryController extends Controller
     {
        try {
         $jobCategories = $this->jobCategoryService->getAllJobCategories();
+
         return response()->json([
            'status'=>'success',
            'message'=>'fetching successful',
