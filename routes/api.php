@@ -1,15 +1,16 @@
 <?php
 
-use App\Http\Controllers\Api\Auth\AuthController;
-use App\Http\Middleware\CheckAdminMiddleware;
-use App\Http\Middleware\JWTMiddleware;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\JobCategory\JobCategoryController;
+use App\Http\Middleware\JWTMiddleware;
+use App\Http\Middleware\CheckAdminMiddleware;
+use App\Http\Controllers\Api\Auth\AuthController;
+use App\Http\Controllers\Api\Skills\SkillController;
+
+use App\Http\Controllers\Api\Resumes\ResumeController;
 
 use App\Http\Controllers\Api\Locations\LocationController;
-
-use App\Http\Controllers\Api\Skills\SkillController;
+use App\Http\Controllers\Api\JobCategory\JobCategoryController;
 
 
 Route::get('/user', function (Request $request) {
@@ -35,3 +36,5 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::resource('skills',SkillController::class);
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });
+
+Route::apiResource('resume', ResumeController::class);
