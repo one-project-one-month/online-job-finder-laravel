@@ -28,13 +28,17 @@ Route::middleware(JWTMiddleware::class)->group(function(){
     Route::post('password/change',[AuthController::class,'changePassword']);
 });
 
-
-
-
 Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::resource('jobCategories',JobCategoryController::class)->middleware(CheckAdminMiddleware::class);
     Route::resource('skills',SkillController::class);
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });
 
-Route::apiResource('resume', ResumeController::class);
+Route::apiResource('resumes', ResumeController::class)->middleware(JWTMiddleware::class);
+
+Route::post('test/',function(){
+    logger(request()->all());
+ return response()->json([
+
+ ]);
+});

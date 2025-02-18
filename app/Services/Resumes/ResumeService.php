@@ -1,8 +1,10 @@
 <?php
 
 namespace App\Services\Resumes;
-use App\Services\Resumes\ResumeService;
+use Illuminate\Http\UploadedFile;
+use Illuminate\Support\Facades\Storage;
 use App\Repositories\Resumes\ResumeRepository;
+
 
 
   class ResumeService{
@@ -13,38 +15,55 @@ use App\Repositories\Resumes\ResumeRepository;
         $this->resumeRepository = $resumeRepository;
      }
 
-     public function createResume( array $data){
-
-        dd($data);
-
-        return $this->resumeRepository->create($data);
+     public function createResume($user_id, UploadedFile $data)
+     {
+        return $this->resumeRepository->create($user_id,$data);
      }
+
 
      public function getAllResumes(){
 
         return $this->resumeRepository->all();
      }
 
-     public function getResume($id)
+     public function getResumeById($id)
      {
-         return $this->resumeRepository->find($id); // Calls the repository to get JobCategory by id
+         return $this->resumeRepository->find($id);
      }
 
-     public function updateResumes(array $data, $id)
+     public function updateResume($userId,$file, $resumeId)
      {
-         return $this->resumeRepository->update($data, $id);
+        $existResume=$this->getResumeById($resumeId);
+        if ($existResume) {
+            $filePath = str_replace('/storage/', '', $existResume->file_path);
+            if (Storage::exists($filePath)) {
+                Storage::delete($filePath);
+            }
+
+        }
+
+        return $this->resumeRepository->update($userId,$file,$resumeId);
+
+
 
      }
 
-     public function deleteResumes($id){
-         return $this->resumeRepository->delete($id);
+     public function deleteResume($resume){
+        $filePath = str_replace('/storage/', '', $resume->file_path);
+        if (Storage::exists($filePath)) {
+            Storage::delete($filePath);
+        }
+         return $this->resumeRepository->delete($resume->id);
      }
+    }
 
 
 
 
-  }
 
 
 
-?>
+
+
+
+
