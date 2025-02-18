@@ -1,5 +1,4 @@
 <?php
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\JWTMiddleware;
@@ -8,10 +7,6 @@ use App\Http\Controllers\Api\Auth\AuthController;
 use App\Http\Controllers\Api\Skills\SkillController;
 
 use App\Http\Controllers\Api\Resumes\ResumeController;
-
-use App\Http\Controllers\Api\Locations\LocationController;
-use App\Http\Controllers\Api\JobCategory\JobCategoryController;
-
 
 Route::get('/user', function (Request $request) {
     return $request->user();
@@ -34,11 +29,10 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });
 
-Route::apiResource('resumes', ResumeController::class)->middleware(JWTMiddleware::class);
 
-Route::post('test/',function(){
-    logger(request()->all());
- return response()->json([
 
- ]);
+Route::prefix('/me')->middleware([JWTMiddleware::class,MustBeApplicant::class])->group(function(){
+    Route::apiResource('profile',ApplicantProfileController::class);
 });
+
+Route::apiResource('resumes', ResumeController::class)->middleware(JWTMiddleware::class);
