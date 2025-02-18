@@ -12,7 +12,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\JobCategoryRequest;
 use App\Http\Resources\JobCategoryResource;
 use App\Services\JobCategories\JobCategoryService;
-use Request;
+
 
 
 class JobCategoryController extends Controller

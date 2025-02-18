@@ -22,7 +22,7 @@ class ResumeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file_path' => 'required|file|mimes:png,jpg'
+            'file_path' => 'nullable|mimes:png,jpg|max:2048',
         ];
     }
 }
