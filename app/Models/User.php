@@ -79,7 +79,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->role_id==2;
     }
 
+    public function isRecruiter(){
+        return $this->role_id==3;
+
+
     public function isApplicant(){
         return $this->role_id==1;
+
     }
 }
