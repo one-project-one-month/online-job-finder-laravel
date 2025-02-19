@@ -27,6 +27,7 @@ class LocationController extends Controller
             return response()->json([
                 'message'=>'fetching successful',
                 'status'=>'success',
+                'statusCode'=>200,
                'data'=>[
                 'locations'=> LocationResource::collection($locations)
                ]
@@ -34,7 +35,8 @@ class LocationController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'message'=>$e->getMessage(),
-                'status'=>'error'
+                'status'=>'error',
+                'statusCode'=>500
             ],500);
         }
     }
@@ -46,6 +48,7 @@ class LocationController extends Controller
             return response()->json([
                 'message'=>'fetching location success',
                 'status'=>'success',
+                'statusCode'=>200,
                 'data'=>[
                     'location'=>new LocationResource($location)
                 ]
@@ -66,16 +69,18 @@ class LocationController extends Controller
             return response()->json(
                 [
                     'status' => 'success',
+                    'statusCode'=>201,
                     'message' => 'Location created successfully',
                     'data'=>[
                         'location' => new LocationResource($location)
                     ]
-                ]
+                    ],201
             );
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
-                'status'=>'error'
+                'status'=>'error',
+                'statusCode'=>500
             ],500);
         }
     }
@@ -90,6 +95,7 @@ class LocationController extends Controller
             return response()->json(
                 [
                     'status' => 'success',
+                    'statusCode'=>200,
                     'message' => 'Location updated successfully',
                    'data'=>[
                     'location'=>new LocationResource($location)
@@ -99,6 +105,7 @@ class LocationController extends Controller
         }  catch (\Exception $e) {
             return response()->json(
                 ['message' => $e->getMessage(),
+                'statusCode'=>500,
                 'status'=>'error'
                 ] , 500);
         }
@@ -112,13 +119,15 @@ class LocationController extends Controller
 
             return response()->json([
                 'status'=>'success',
+                'statusCode'=>200,
                 'message'=>'Deleted successfully'
                ],200);
         } catch (\Exception $e) {
             return response()->json(
                 [
                     'message' => $e->getMessage(),
-                    'status'=>'error'
+                    'status'=>'error',
+                    'statusCode'=>500
                 ] , 500);
         }
     }

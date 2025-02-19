@@ -29,7 +29,7 @@ Route::middleware([JWTMiddleware::class])->group(function () {
     Route::post('password/change', [AuthController::class, 'changePassword']);
 });
 
-Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class,MustBeApplicant::class])->group(function(){
+Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class,CheckRecruiterMiddleware::class])->group(function(){
     Route::apiResource('profile',CompanyProfileController::class);
 });
 
@@ -39,8 +39,8 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });
 
-Route::prefix('applicant/me')->middleware([JWTMiddleware::class,MustBeApplicant::class])->group(function(){
-    Route::apiResource('profile',ApplicantProfileController::class);
+Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(){
+    Route::apiResource('profile',ApplicantProfileController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('resumes', ResumeController::class)->middleware(JWTMiddleware::class);
 });
 

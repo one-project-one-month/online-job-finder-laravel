@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\ApplicantProfile;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ApplicantProfileRequest;
+use App\Http\Requests\ApplicantProfileUpdateRequest;
 use App\Http\Resources\ApplicantProfileResource;
 use App\Models\ApplicantProfile\ApplicantProfile;
 use App\Services\ApplicantProfile\ApplicantProfileService;
@@ -23,6 +24,7 @@ class ApplicantProfileController extends Controller
             $applicantProfiles = $this->applicantProfileService->getAll();
             return response()->json([
                 'status' => 'success',
+                'statusCode'=>200,
                 'message' => 'Applicant retrives successfully',
                 'data' => [
                     'applicantProfiles' => ApplicantProfileResource::collection($applicantProfiles)
@@ -31,6 +33,7 @@ class ApplicantProfileController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'false',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -38,10 +41,14 @@ class ApplicantProfileController extends Controller
 
     public function store(ApplicantProfileRequest $request)
     {
+
         try {
+
+
             $applicantProfile = $this->applicantProfileService->create($request->toArray());
             return response()->json([
                 'status' => 'success',
+                'statusCode'=>201,
                 'message' => "Profile created successfully",
                 'data' => [
                     'applicantProfile' => new ApplicantProfileResource($applicantProfile)
@@ -50,6 +57,7 @@ class ApplicantProfileController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'false',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ], 500);
         }
@@ -61,6 +69,7 @@ class ApplicantProfileController extends Controller
             $applicantProfileId = $this->applicantProfileService->show($id);
             return response()->json([
                 'status' => 'success',
+                'statusCode'=>200,
                 'message' => "fetching success",
                 'data' => [
                     'applicantProfile' => new ApplicantProfileResource($applicantProfileId)
@@ -69,21 +78,22 @@ class ApplicantProfileController extends Controller
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'false',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ], 500);
         }
     }
 
-    public function update(ApplicantProfileRequest $request,$id)
+    public function update(ApplicantProfileUpdateRequest $request,$id)
     {
 
         try {
-            logger($id);
             $applicantProfile = $this->applicantProfileService->update($request->toArray(), $id);
 
             return response()->json(
                 [
                     'status' => 'success',
+                    'statusCode'=>200,
                     'message' => 'Profile updated successfully',
                     'data' => [
                         'applicantProfile' => new ApplicantProfileResource($applicantProfile)
@@ -95,24 +105,27 @@ class ApplicantProfileController extends Controller
             return response()->json(
                 [
                     'message' => $e->getMessage(),
-                    'status' => 'fail to update'
+                    'status' => 'fail to update',
+                    'statusCode'=>500
                 ],
                 500
             );
         }
     }
 
-    public function destroy(ApplicantProfile $applicantProfile)
+    public function destroy($id)
     {
         try {
-            $this->applicantProfileService->delete($applicantProfile->id);
+            $this->applicantProfileService->delete($id);
             return response()->json([
                 'status' => 'success',
                 'message' => 'deleted successful',
+                'statusCode'=>200
             ], 200);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'fail to delete',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ], 500);
         }

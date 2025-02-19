@@ -33,6 +33,7 @@ class JobCategoryController extends Controller
             [
                 'status'=>'success',
                 'message'=>'Job Category created successful',
+                'statusCode'=>500,
                 'data'=>[
                     'jobCategory'=> new JobCategoryResource($jobCategory)
                 ]
@@ -42,7 +43,8 @@ class JobCategoryController extends Controller
         return response()->json(
             [
                'message'=>$e->getMessage(),
-
+                'status'=>'error',
+                'statusCode'=>500
             ],500
             );
       }
@@ -56,14 +58,16 @@ class JobCategoryController extends Controller
         return response()->json([
            'status'=>'success',
            'message'=>'fetching successful',
+           'statusCode'=>200,
            'data'=>[
             'jobCategories'=> JobCategoryResource::collection($jobCategories)
            ]
         ],200);
        } catch (\Exception $e) {
         return response()->json([
-            'status'=>'false',
+            'status'=>'error',
             'message'=>$e->getMessage(),
+            'statusCode'=>500
 
          ],500);
        }
@@ -76,6 +80,7 @@ class JobCategoryController extends Controller
         return response()->json([
             'status' => 'success',
             'message' => 'Fetching successful',
+            'statusCode'=>200,
             'data'=>[
                 'jobCategory' => new JobCategoryResource($jobCategory),
             ]
@@ -83,6 +88,7 @@ class JobCategoryController extends Controller
        } catch (\Exception $e) {
        return response()->json([
         'status'=>'error',
+        'statusCode'=>500,
         'message'=>$e->getMessage(),
        ],500);
        }
@@ -94,6 +100,7 @@ class JobCategoryController extends Controller
         $jobCategory = $this->jobCategoryService->updateJobCategory($request->toArray(), $jobCategory->id); // Call service to update JobCategory
        return response()->json([
         'status'=>'success',
+        'statusCode'=>200,
         'message'=>'update successful',
         'data'=>[
             'jobCategory'=> new JobCategoryResource($jobCategory)
@@ -102,6 +109,7 @@ class JobCategoryController extends Controller
       } catch (\Exception $e) {
         return response()->json([
             'status'=>'error',
+            'statusCode'=>500,
             'message'=>$e->getMessage()
         ],500);
       }
@@ -113,11 +121,13 @@ class JobCategoryController extends Controller
             $jobCategory = $this->jobCategoryService->deleteJobCategory($jobCategory->id);
             return response()->json([
                 'status'=>'success',
+                'statusCode'=>200,
                 'message'=>'deleted successful',
                ],200);
         } catch (\Exception $e) {
             return response()->json([
                 'status'=>'error',
+                'statusCode'=>500,
                 'message'=>$e->getMessage()
             ],500);
         }

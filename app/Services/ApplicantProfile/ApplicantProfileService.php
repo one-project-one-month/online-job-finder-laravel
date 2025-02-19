@@ -15,6 +15,8 @@ class ApplicantProfileService
 
     public function create(array $data)
     {
+        $user=auth()->user()->id;
+        $data['user_id']=$user;
         return $this->applicantProfileRepository->create($data);
     }
 

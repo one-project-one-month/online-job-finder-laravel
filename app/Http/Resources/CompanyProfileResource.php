@@ -14,6 +14,7 @@ class CompanyProfileResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'user_id'=>$this->user_id,
             'company_name' => $this->company_name,
             'phone' => $this->phone,
             'website' => $this->website,
@@ -22,6 +23,7 @@ class CompanyProfileResource extends JsonResource
             'description' => $this->description,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'location'=>new LocationResource($this->whenLoaded('location'))
         ];
     }
 }

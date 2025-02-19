@@ -13,7 +13,7 @@ class ApplicantProfileRepository
 
     public function getall()
     {
-        return ApplicantProfile::latest()->get();
+        return ApplicantProfile::with('location')->latest()->get();
     }
 
     public function show($id)

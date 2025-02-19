@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplicantProfileRequest extends FormRequest
+class ApplicantProfileUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -23,7 +23,7 @@ class ApplicantProfileRequest extends FormRequest
     {
         return [
             'full_name'=>'required|string|max:100',
-            'phone'=>'required|numeric|min:15|unique:applicant_profiles,phone',
+            'phone'=>'required|numeric|min:15',
             'address'=>'required|string',
             'location_id'=>'required|exists:locations,id',
             'description'=>'required|string'
