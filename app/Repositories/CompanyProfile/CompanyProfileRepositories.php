@@ -14,7 +14,7 @@ class CompanyProfileRepositories
     public function all ()
     {
         // Get all company profiles
-        return CompanyProfile::all();
+        return CompanyProfile::with('location')->get();
     }
 
     public function find($id)

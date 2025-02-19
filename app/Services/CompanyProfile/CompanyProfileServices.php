@@ -1,14 +1,12 @@
 <?php
 
 namespace App\Services\CompanyProfile;
-use App\Http\Resources\CompanyProfileResource;
 use App\Repositories\CompanyProfile\CompanyProfileRepositories;
 
 class CompanyProfileServices
 {
     protected $companyProfileRepositories;
 
-    // Constructor to inject the repository
     public function __construct(CompanyProfileRepositories $companyProfileRepositories)
     {
         $this->companyProfileRepositories = $companyProfileRepositories;
@@ -16,14 +14,19 @@ class CompanyProfileServices
 
     public function createCompanyProfile($validatedData)
     {
-        // Get the user ID from the authenticated user
-        $user = auth()->user()->id; // Fetches the authenticated user's ID
+        $user = auth()->user()->id;
 
-        // Add the user_id to validated data
         $validatedData['user_id'] = $user;
 
-        // Create a new company profile
+       if ($user->id ==$validatedData['user_id']) {
+        return response()->json([
+            'message'=>'company profile already created',
+            'status'=>'false',
+            'statusCode'=>404
+        ],404);
+       }else {
         $companyProfile = $this->companyProfileRepositories->create($validatedData);
+       }
 
         return $companyProfile;
     }
@@ -44,7 +47,7 @@ class CompanyProfileServices
         return $companyProfile;
     }
 
-    public function UpdateCompanyProfile($validatedData, $id)
+    public function updateCompanyProfile($validatedData, $id)
     {
         // Update company profile
         $companyProfile = $this->companyProfileRepositories->update($validatedData, $id);
@@ -60,4 +63,4 @@ class CompanyProfileServices
         return $companyProfile;
     }
 }
-  
+

@@ -25,6 +25,7 @@ class CompanyProfileController extends Controller
                 return response()->json(
                     [
                         'status'=>'success',
+                        'statusCode'=>201,
                         'message'=>'Company Profile created successfully',
                         'data'=>[
                             'CompanyProfile'=> new CompanyProfileResource($companyProfile)
@@ -35,7 +36,8 @@ class CompanyProfileController extends Controller
                 return response()->json(
                     [
                        'message'=>$e->getMessage(),
-        
+                        'status'=>'error',
+                        'statusCode'=>500
                     ],500
                     );
             }
@@ -47,6 +49,7 @@ class CompanyProfileController extends Controller
                     $companyProfiles = $this->companyProfileService->GetAllCompanyProfile();
                     return response()->json([
                         'status'=>'success',
+                        'statusCode'=>200,
                         'message'=>'fetching successful',
                         'data'=>[
                             'companyProfiles'=> CompanyProfileResource::collection($companyProfiles)
@@ -56,7 +59,8 @@ class CompanyProfileController extends Controller
                     return response()->json([
                         'status'=>'error',
                         'message'=>$e->getMessage(),
-            
+                        'statusCode'=>500
+
                     ],500);
                 }
         }
@@ -67,6 +71,7 @@ class CompanyProfileController extends Controller
                 $companyProfile = $this->companyProfileService->GetCompanyProfileById($id);
                 return response()->json([
                     'status'=>'success',
+                    'statusCode'=>200,
                     'message'=>'fetching successful',
                     'data'=>[
                         'companyProfile'=> new CompanyProfileResource($companyProfile)
@@ -76,7 +81,7 @@ class CompanyProfileController extends Controller
                     return response()->json([
                         'status'=>'error',
                         'message'=>$e->getMessage(),
-            
+                        'statusCode'=>500
                     ],500);
         }
     }
@@ -87,6 +92,7 @@ class CompanyProfileController extends Controller
                 $companyProfile = $this->companyProfileService->updateCompanyProfile($request->toArray(), $id);
                 return response()->json([
                     'status'=>'success',
+                    'statusCode'=>200,
                     'message'=>'Company Profile updated successfully',
                     'data'=>[
                         'companyProfile'=> new CompanyProfileResource($companyProfile)
@@ -96,7 +102,8 @@ class CompanyProfileController extends Controller
                 return response()->json([
                     'status'=>'error',
                     'message'=>$e->getMessage(),
-        
+                    'statusCode'=>500
+
                 ],500);
             }
         }
@@ -107,13 +114,15 @@ class CompanyProfileController extends Controller
                 $companyProfile = $this->companyProfileService->deleteCompanyProfile($id);
                 return response()->json([
                     'status'=>'success',
+                    'statusCode'=>200,
                     'message'=>'Company Profile deleted successfully',
-                ],200); 
+                ],200);
             }catch (\Exception $e) {
                 return response()->json([
                     'status'=>'error',
                     'message'=>$e->getMessage(),
-        
+                    'statusCode'=>500
+
                 ],500);
             }
         }

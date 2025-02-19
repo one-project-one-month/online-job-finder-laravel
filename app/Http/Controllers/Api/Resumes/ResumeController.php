@@ -26,13 +26,15 @@ class ResumeController extends Controller
             return response()->json([
                 'message'=>'fetching successful',
                 'status'=>'success',
+                'statusCode'=>200,
                'data'=>[
                 'resumes' => ResumeResource::collection($resumes)
                ]
-            ]);
+            ],200);
         } catch (Exception $e) {
             return response()->json([
                 'message'=>$e->getMessage(),
+                'statusCode'=>500,
                 'status'=>'error'
             ],500);
         }
@@ -48,12 +50,12 @@ class ResumeController extends Controller
             return response()->json(
                 [
                     'status' => 'success',
-                    'statusCode'=>200,
+                    'statusCode'=>201,
                     'message' => 'Resumes created successfully',
                     'data'=>[
                         'resume' => new ResumeResource($resume)
                     ]
-                ]
+                    ],201
             );
         } catch (\Exception $e) {
             return response()->json([
@@ -76,7 +78,7 @@ class ResumeController extends Controller
             'data'=>[
                 'resume'=> new ResumeResource($resume)
             ]
-            ]);
+            ],200);
        } catch (\Exception $e) {
         return response()->json([
             'message' => $e->getMessage(),
@@ -99,11 +101,13 @@ class ResumeController extends Controller
            'data'=>[
             'resume'=>new ResumeResource($this->resumeService->getResumeById($resume->id))
            ]
-            ]);
+            ],200);
        } catch (\Exception $e) {
        return response()->json([
+        'status'=>'error',
+        'statusCode'=>500,
         'message'=>$e->getMessage()
-       ]);
+       ],500);
        }
     }
 
@@ -111,5 +115,10 @@ class ResumeController extends Controller
     public function destroy(Resume $resume)
     {
         $resume=$this->resumeService->deleteResume($resume);
+        return response()->json([
+            'message'=>'delete success',
+            'status'=>'success',
+            'statusCode'=>200,
+        ],200);
     }
 }

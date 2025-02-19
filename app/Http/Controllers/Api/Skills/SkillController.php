@@ -25,6 +25,7 @@ class SkillController extends Controller
             return response()->json([
                 'status'=>'success',
                 'message'=>'fetching successful',
+                'statusCode'=>200,
                'data'=>[
                 'skills'=> SkillResource::collection($skills)
                ]
@@ -34,6 +35,7 @@ class SkillController extends Controller
         {
             return response()->json([
                 'status'=>'error',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ],500);
         }
@@ -45,6 +47,7 @@ class SkillController extends Controller
             $skill = $this->skillService->createSkill($request->toArray());
             return response()->json([
                 'status'=>'success',
+                'statusCode'=>201,
                 'message'=>'Skill created successful',
                 'data'=>[
                     'skill'=> new SkillResource($skill)
@@ -55,6 +58,7 @@ class SkillController extends Controller
         {
             return response()->json([
                 'status'=>'error',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ],500);
         }
@@ -66,12 +70,15 @@ class SkillController extends Controller
             $this->skillService->destroySkill($skill->id);
             return response()->json([
                 'status'=>'success',
+                'statusCode'=>200,
                 'message'=>'Skill deleted successful'
             ],200);
         }
         catch(\Exception $e)
         {
             return response()->json([
+                'status'=>'error',
+                'statusCode'=>200,
                 'message' => $e->getMessage()
             ],500);
         }
@@ -83,6 +90,7 @@ class SkillController extends Controller
             $skill = $this->skillService->findSkill($skill->id);
             return response()->json([
                 'status'=>'success',
+                'statusCode'=>200,
                 'message'=>'Skill fetched successful',
                 'data'=>[
                     'skill'=> new SkillResource($skill)
@@ -92,6 +100,8 @@ class SkillController extends Controller
         catch(\Exception $e)
         {
             return response()->json([
+                'status'=>'error',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ],500);
         }
@@ -104,6 +114,7 @@ class SkillController extends Controller
             $skill = $this->skillService->updateSkill($request->toArray(),$skill->id);
             return response()->json([
                 'status'=>'success',
+                'statusCode'=>200,
                 'message'=>'Skill updated successful',
                 'data'=>[
                     'skill'=> new SkillResource($skill)
@@ -113,6 +124,8 @@ class SkillController extends Controller
         catch(\Exception $e)
         {
             return response()->json([
+                'status'=>'error',
+                'statusCode'=>500,
                 'message' => $e->getMessage()
             ],500);
         }

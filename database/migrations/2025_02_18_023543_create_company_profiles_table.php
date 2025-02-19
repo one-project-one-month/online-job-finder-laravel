@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('company_profiles', function (Blueprint $table) {
-            $table->id(); // Auto-incrementing primary key
+            $table->id();
             $table->unsignedBigInteger('user_id');
             $table->string('company_name');
             $table->string('phone')->nullable();
