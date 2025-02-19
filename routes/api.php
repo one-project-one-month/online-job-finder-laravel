@@ -29,8 +29,11 @@ Route::middleware([JWTMiddleware::class])->group(function () {
     Route::post('password/change', [AuthController::class, 'changePassword']);
 });
 
-Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class,CheckRecruiterMiddleware::class])->group(function(){
-    Route::apiResource('profile',CompanyProfileController::class);
+Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class])->group(function(){
+    Route::get('profile',[CompanyProfileController::class,'index']);
+    Route::post('profile',[CompanyProfileController::class,'store'])->middleware(CheckRecruiterMiddleware::class);
+    Route::get('profile',[CompanyProfileController::class,'show']);
+    Route::put('profile',[CompanyProfileController::class,'update'])->middleware(CheckRecruiterMiddleware::class);
 });
 
 Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
