@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\SocialMedia\SocialMediaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\JWTMiddleware;
@@ -45,6 +46,10 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
 Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('profile',ApplicantProfileController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('resumes', ResumeController::class)->middleware(JWTMiddleware::class);
+});
+
+Route::middleware(JWTMiddleware::class)->group(function(){
+    Route::apiResource('social-media',SocialMediaController::class);
 });
 
 
