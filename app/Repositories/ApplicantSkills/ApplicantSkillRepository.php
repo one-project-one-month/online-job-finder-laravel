@@ -13,7 +13,7 @@ class ApplicantSkillRepository
 
     public function getall()
     {
-        return ApplicantSkill::all();
+        return ApplicantSkill::with('skill')->get();
     }
 
     public function show($id)

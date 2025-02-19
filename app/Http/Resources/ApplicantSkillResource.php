@@ -16,11 +16,13 @@ class ApplicantSkillResource extends JsonResource
     {
         return [
             'id' => $this->id,
+            'user_id'=>$this->applicant_id,
             'applicant_name' => $this->applicantProfile->full_name ?? 'Unknown',
             'skill_name' => $this->skill->name ?? 'Unknown',
             'lock_version' => $this->lock_version,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'skill' => new RoleResource($this->whenLoaded('skill')),
         ];
     }
 }
