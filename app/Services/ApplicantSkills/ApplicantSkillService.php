@@ -13,9 +13,11 @@ class ApplicantSkillService
         $this->applicantSkillRepository = $applicantSkillRepository;
     }
 
-    public function create(array $data)
+    public function create( $data)
     {
+        
        
+        
         return $this->applicantSkillRepository->create($data);
     }
 
@@ -30,8 +32,10 @@ class ApplicantSkillService
         return $this->applicantSkillRepository->show($id);
     }
 
-    public function  update(array $data, $id)
-    {
+    public function  update( $data, $id)
+    {   
+        
+        
         return $this->applicantSkillRepository->update($data, $id);
     }
 

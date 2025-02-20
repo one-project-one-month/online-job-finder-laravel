@@ -18,7 +18,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 class AuthController extends Controller
 {
     public function register(RegisterRequest $request){
-        return 'gg';
+        
         try {
             $user=User::create([
                 'username'=>$request->username,
@@ -50,6 +50,7 @@ class AuthController extends Controller
     }
 
     public function login(LoginRequest $request){
+        
        try {
         $user = User::with('role')->where('email', $request->email)->first();
 

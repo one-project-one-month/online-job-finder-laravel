@@ -22,7 +22,7 @@ class StoreApplicantSkillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'applicant_id' => ' required | numeric',
+            
             'skill_id' => 'required',
         ];
     }

@@ -14,7 +14,7 @@ class ApplicantSkill extends Model
     use HasFactory, OptimisticLocking;
 
     protected $fillable = [
-        'applicant_id','skill_id','lock_version'
+        'applicant_id','skill_id'
     ];
 
     public function optimisticLockColumn(): string

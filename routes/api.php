@@ -50,6 +50,6 @@ Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(
     Route::apiResource('applicant-skill',ApplicantSkillController::class)->middleware(MustBeApplicant::class);
 });
 
-Route::apiResource('applicant-skill',ApplicantSkillController::class);
+//Route::apiResource('applicant-skill',ApplicantSkillController::class);
 
 

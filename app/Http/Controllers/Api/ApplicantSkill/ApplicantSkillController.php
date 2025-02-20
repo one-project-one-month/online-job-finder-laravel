@@ -7,6 +7,7 @@ use App\Http\Requests\StoreApplicantSkillRequest;
 use App\Http\Requests\UpdateApplicantSkillRequest;
 use App\Http\Resources\ApplicantSkillResource;
 use App\Services\ApplicantSkills\ApplicantSkillService;
+use Illuminate\Support\Facades\Auth;
 
 class ApplicantSkillController extends Controller
 {
@@ -19,7 +20,6 @@ class ApplicantSkillController extends Controller
 
     public function index()
     {
-        
         try {
             $applicantSkills = $this->applicantSkillService->getAll();
             return response()->json([
@@ -41,11 +41,10 @@ class ApplicantSkillController extends Controller
 
     public function store(StoreApplicantSkillRequest $request)
     {
-
         try {
-
-
-            $applicantSkill = $this->applicantSkillService->create($request->toArray());
+           
+            $applicantSkill = $this->applicantSkillService->create($request);
+            
             return response()->json([
                 'status' => 'success',
                 'statusCode'=>201,
@@ -86,10 +85,10 @@ class ApplicantSkillController extends Controller
 
     public function update(UpdateApplicantSkillRequest $request,$id)
     {
-
+        
         try {
-            $applicantSkill = $this->applicantSkillService->update($request->toArray(), $id);
-
+             $applicantSkill = $this->applicantSkillService->update($request, $id);
+           
             return response()->json(
                 [
                     'status' => 'success',
