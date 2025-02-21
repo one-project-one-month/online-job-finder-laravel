@@ -23,6 +23,7 @@ class ApplicantEducationRequest extends FormRequest
     {
         return [
             'applicant_id' => 'exists:applicant_profiles,id',
+            'start_date' => 'required',
             'school_name' => 'required | string',
             'degree' => 'required | string',
             'field_of_study' => 'required | string',
