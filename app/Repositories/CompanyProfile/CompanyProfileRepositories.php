@@ -20,7 +20,7 @@ class CompanyProfileRepositories
     public function find($id)
     {
         // Get company profile by ID
-        return CompanyProfile::find($id);
+        return CompanyProfile::with('location')->findOrFail($id);
     }
 
     public function update($validatedData, $id)
