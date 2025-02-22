@@ -1,5 +1,4 @@
 <?php
-use App\Http\Controllers\SocialMedia\SocialMediaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\JWTMiddleware;
@@ -10,14 +9,13 @@ use App\Http\Middleware\CheckRecruiterMiddleware;
 use App\Http\Controllers\Api\Skills\SkillController;
 use App\Http\Controllers\Api\Resumes\ResumeController;
 use App\Http\Controllers\Api\Locations\LocationController;
-
+use App\Http\Controllers\SocialMedia\SocialMediaController;
 use App\Http\Controllers\Api\JobCategory\JobCategoryController;
+use App\Http\Controllers\Api\ApplicantSkill\ApplicantSkillController;
 use App\Http\Controllers\Api\CompanyProfile\CompanyProfileController;
 use App\Http\Controllers\Api\ApplicantProfile\ApplicantProfileController;
-
-use App\Http\Controllers\Api\ApplicantSkill\ApplicantSkillController;
-
 use App\Http\Controllers\ApplicantEducation\ApplicantEducationController;
+use App\Http\Controllers\Api\ApplicantJobCategory\ApplicantJobCategoryController;
 
 
 Route::get('/user', function (Request $request) {
@@ -48,7 +46,6 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });
 
-
 Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('profile',ApplicantProfileController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('education',ApplicantEducationController::class)->middleware(MustBeApplicant::class);
@@ -62,6 +59,8 @@ Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(
 Route::middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('social-media',SocialMediaController::class);
 });
+
+Route::post('/applicant-job-categories', [ApplicantJobCategoryController::class, 'store']);
 
 
 
