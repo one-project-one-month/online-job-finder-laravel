@@ -14,7 +14,9 @@ return new class extends Migration
         Schema::create('resumes', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
+            $table->string('name');
             $table->string('file_path');
+            $table->boolean('is_default')->default(false);
             $table->unsignedBigInteger('lock_version');
             $table->timestamps();
         });
