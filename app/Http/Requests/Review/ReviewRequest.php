@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Review;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ApplicantEducationRequest extends FormRequest
+class ReviewRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,12 +22,10 @@ class ApplicantEducationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'applicant_id' => 'exists:applicant_profiles,id',
-            'start_date' => 'required',
-            'school_name' => 'required | string',
-            'degree' => 'required | string',
-            'field_of_study' => 'required | string',
-            'description' => 'required | string',
+            'applicant_id'=>'exists:applicant_profiles,id',
+            'company_id'=>'required|exists:company_profiles,id',
+            'comment'=>'nullable|string|min:3',
+            'rating'=>'numeric|min:0|max:5'
         ];
     }
 }

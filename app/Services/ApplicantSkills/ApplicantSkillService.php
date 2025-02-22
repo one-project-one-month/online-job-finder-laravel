@@ -16,8 +16,6 @@ class ApplicantSkillService
     public function create( $data)
     {
         
-       
-        
         return $this->applicantSkillRepository->create($data);
     }
 

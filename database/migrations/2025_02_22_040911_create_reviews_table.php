@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('resumes', function (Blueprint $table) {
+        Schema::create('reviews', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
-            $table->string('name');
-            $table->string('file_path');
-            $table->boolean('is_default')->default(false);
-            $table->unsignedBigInteger('lock_version');
+            $table->unsignedBigInteger('applicant_id');
+            $table->unsignedBigInteger('company_id');
+            $table->double('rating')->nullable();
+            $table->text('comment')->nullable();
+            $table->integer('lock_version')->default(0);
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('resumes');
+        Schema::dropIfExists('reviews');
     }
 };

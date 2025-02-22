@@ -1,4 +1,7 @@
 <?php
+
+use App\Http\Controllers\Api\Review\ReviewController;
+use App\Http\Controllers\SocialMedia\SocialMediaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\JWTMiddleware;
@@ -9,13 +12,13 @@ use App\Http\Middleware\CheckRecruiterMiddleware;
 use App\Http\Controllers\Api\Skills\SkillController;
 use App\Http\Controllers\Api\Resumes\ResumeController;
 use App\Http\Controllers\Api\Locations\LocationController;
-use App\Http\Controllers\SocialMedia\SocialMediaController;
 use App\Http\Controllers\Api\JobCategory\JobCategoryController;
 use App\Http\Controllers\Api\ApplicantSkill\ApplicantSkillController;
 use App\Http\Controllers\Api\CompanyProfile\CompanyProfileController;
 use App\Http\Controllers\Api\ApplicantProfile\ApplicantProfileController;
 use App\Http\Controllers\ApplicantEducation\ApplicantEducationController;
 use App\Http\Controllers\Api\ApplicantJobCategory\ApplicantJobCategoryController;
+
 
 
 Route::get('/user', function (Request $request) {
@@ -58,6 +61,7 @@ Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(
 
 Route::middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('social-media',SocialMediaController::class);
+    Route::apiResource('reviews',ReviewController::class);
 });
 
 Route::post('/applicant-job-categories', [ApplicantJobCategoryController::class, 'store']);

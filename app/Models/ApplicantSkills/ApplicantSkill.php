@@ -23,10 +23,10 @@ class ApplicantSkill extends Model
     }
 
     public function applicantProfile () {
-        return $this->belongsTo(ApplicantProfile::class,'applicant_id','id');
+        return $this->belongsTo(ApplicantProfile::class,'applicant_id');
     }
 
-    public function skill () {
-        return $this->belongsTo(Skill::class,'skill_id','id');
+    public function skill() {
+        return $this->belongsTo(Skill::class,'skill_id');
     }
 }

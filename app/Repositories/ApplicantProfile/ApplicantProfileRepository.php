@@ -18,7 +18,7 @@ class ApplicantProfileRepository
 
     public function show($id)
     {
-        return ApplicantProfile::findOrFail($id);
+        return ApplicantProfile::with('location')->findOrFail($id);
     }
 
     public function update(array $data, $id)

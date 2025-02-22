@@ -13,8 +13,9 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         // Seed Users
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
        
-
         // Seed Applicant Profiles
         DB::table('applicant_profiles')->insert([
             [

@@ -1,16 +1,15 @@
 <?php
-
 namespace App\Models\Resumes;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Reshadman\OptimisticLocking\OptimisticLocking;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class Resume extends Model
 {
-    use OptimisticLocking,  HasFactory;
-    protected $fillable =['user_id','file_path',];
+    use OptimisticLocking, HasFactory;
+    protected $fillable = ['user_id', 'name', 'file_path', 'is_default'];
 
     public function optimisticLockColumn(): string
     {

@@ -42,9 +42,8 @@ class ApplicantSkillController extends Controller
     public function store(StoreApplicantSkillRequest $request)
     {
         try {
-           
-            $applicantSkill = $this->applicantSkillService->create($request);
-            
+           $applicantSkill= $this->applicantSkillService->create($request->toArray());
+
             return response()->json([
                 'status' => 'success',
                 'statusCode'=>201,
@@ -85,10 +84,10 @@ class ApplicantSkillController extends Controller
 
     public function update(UpdateApplicantSkillRequest $request,$id)
     {
-        
+
         try {
              $applicantSkill = $this->applicantSkillService->update($request, $id);
-           
+
             return response()->json(
                 [
                     'status' => 'success',

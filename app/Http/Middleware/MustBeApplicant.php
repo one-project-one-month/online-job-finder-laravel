@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Middleware;
 
 use Closure;
@@ -15,12 +14,13 @@ class MustBeApplicant
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if(auth()->user() && auth()->user()->isApplicant()){
+        if (auth()->user() && auth()->user()->isApplicant()) {
             return $next($request);
         }
+
         return response()->json([
             "status"  => false,
             "message" => "Unauthorized Access",
-        ],403);
+        ], 403);
     }
 }

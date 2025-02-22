@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -22,8 +21,8 @@ class StoreApplicantSkillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            
-            'skill_id' => 'required',
+            'skill_ids'   => 'array|min:1',
+            'skill_ids.*' => 'exists:skills,id',
         ];
     }
 }

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('field_of_study');
             $table->text('description');
             $table->date('start_date');
-            $table->date('end_date');
+            $table->date('end_date')->nullable();
             $table->boolean('still_attending')->default(0);
             $table->unsignedBigInteger('lock_version');
             $table->timestamps();

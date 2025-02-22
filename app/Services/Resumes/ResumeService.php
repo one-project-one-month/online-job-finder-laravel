@@ -15,9 +15,9 @@ use App\Repositories\Resumes\ResumeRepository;
         $this->resumeRepository = $resumeRepository;
      }
 
-     public function createResume($user_id, UploadedFile $data)
+     public function createResume($data)
      {
-        return $this->resumeRepository->create($user_id,$data);
+        return $this->resumeRepository->create($data);
      }
 
 
