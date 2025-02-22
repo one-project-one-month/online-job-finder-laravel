@@ -23,28 +23,25 @@ class ApplicantSkillRepository
         //     ]);
         // }
         $applicantProfile->skills()->sync($data['skill_ids']);
+        return $applicantProfile;
     }
 
-    public function getall()
+    public function getAll()
     {
-        return ApplicantSkill::with('skill')->get();
+        return ApplicantSkill::with('applicantProfile','skill')->get();
     }
 
     public function show($id)
     {
-        return ApplicantSkill::with('skill')->findOrFail($id);
+        return ApplicantSkill::with('skill','applicantProfile')->findOrFail($id);
     }
 
-    public function update( $data, $id)
+    public function update($data, $id)
     {
         $user_id = Auth::user()->id;
-        $data['applicant_id'] = $user_id;
-
-        $applicantSkill = ApplicantSkill::with('skill')->findOrFail($id);
-        $applicantSkill->update(['applicant_id' => $data->applicant_id,'skill_id' => $data->skill_id]);
-        return $applicantSkill;
-
-
+        $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
+        $applicantProfile->skills()->sync($data['skill_ids']);
+        return ApplicantSkill::with('skill')->findOrFail($id);
     }
 
     public function delete($id)
