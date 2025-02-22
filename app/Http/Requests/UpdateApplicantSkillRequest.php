@@ -21,9 +21,11 @@ class UpdateApplicantSkillRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            
-            'skill_id' => 'required',
-        ];
+
+
+            return [
+                'skill_ids'   => 'array|min:1',
+                'skill_ids.*' => 'exists:skills,id',
+            ];
     }
 }
