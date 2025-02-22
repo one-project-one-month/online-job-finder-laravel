@@ -1,4 +1,5 @@
 <?php
+use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\SocialMedia\SocialMediaController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -61,6 +62,7 @@ Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(
 
 Route::middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('social-media',SocialMediaController::class);
+    Route::apiResource('reviews',ReviewController::class);
 });
 
 

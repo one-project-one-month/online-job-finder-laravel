@@ -16,54 +16,91 @@ class SocialMediaController extends Controller
         $this->socialMedia=$socialMedia;
     }
     public function index(){
-       $socialMedia= $this->socialMedia->getAllSocialMedia();
-       return response()->json([
-        'message'=>'social media created successfully',
-        'status'=>'success',
-        'statusCode'=>200,
-        'data'=>[
-            'socialMedias'=>SocialMediaResource::collection($socialMedia)
-        ]
-        ],200);
+      try {
+        $socialMedia= $this->socialMedia->getAllSocialMedia();
+        return response()->json([
+         'message'=>'social media created successfully',
+         'status'=>'success',
+         'statusCode'=>200,
+         'data'=>[
+             'socialMedias'=>SocialMediaResource::collection($socialMedia)
+         ]
+         ],200);
+      } catch (\Exception $e) {
+        return response()->json([
+            'message'=>$e->getMessage(),
+            'status'=>'fail',
+            'statusCode'=>500,
+            ],500);
+      }
     }
 
     public function store(SocialMediaRequest $request){
-        $socialMedia=$this->socialMedia->createSocialMedia($request->validated());
 
-        return response()->json([
-            'message'=>'social media created successfully',
-            'status'=>'success',
-            'statusCode'=>201,
-            'data'=>[
-                'socialMedias'=>SocialMediaResource::make($socialMedia)
-            ]
-            ],201);
+        try {
+            $socialMedia=$this->socialMedia->createSocialMedia($request->validated());
+
+            return response()->json([
+                'message'=>'social media created successfully',
+                'status'=>'success',
+                'statusCode'=>201,
+                'data'=>[
+                    'socialMedias'=>SocialMediaResource::make($socialMedia)
+                ]
+                ],201);
+          } catch (\Exception $e) {
+            return response()->json([
+                'message'=>$e->getMessage(),
+                'status'=>'error',
+                'statusCode'=>500,
+                ],500);
+          }
+
     }
 
     public function show($id){
-        $socialMedia=$this->socialMedia->getSocialMediaById($id);
 
-        return response()->json([
-            'message'=>'social media created successfully',
-            'status'=>'success',
-            'statusCode'=>200,
-            'data'=>[
-                'socialMedias'=>SocialMediaResource::make($socialMedia)
-            ]
-            ],200);
+        try {
+            $socialMedia=$this->socialMedia->getSocialMediaById($id);
+            return response()->json([
+                'message'=>'social media fetched successfully',
+                'status'=>'success',
+                'statusCode'=>200,
+                'data'=>[
+                    'socialMedias'=>SocialMediaResource::make($socialMedia)
+                ]
+                ],200);
+          } catch (\Exception $e) {
+            return response()->json([
+                'message'=>$e->getMessage(),
+                'status'=>'error',
+                'statusCode'=>500,
+                ],500);
+          }
+
+
     }
 
     public function update(SocialMediaRequest $request , $id){
-        $updateSocialMedia=$this->socialMedia->updateSocialMedia($request->toArray(),$id);
+        try {
+            $updateSocialMedia=$this->socialMedia->updateSocialMedia($request->toArray(),$id);
 
-        return response()->json([
-            'message'=>'Social Media Update successfully',
-            'status'=>'success',
-            'statusCode'=>200,
-            'data'=>[
-                'socialMedia'=>SocialMediaResource::make($updateSocialMedia)
-            ]
-            ],200);
+            return response()->json([
+                'message'=>'Social Media Update successfully',
+                'status'=>'success',
+                'statusCode'=>200,
+                'data'=>[
+                    'socialMedia'=>SocialMediaResource::make($updateSocialMedia)
+                ]
+                ],200);
+          } catch (\Exception $e) {
+            return response()->json([
+                'message'=>$e->getMessage(),
+                'status'=>'error',
+                'statusCode'=>500,
+                ],500);
+          }
+
     }
 
     public function destroy($id){

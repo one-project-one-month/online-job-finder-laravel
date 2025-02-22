@@ -21,19 +21,19 @@ class ApplicantSkillRepository
 
     public function show($id)
     {
-        return ApplicantSkill::findOrFail($id);
+        return ApplicantSkill::with('skill')->findOrFail($id);
     }
 
     public function update( $data, $id)
     {
         $user_id = Auth::user()->id;
         $data['applicant_id'] = $user_id;
-        
+
         $applicantSkill = ApplicantSkill::with('skill')->findOrFail($id);
         $applicantSkill->update(['applicant_id' => $data->applicant_id,'skill_id' => $data->skill_id]);
         return $applicantSkill;
 
-        
+
     }
 
     public function delete($id)
