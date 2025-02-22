@@ -11,24 +11,23 @@ class ApplicantSkillRepository
     public function create( $data)
     {
         $user_id = Auth::user()->id;
-        // $data['applicant_id'] = $user_id;
-        // return ApplicantSkill::create(['applicant_id' => $data->applicant_id , 'skill_id' => $data->skill_id]);
 
         $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
-
-        // foreach ($data as $key => $value) {
-        //     ApplicantSkill::create([
-        //         'applicant_id' => $applicantProfile->id,
-        //         'skill_id' => $value
-        //     ]);
-        // }
+        if (ApplicantSkill::where('applicant_id', $applicantProfile->id)->exists()) {
+            throw new \Exception("Applicant skills already created");
+        }
         $applicantProfile->skills()->sync($data['skill_ids']);
-        return $applicantProfile;
+
+
+        return ApplicantSkill::where('applicant_id',$applicantProfile->id)->with('applicantProfile','skill')->get();
+
     }
 
     public function getAll()
     {
-        return ApplicantSkill::with('applicantProfile','skill')->get();
+        $user=auth()->user();
+        $applicant=ApplicantProfile::where('user_id',$user->id)->first();
+        return ApplicantSkill::where('applicant_id',$applicant->id)->with('applicantProfile','skill')->get();
     }
 
     public function show($id)
@@ -41,12 +40,13 @@ class ApplicantSkillRepository
         $user_id = Auth::user()->id;
         $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
         $applicantProfile->skills()->sync($data['skill_ids']);
-        return ApplicantSkill::with('skill')->findOrFail($id);
+        return ApplicantSkill::where('applicant_id',$applicantProfile->id)->with('applicantProfile','skill')->get();
     }
 
     public function delete($id)
     {
-        $applicantSkill = ApplicantSkill::findOrFail($id);
+
+        $applicantSkill = ApplicantSkill::where('applicant_id',$id)->firstOrFail();
         $applicantSkill->delete();
         return $applicantSkill;
     }

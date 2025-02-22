@@ -14,19 +14,8 @@ class CompanyProfileServices
 
     public function createCompanyProfile($validatedData)
     {
-        $user = auth()->user()->id;
 
-        $validatedData['user_id'] = $user;
-
-       if ($user->id ==$validatedData['user_id']) {
-        return response()->json([
-            'message'=>'company profile already created',
-            'status'=>'false',
-            'statusCode'=>404
-        ],404);
-       }else {
         $companyProfile = $this->companyProfileRepositories->create($validatedData);
-       }
 
         return $companyProfile;
     }

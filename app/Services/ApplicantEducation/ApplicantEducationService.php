@@ -16,8 +16,8 @@ class ApplicantEducationService
 
    public function create(array $data)
    {
-        $user = auth()->user()->id;
-        $applicant = ApplicantProfile::where('user_id',$user)->first();
+        $user = auth()->user();
+        $applicant = ApplicantProfile::where('user_id',$user->id)->first();
 
         if (isset($data['start_date'])) {
             $data['start_date'] =  Carbon::parse($data['start_date'])->toDateString();
@@ -28,6 +28,10 @@ class ApplicantEducationService
         }
 
         $data['applicant_id'] = $applicant->id;
+
+        if ($data['applicant_id'] ==$applicant->id) {
+            throw new \Exception("Applicant education already created");
+        }
         return $this->applicantEducationRepository->create($data);
    }
 

@@ -39,8 +39,9 @@ Route::middleware([JWTMiddleware::class])->group(function () {
 Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class])->group(function(){
     Route::get('profile',[CompanyProfileController::class,'index']);
     Route::post('profile',[CompanyProfileController::class,'store'])->middleware(CheckRecruiterMiddleware::class);
-    Route::get('profile',[CompanyProfileController::class,'show']);
-    Route::put('profile',[CompanyProfileController::class,'update'])->middleware(CheckRecruiterMiddleware::class);
+    Route::get('profile/{id}',[CompanyProfileController::class,'show']);
+    Route::put('profile/{id}',[CompanyProfileController::class,'update'])->middleware(CheckRecruiterMiddleware::class);
+    Route::delete('profile/{id}',[CompanyProfileController::class,'destroy'])->middleware(CheckRecruiterMiddleware::class);
 });
 
 Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
@@ -53,7 +54,7 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
 Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('profile',ApplicantProfileController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('education',ApplicantEducationController::class)->middleware(MustBeApplicant::class);
-    Route::apiResource('resumes', ResumeController::class)->middleware(JWTMiddleware::class);
+    Route::apiResource('resumes', ResumeController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('applicant-skill',ApplicantSkillController::class)->middleware(MustBeApplicant::class);
 });
 
