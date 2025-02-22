@@ -1,124 +1,132 @@
 <?php
-
 namespace App\Http\Controllers\Api\Resumes;
-use Exception;
-use Illuminate\Http\Request;
-use App\Models\Resumes\Resume;
+
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ResumeRequest;
 use App\Http\Resources\ResumeResource;
+use App\Models\Resumes\Resume;
 use App\Services\Resumes\ResumeService;
+use App\Services\Storage\StorageService;
+use Exception;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ResumeController extends Controller
 {
     private $resumeService;
+    private $storageService;
 
-    public function __construct(ResumeService $resumeService){
-
-              $this->resumeService = $resumeService;
-        }
-
+    public function __construct(ResumeService $resumeService, StorageService $storageService)
+    {
+        $this->resumeService  = $resumeService;
+        $this->storageService = $storageService;
+    }
 
     public function index()
     {
         try {
             $resumes = $this->resumeService->getAllResumes();
             return response()->json([
-                'message'=>'fetching successful',
-                'status'=>'success',
-                'statusCode'=>200,
-               'data'=>[
-                'resumes' => ResumeResource::collection($resumes)
-               ]
-            ],200);
+                'message'    => 'fetching successful',
+                'status'     => 'success',
+                'statusCode' => 200,
+                'data'       => [
+                    'resumes' => ResumeResource::collection($resumes),
+                ],
+            ], 200);
         } catch (Exception $e) {
             return response()->json([
-                'message'=>$e->getMessage(),
-                'statusCode'=>500,
-                'status'=>'error'
-            ],500);
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
         }
     }
-
 
     public function store(ResumeRequest $request)
     {
 
         try {
-            $user=auth()->user();
-            $resume = $this->resumeService->createResume($user->id,$request->file('file_path'));
+            $user = Auth::user();
+
+            $file_path = $this->storageService->store('resumes', $request->file('file_path'));
+            $name      = $request->file('file_path')->getClientOriginalName();
+
+            $resume = $this->resumeService->createResume([
+                'user_id'   => $user->id,
+                'name'      => $name,
+                'file_path' => $file_path,
+            ]);
+
             return response()->json(
                 [
-                    'status' => 'success',
-                    'statusCode'=>201,
-                    'message' => 'Resumes created successfully',
-                    'data'=>[
-                        'resume' => new ResumeResource($resume)
-                    ]
-                    ],201
+                    'status'     => 'success',
+                    'statusCode' => 201,
+                    'message'    => 'Resumes uploaded successfully',
+                    'data'       => [
+                        'resume' => new ResumeResource($resume),
+                    ],
+                ], 201
             );
         } catch (\Exception $e) {
             return response()->json([
-                'message' => $e->getMessage(),
-                'statusCode'=>500,
-                'status'=>'error'
-            ],500);
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
         }
     }
 
-
     public function show(Resume $resume)
     {
-       try {
-        $resume=$this->resumeService->getResumeById($resume->id);
-        return response()->json([
-            'status'=>'success',
-            'statusCode'=>200,
-            'message'=>'fetching resume success',
-            'data'=>[
-                'resume'=> new ResumeResource($resume)
-            ]
-            ],200);
-       } catch (\Exception $e) {
-        return response()->json([
-            'message' => $e->getMessage(),
-            'statusCode'=>500,
-            'status'=>'error'
-        ],500);
-       }
+        try {
+            $resume = $this->resumeService->getResumeById($resume->id);
+            return response()->json([
+                'status'     => 'success',
+                'statusCode' => 200,
+                'message'    => 'fetching resume success',
+                'data'       => [
+                    'resume' => new ResumeResource($resume),
+                ],
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
+        }
     }
 
-
-    public function update(Request $request ,Resume $resume)
+    public function update(Request $request, Resume $resume)
     {
-       try {
-        $user=auth()->user();
-        $this->resumeService->updateResume($user->id,$request->file('file_path'),$resume->id);
-        return response()->json([
-            'message'=>'resume update successful',
-            'status'=>'success',
-            'statusCode'=>'200',
-           'data'=>[
-            'resume'=>new ResumeResource($this->resumeService->getResumeById($resume->id))
-           ]
-            ],200);
-       } catch (\Exception $e) {
-       return response()->json([
-        'status'=>'error',
-        'statusCode'=>500,
-        'message'=>$e->getMessage()
-       ],500);
-       }
+        try {
+            $user = Auth::user();
+            $this->resumeService->updateResume($user->id, $request->file('file_path'), $resume->id);
+            return response()->json([
+                'message'    => 'resume update successful',
+                'status'     => 'success',
+                'statusCode' => '200',
+                'data'       => [
+                    'resume' => new ResumeResource($this->resumeService->getResumeById($resume->id)),
+                ],
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'     => 'error',
+                'statusCode' => 500,
+                'message'    => $e->getMessage(),
+            ], 500);
+        }
     }
-
 
     public function destroy(Resume $resume)
     {
-        $resume=$this->resumeService->deleteResume($resume);
+        $resume = $this->resumeService->deleteResume($resume);
         return response()->json([
-            'message'=>'delete success',
-            'status'=>'success',
-            'statusCode'=>200,
-        ],200);
+            'message'    => 'delete success',
+            'status'     => 'success',
+            'statusCode' => 200,
+        ], 200);
     }
 }
