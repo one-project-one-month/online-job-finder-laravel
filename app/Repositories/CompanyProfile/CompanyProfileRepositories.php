@@ -7,8 +7,17 @@ class CompanyProfileRepositories
 {
     public function create($validatedData)
     {
-        // Create and save a new company profile
-        return CompanyProfile::create($validatedData);
+        $user=auth()->user();
+        $validatedData['user_id']=$user->id;
+        $existCompanyProfile=CompanyProfile::where('user_id',$user->id)->first();
+        logger($existCompanyProfile);
+        if ($existCompanyProfile) {
+            throw new \Exception("Company profile already created");
+        }
+        $companyProfile= CompanyProfile::create($validatedData);
+        return $companyProfile;
+
+
     }
 
     public function all ()

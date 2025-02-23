@@ -2,6 +2,7 @@
 
 namespace App\Services\ApplicantProfile;
 
+use App\Models\ApplicantProfile\ApplicantProfile;
 use App\Repositories\ApplicantProfile\ApplicantProfileRepository;
 
 class ApplicantProfileService
@@ -15,8 +16,13 @@ class ApplicantProfileService
 
     public function create(array $data)
     {
-        $user=auth()->user()->id;
-        $data['user_id']=$user;
+        $user=auth()->user();
+        $data['user_id']=$user->id;
+
+        $existApplicantProfile=ApplicantProfile::where('user_id',$user->id)->first();
+        if ($existApplicantProfile) {
+            throw new \Exception("Applicant profile already created");
+        }
         return $this->applicantProfileRepository->create($data);
     }
 
