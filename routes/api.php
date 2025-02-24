@@ -57,6 +57,7 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });
 
+
 Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('profile',ApplicantProfileController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('education',ApplicantEducationController::class)->middleware(MustBeApplicant::class);

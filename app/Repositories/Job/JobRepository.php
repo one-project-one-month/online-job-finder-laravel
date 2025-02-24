@@ -8,7 +8,17 @@ use App\Models\Job\JobPost;
 
 class JobRepository{
     public function get(){
-        $jobs=JobPost::all();
+        $jobs=JobPost::when(request('location'),function($query){
+           $query->whereHas('location',function($query){
+                return $query->where('id',request('location'));
+            });
+        })->
+        when(request('jobCategory'),function($query){
+            $query->whereHas('location',function($query){
+                return $query->where('id',request('jobCategory'));
+            });
+        })->get();
+        dd($jobs);
         return $jobs;
     }
 
@@ -39,5 +49,6 @@ class JobRepository{
     public function delete($id){
         $job=JobPost::findOrFail($id);
         $job->delete();
+        return $job;
     }
 }
