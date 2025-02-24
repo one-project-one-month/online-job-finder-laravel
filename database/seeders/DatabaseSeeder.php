@@ -15,18 +15,19 @@ class DatabaseSeeder extends Seeder
         // Seed Users
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
-       
+        $this->call(LocationSeeder::class);
+
         // Seed Applicant Profiles
         DB::table('applicant_profiles')->insert([
             [
-                
+
                 'user_id' => DB::table('users')->first()->id,
                 'full_name' => 'John Doe',
                 'phone' => '1234567890',
                 'address' => '123 Main St, City, Country',
                 'location_id' => 1,
                 'description' => 'Experienced web developer',
-                'lock_version' => 0,
+                'lock_version' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
@@ -35,40 +36,42 @@ class DatabaseSeeder extends Seeder
         // Seed Skills
         DB::table('skills')->insert([
             [
-                
+
                 'name' => 'Laravel',
                 'description' => 'PHP Framework',
-                'lock_version' => 0,
+                'lock_version' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                
+
                 'name' => 'React',
                 'description' => 'JS Framework',
-                'lock_version' => 0,
+                'lock_version' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
-            
+
             [
-                
+
                 'name' => '.Net',
                 'description' => 'C# Framework',
-                'lock_version' => 0,
+                'lock_version' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ],
             [
-                
+
                 'name' => 'Flask',
                 'description' => 'Python Framework',
-                'lock_version' => 0,
+                'lock_version' => 1,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
             ]
         ]);
 
-        
+
+
+
     }
 }
