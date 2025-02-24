@@ -18,7 +18,7 @@ class JobRepository{
                 return $query->where('id',request('jobCategory'));
             });
         })->get();
-        dd($jobs);
+
         return $jobs;
     }
 
