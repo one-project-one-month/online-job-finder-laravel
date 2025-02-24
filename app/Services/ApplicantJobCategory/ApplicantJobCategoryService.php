@@ -22,4 +22,19 @@ class ApplicantJobCategoryService
     {
         return $this->applicantJobCategoryRepository->getAll();
     }
+
+    public function show($id)
+    {
+        return $this->applicantJobCategoryRepository->show($id);
+    }
+
+    public function update($data, $id)
+    {
+        return $this->applicantJobCategoryRepository->update($data,$id);
+    }
+
+    public function delete ($id)
+    {
+        return $this->applicantJobCategoryRepository->delete($id);
+    }
 }

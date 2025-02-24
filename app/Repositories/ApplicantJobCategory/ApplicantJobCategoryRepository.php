@@ -12,13 +12,45 @@ class ApplicantJobCategoryRepository
     {
         $user_id = Auth::user()->id;
         $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
-        $applicantProfile->job_categories()->sync($data['job_category_id']);
-        return $applicantProfile;
+        if(ApplicantJobCategory::where('applicant_id', $applicantProfile->id)->exists())
+        {
+            throw new \Exception("Applicant Job Category already created");
+        }
+        $applicantProfile->job_categories()->sync($data['job_category_ids']);
+
+        return ApplicantJobCategory::where('applicant_id', $applicantProfile->id)
+                           ->with('applicantProfile', 'jobCategory')
+                           ->first();
     }
 
     public function getAll()
     {
-        return ApplicantJobCategory::with('applicantProfile', 'jobCategory')->get();
+        $user = auth()->user();
+        $applicant = ApplicantProfile::where('user_id', $user->id)->firstOrFail();
+        return ApplicantJobCategory::where('applicant_id', $applicant->id)->with('applicantProfile', 'jobCategory')->get();
     }
 
+    
+    public function show($id)
+    {
+        return ApplicantJobCategory::with('jobCategory','applicantProfile')->findOrFail($id);
+    }
+
+    
+    public function update($data, $id)
+    {
+        $user_id = Auth::user()->id;
+        $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
+        $applicantProfile->skills()->sync($data['job_category_ids']);
+        return ApplicantJobCategory::where('applicant_id',$applicantProfile->id)->with('applicantProfile','jobCategory')->get();
+    }
+
+    public function delete($id)
+    {
+        $applicantProfile = ApplicantJobCategory::where('applicant_id',$id)->firstOrFail();
+        $applicantProfile->delete();
+        return $applicantProfile;
+    }
 }
+
+

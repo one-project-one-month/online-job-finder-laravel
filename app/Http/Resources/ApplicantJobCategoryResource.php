@@ -22,8 +22,6 @@ class ApplicantJobCategoryResource extends JsonResource
             'job_category_id' => $this->job_category_id,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-
-            // Include related models using whenLoaded for better performance
             'jobCategory' => new JobCategoryResource($this->whenLoaded('jobCategory')),
             'applicant' => new ApplicantProfileResource($this->whenLoaded('applicantProfile')),
         ];
