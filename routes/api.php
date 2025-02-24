@@ -1,5 +1,8 @@
 <?php
 
+
+
+use App\Http\Controllers\Api\Jobs\JobController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\SocialMedia\SocialMediaController;
 use Illuminate\Http\Request;
@@ -28,6 +31,10 @@ Route::get('/user', function (Request $request) {
 Route::prefix('/auth')->group(function(){
     Route::post('signup',[AuthController::class,'register']);
     Route::post('signin',[AuthController::class,'login']);
+});
+
+Route::prefix('v1/')->middleware(JWTMiddleware::class)->group(function(){
+    Route::apiResource('jobs',JobController::class);
 });
 
 Route::middleware([JWTMiddleware::class])->group(function () {
