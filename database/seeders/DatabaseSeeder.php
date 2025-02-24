@@ -16,12 +16,13 @@ class DatabaseSeeder extends Seeder
         $this->call(RoleSeeder::class);
         $this->call(UserSeeder::class);
         $this->call(LocationSeeder::class);
+        $this->call(JobCategorySeeder::class);
 
         // Seed Applicant Profiles
         DB::table('applicant_profiles')->insert([
             [
 
-                'user_id' => DB::table('users')->first()->id,
+                'user_id' => 3,
                 'full_name' => 'John Doe',
                 'phone' => '1234567890',
                 'address' => '123 Main St, City, Country',

@@ -19,5 +19,19 @@ class UserSeeder extends Seeder
             'password'=>'moewaiyan',
             'role_id'=>'2'
         ]);
+
+        User::create([
+            'username'=>'Recruiter',
+            'email'=>'recruiter@gmail.com',
+            'password'=>'moewaiyan',
+            'role_id'=>'3'
+        ]);
+
+        User::create([
+            'username'=>'Applicant',
+            'email'=>'applicant@gmail.com',
+            'password'=>'moewaiyan',
+            'role_id'=>'1'
+        ]);
     }
 }
