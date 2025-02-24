@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Repositories\ApplicantJobCategory;
 
@@ -30,18 +30,17 @@ class ApplicantJobCategoryRepository
         return ApplicantJobCategory::where('applicant_id', $applicant->id)->with('applicantProfile', 'jobCategory')->get();
     }
 
-    
+
     public function show($id)
     {
         return ApplicantJobCategory::with('jobCategory','applicantProfile')->findOrFail($id);
     }
 
-    
+
     public function update($data, $id)
     {
-        $user_id = Auth::user()->id;
-        $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
-        $applicantProfile->skills()->sync($data['job_category_ids']);
+        $applicantProfile = ApplicantProfile::where('id', $id)->firstOrFail();
+        $applicantProfile->job_categories()->sync($data['job_category_ids']);
         return ApplicantJobCategory::where('applicant_id',$applicantProfile->id)->with('applicantProfile','jobCategory')->get();
     }
 
