@@ -1,4 +1,7 @@
 <?php
+
+
+
 use App\Http\Controllers\Api\Jobs\JobController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\SocialMedia\SocialMediaController;
@@ -12,14 +15,13 @@ use App\Http\Middleware\CheckRecruiterMiddleware;
 use App\Http\Controllers\Api\Skills\SkillController;
 use App\Http\Controllers\Api\Resumes\ResumeController;
 use App\Http\Controllers\Api\Locations\LocationController;
-
 use App\Http\Controllers\Api\JobCategory\JobCategoryController;
+use App\Http\Controllers\Api\ApplicantSkill\ApplicantSkillController;
 use App\Http\Controllers\Api\CompanyProfile\CompanyProfileController;
 use App\Http\Controllers\Api\ApplicantProfile\ApplicantProfileController;
-
-use App\Http\Controllers\Api\ApplicantSkill\ApplicantSkillController;
-
 use App\Http\Controllers\ApplicantEducation\ApplicantEducationController;
+use App\Http\Controllers\Api\ApplicantJobCategory\ApplicantJobCategoryController;
+
 
 
 Route::get('/user', function (Request $request) {
@@ -55,12 +57,17 @@ Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
 });
 
-
 Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('profile',ApplicantProfileController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('education',ApplicantEducationController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('resumes', ResumeController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('applicant-skill',ApplicantSkillController::class)->middleware(MustBeApplicant::class);
+    Route::post('/applicant-job-categories', [ApplicantJobCategoryController::class, 'store'])->middleware(MustBeApplicant::class);
+    Route::get('/applicant-job-categories', [ApplicantJobCategoryController::class, 'index']);
+    Route::get('/applicant-job-categories/{id}',[ApplicantJobCategoryController::class, 'show']);
+    Route::put('/applicant-job-categories/{id}',[ApplicantJobCategoryController::class, 'update'])->middleware(MustBeApplicant::class);
+    Route::delete('/applicant-job-categories/{id}',[ApplicantJobCategoryController::class, 'destroy'])->middleware(MustBeApplicant::class);;
+
 });
 
 
@@ -70,6 +77,8 @@ Route::middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('social-media',SocialMediaController::class);
     Route::apiResource('reviews',ReviewController::class);
 });
+
+
 
 
 

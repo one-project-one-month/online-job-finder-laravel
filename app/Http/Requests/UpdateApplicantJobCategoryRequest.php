@@ -1,9 +1,10 @@
 <?php
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreApplicantSkillRequest extends FormRequest
+class UpdateApplicantJobCategoryRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -20,10 +21,11 @@ class StoreApplicantSkillRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'skill_ids'   => 'array|min:1',
-            'skill_ids.*' => 'exists:skills,id',
-        ];
+
+
+            return [
+                'job_category_ids'   => 'required|array|min:1',
+                'job_category_ids.*' => 'exists:job_categories,id',
+            ];
     }
 }
-
