@@ -1,6 +1,7 @@
 <?php
 namespace App\Models\ApplicantProfile;
 
+use App\Models\JobCategory\JobCategory;
 use App\Models\Locations\Location;
 use App\Models\Skills\Skill;
 use Illuminate\Database\Eloquent\Model;
@@ -32,5 +33,10 @@ class ApplicantProfile extends Model
     public function skills()
     {
         return $this->belongsToMany(Skill::class, 'applicant_skills', 'applicant_id', 'skill_id');
+    }
+
+    public function job_categories()
+    {
+        return $this->belongsToMany(JobCategory::class, 'applicant_job_categories', 'applicant_id','job_category_id' );
     }
 }

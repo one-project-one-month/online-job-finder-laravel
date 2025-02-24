@@ -2,15 +2,23 @@
 
 namespace App\Repositories\ApplicantJobCategory;
 
-use App\Models\ApplicantJobCategory\ApplicantJobCategory;
 use Illuminate\Support\Facades\Auth;
+use App\Models\ApplicantProfile\ApplicantProfile;
+use App\Models\ApplicantJobCategory\ApplicantJobCategory;
 
 class ApplicantJobCategoryRepository
 {
     public function create ($data)
     {
         $user_id = Auth::user()->id;
-        $data['applicant_id'] = $user_id;
-        return ApplicantJobCategory::create(['applicant_id' => $data->applicant_id , 'job_category_id' => $data->job_category_id]);
+        $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
+        $applicantProfile->job_categories()->sync($data['job_category_id']);
+        return $applicantProfile;
     }
+
+    public function getAll()
+    {
+        return ApplicantJobCategory::with('applicantProfile', 'jobCategory')->get();
+    }
+
 }

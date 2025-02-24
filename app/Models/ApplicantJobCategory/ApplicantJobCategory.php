@@ -19,7 +19,6 @@ class ApplicantJobCategory extends Model
     protected $fillable = [
         'applicant_id',
         'job_category_id',
-        'lock_version',
     ];
 
       // Timestamps are handled automatically

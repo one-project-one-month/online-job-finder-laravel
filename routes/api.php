@@ -54,6 +54,8 @@ Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(
     Route::apiResource('education',ApplicantEducationController::class)->middleware(MustBeApplicant::class);
     Route::apiResource('resumes', ResumeController::class)->middleware(JWTMiddleware::class);
     Route::apiResource('applicant-skill',ApplicantSkillController::class)->middleware(MustBeApplicant::class);
+    Route::post('/applicant-job-categories', [ApplicantJobCategoryController::class, 'store']);
+    Route::get('/applicant-job-categories', [ApplicantJobCategoryController::class, 'index']);
 });
 
 
@@ -64,7 +66,7 @@ Route::middleware(JWTMiddleware::class)->group(function(){
     Route::apiResource('reviews',ReviewController::class);
 });
 
-Route::post('/applicant-job-categories', [ApplicantJobCategoryController::class, 'store']);
+
 
 
 

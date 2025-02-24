@@ -34,5 +34,25 @@ class ApplicantJobCategoryController extends Controller
             ], 500);
         }
     }
-}
 
+    public function index()
+    {
+        try{
+            $applicantJobCategory = $this->applicantJobCategoryService->getAll();
+            return response()->json([
+                'status' => 'success',
+                'statusCode'=>200,
+                'message' => 'Applicant-job-categories retrives successfully',
+                'data' => [
+                'applicanapplicantJobCategorytSkills' => ApplicantJobCategoryResource::collection($applicantJobCategory)
+            ]
+            ],200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status' => 'false',
+                'statusCode'=>500,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+}

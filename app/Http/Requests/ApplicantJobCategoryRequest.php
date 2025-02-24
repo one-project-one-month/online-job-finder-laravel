@@ -22,7 +22,8 @@ class ApplicantJobCategoryRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'job_category_id' => 'required|exists:job_categories,id',
+            'job_category_ids'   => 'required|array|min:1',
+            'job_category_ids.*' => 'exists:job_categories,id',
         ];
     }
 }

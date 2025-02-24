@@ -17,4 +17,9 @@ class ApplicantJobCategoryService
     {
         return $this->applicantJobCategoryRepository->create($data);
     }
+
+    public function getAll()
+    {
+        return $this->applicantJobCategoryRepository->getAll();
+    }
 }
