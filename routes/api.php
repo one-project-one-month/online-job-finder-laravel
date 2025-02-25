@@ -51,12 +51,14 @@ Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class])->group(functi
     Route::get('profile/{id}',[CompanyProfileController::class,'show']);
     Route::put('profile/{id}',[CompanyProfileController::class,'update'])->middleware(CheckRecruiterMiddleware::class);
     Route::delete('profile/{id}',[CompanyProfileController::class,'destroy'])->middleware(CheckRecruiterMiddleware::class);
+    Route::patch('update-status/{id}',[ApplicationController::class,'updateStatus']);
 });
 
 Route::prefix('admin/me')->middleware(JWTMiddleware::class)->group(function (){
     Route::resource('jobCategories',JobCategoryController::class)->middleware(CheckAdminMiddleware::class);
     Route::resource('skills',SkillController::class);
     Route::apiResource('locations', LocationController::class)->middleware(CheckAdminMiddleware::class);
+
 });
 
 

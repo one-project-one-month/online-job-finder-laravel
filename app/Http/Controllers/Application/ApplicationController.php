@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Application;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Application\ApplicationRequest;
+use App\Http\Requests\Application\UpdateStatusRequest;
 use App\Http\Resources\Application\ApplicationResource;
 use App\Services\Application\ApplicationService;
 use Illuminate\Http\Request;
@@ -116,4 +117,26 @@ class ApplicationController extends Controller
              ],500);
             }
     }
+
+    public function updateStatus(UpdateStatusRequest $request,$id){
+       try {
+      $updateStatus=  $this->applicationService->updateStatusById($request->validated(),$id);
+      return response()->json([
+        'message'=>'update status successfully',
+        'status'=>'success',
+        'statusCode'=>200,
+        'data'=>[
+            'application'=>ApplicationResource::make($updateStatus)
+        ]
+    ],200);
+       } catch (\Exception $e) {
+        return response()->json([
+            'message'=>$e->getMessage(),
+            'status'=>'error',
+            'statusCode'=>500,
+        ],500);
+       }
+    }
+
+
 }

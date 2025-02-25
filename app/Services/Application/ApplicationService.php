@@ -31,6 +31,10 @@ class ApplicationService{
         return $this->applicationRepo->delete($id);
     }
 
+    public function updateStatusById($data, $id){
+        return $this->applicationRepo->updateStatus($data,$id);
+    }
+
 
 
 
