@@ -17,9 +17,9 @@ class ApplicationRepository{
 
         $data['applicant_id']=$applicant->id;
         $applicantId=Application::where('applicant_id',$data['applicant_id'])->first();
-        if ( $applicantId) {
-            throw new \Exception("already applied");
-        }
+        // if ( $applicantId) {
+        //     throw new \Exception("already applied");
+        // }
         $data['applied_at']=Carbon::now();
         $application=Application::create($data);
         return $application;
@@ -47,6 +47,20 @@ class ApplicationRepository{
         $application=Application::findOrFail($id);
         $application->delete();
         return $application;
+    }
+
+    public function updateStatus($data,$id){
+        $updateStatus=Application::findOrFail($id);
+        if (is_array($data)) {
+            // For instance, taking the first element
+            $data = reset($data);
+            // Or, if you need a comma-separated string (if your business logic allows that):
+            // $data = implode(',', $data);
+        }
+        $updateStatus->update([
+            'status'=>$data
+        ]);
+        return $updateStatus;
     }
 
 
