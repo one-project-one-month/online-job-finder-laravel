@@ -9,15 +9,18 @@ use App\Models\Job\JobPost;
 class JobRepository{
     public function get(){
         $jobs=JobPost::when(request('location'),function($query){
-           $query->whereHas('location',function($query){
-                return $query->where('id',request('location'));
-            });
+            return $query->where('location_id',request('location'));
         })->
         when(request('jobCategory'),function($query){
-            $query->whereHas('location',function($query){
-                return $query->where('id',request('jobCategory'));
-            });
-        })->get();
+            return $query->where('job_category_id',request('jobCategory'));
+        })->
+        when(request('type'),function($query){
+            return $query->where('type',request('type'));
+        })->
+        when(request('search'),function($query){
+            return $query->where('title','like','%'.request('search').'%');
+        })
+        ->get();
 
         return $jobs;
     }
@@ -30,8 +33,15 @@ class JobRepository{
             throw new \Exception("Company profile not found for this user.");
         }
         $data['company_id']=$company->id;
-        logger($data);
+
+        $skills=$data['skill_ids'] ?? [];
+
         $job=JobPost::create($data);
+
+        if (!empty($skills)) {
+            $job->skills()->sync($skills);
+        }
+
        return $job;
     }
 
@@ -42,7 +52,13 @@ class JobRepository{
 
     public function update($data,$id){
         $job=JobPost::findOrFail($id);
+        $skills=$data['skill_ids'] ?? [];
         $job->update($data);
+
+        if (!empty($skills)) {
+            $job->skills()->sync($skills);
+        }
+
         return $job;
     }
 

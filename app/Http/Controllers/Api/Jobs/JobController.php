@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Job\JobRequest;
 use App\Http\Resources\Job\JobResource;
 use App\Models\Job\Job;
+use App\Models\Job\JobPost;
 use App\Services\Job\JobService;
 use Illuminate\Http\Request;
 
@@ -46,12 +47,14 @@ class JobController extends Controller
     {
         try {
             $job=$this->jobService->createJob($request->toArray());
+            $createJob=JobPost::where('id',$job->id)->first();
+
             return response()->json([
                 'message'=>'job created successfully',
                 'status'=>'success',
                 'statusCode'=>201,
                 'data'=>[
-                    'job'=> JobResource::make($job)
+                    'job'=> JobResource::make($createJob)
                 ]
             ],201);
          } catch (\Exception $e) {

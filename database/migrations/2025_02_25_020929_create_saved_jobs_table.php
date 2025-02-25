@@ -11,14 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('applications', function (Blueprint $table) {
+        Schema::create('saved_jobs', function (Blueprint $table) {
             $table->id();
-            $table->unsignedInteger('job_post_id');
-            $table->enum('status',['Pending','Seen','Accepted','Rejected'])->default('Pending');
-            $table->unsignedInteger('applicant_id');
-            $table->integer('resume_id');
+            $table->integer('job_post_id');
+            $table->integer('applicant_id');
             $table->integer('lock_version');
-            $table->date('applied_at');
             $table->timestamps();
         });
     }
@@ -28,6 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('applications');
+        Schema::dropIfExists('saved_jobs');
     }
 };

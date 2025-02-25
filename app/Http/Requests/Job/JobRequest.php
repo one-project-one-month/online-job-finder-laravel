@@ -48,6 +48,8 @@ class JobRequest extends FormRequest
             'salary' => 'nullable|numeric|min:0',
             'address' => 'nullable|string|max:255',
             'status' => 'required|in:Open,Close',
+            'skill_ids'=>'present|array',
+            'skill_ids.*'=>'required|exists:skills,id'
         ];
     }
 }

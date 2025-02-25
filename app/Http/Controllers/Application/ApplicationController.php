@@ -24,7 +24,7 @@ class ApplicationController extends Controller
         'status'=>'success',
         'statusCode'=>200,
         'data'=>[
-            'application'=>ApplicationResource::make($applicationList)
+            'application'=>ApplicationResource::collection($applicationList)
          ]
     ],200);
        } catch (\Exception $e) {
@@ -107,9 +107,6 @@ class ApplicationController extends Controller
              'message'=>'applications delete successfully',
              'status'=>'success',
              'statusCode'=>200,
-             'data'=>[
-                'application'=>ApplicationResource::make($application)
-             ]
          ],200);
             } catch (\Exception $e) {
              return response()->json([
