@@ -25,7 +25,7 @@ class ApplicantProfileResource extends JsonResource
             'lock_version' => $this->lock_version,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
-            'location'=>new LocationResource($this->whenLoaded('location'))
+            'location'=>new LocationResource($this->location)
         ];
     }
 }

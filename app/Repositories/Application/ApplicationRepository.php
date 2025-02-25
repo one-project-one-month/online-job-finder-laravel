@@ -2,17 +2,33 @@
 
 namespace App\Repositories\Application;
 
+use App\Models\ApplicantProfile\ApplicantProfile;
 use App\Models\Application\Application;
+use Carbon\Carbon;
 
 class ApplicationRepository{
 
     public function create($data){
+        $user=auth()->user();
+        $applicant=ApplicantProfile::where('user_id',$user->id)->first();
+        if (!$applicant) {
+            throw new \Exception("Applicant user is not found");
+        }
+
+        $data['applicant_id']=$applicant->id;
+        $applicantId=Application::where('applicant_id',$data['applicant_id'])->first();
+        if ( $applicantId) {
+            throw new \Exception("already applied");
+        }
+        $data['applied_at']=Carbon::now();
         $application=Application::create($data);
         return $application;
     }
 
     public function get(){
-        $applications=Application::get();
+        $applicant=ApplicantProfile::where('user_id',auth()->user()->id)->first();
+
+        $applications=Application::where('applicant_id',$applicant->id)->get();
         return $applications;
     }
 

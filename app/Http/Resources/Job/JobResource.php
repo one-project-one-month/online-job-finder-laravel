@@ -4,6 +4,7 @@ namespace App\Http\Resources\Job;
 
 use App\Http\Resources\JobCategoryResource;
 use App\Http\Resources\LocationResource;
+use App\Http\Resources\SkillResource;
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
@@ -33,6 +34,7 @@ class JobResource extends JsonResource
             'updated_at'=>$this->updated_at,
             'location'=>LocationResource::make($this->location),
             'jobCategory'=>JobCategoryResource::make($this->jobCategory),
+            'skills'=>SkillResource::collection($this->skills)
 
 
         ];

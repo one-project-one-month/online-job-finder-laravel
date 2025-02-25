@@ -2,8 +2,10 @@
 
 namespace App\Models\Job;
 
+use App\Models\JobSkill\JobSkill;
 use App\Models\Locations\Location;
 use App\Models\JobCategory\JobCategory;
+use App\Models\Skills\Skill;
 use Illuminate\Database\Eloquent\Model;
 use Reshadman\OptimisticLocking\OptimisticLocking;
 
@@ -24,5 +26,9 @@ class JobPost extends Model
 
     public function jobCategory(){
         return $this->belongsTo(JobCategory::class);
+    }
+
+    public function skills(){
+        return $this->belongsToMany(Skill::class,'job_skills','job_post_id','skill_id');
     }
 }
