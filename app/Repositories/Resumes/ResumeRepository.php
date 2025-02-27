@@ -1,6 +1,7 @@
 <?php
 namespace App\Repositories\Resumes;
 
+use App\Models\Application\Application;
 use App\Models\Resumes\Resume;
 
 class ResumeRepository
@@ -44,6 +45,10 @@ class ResumeRepository
     public function delete($id)
     {
         $Resume = Resume::findOrFail($id);
+        $existApplication=Application::where('resume_id',$id)->first();
+       if ($existApplication) {
+        throw new \Exception("You can't delete this resume");
+       }
         $Resume->delete();
         return $Resume;
     }
