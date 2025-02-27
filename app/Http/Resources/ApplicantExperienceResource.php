@@ -28,6 +28,7 @@ class ApplicantExperienceResource extends JsonResource
             'lock_version' => $this->lock_version,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
+            'applicant'=>ApplicantProfileResource::make($this->applicant)
         ];
     }
 }

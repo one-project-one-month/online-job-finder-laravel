@@ -2,6 +2,7 @@
 
 namespace App\Models\ApplicantExperience;
 
+use App\Models\ApplicantProfile\ApplicantProfile;
 use Illuminate\Database\Eloquent\Model;
 use Reshadman\OptimisticLocking\OptimisticLocking;
 
@@ -26,6 +27,10 @@ class ApplicantExperience extends Model
     public function optimisticLockColumn(): string
     {
         return 'lock_version';
+    }
+
+    public function applicant(){
+        return $this->belongsTo(ApplicantProfile::class);
     }
 
 
