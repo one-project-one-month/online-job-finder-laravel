@@ -52,10 +52,7 @@ class ApplicationRepository{
     public function updateStatus($data,$id){
         $updateStatus=Application::findOrFail($id);
         if (is_array($data)) {
-            // For instance, taking the first element
             $data = reset($data);
-            // Or, if you need a comma-separated string (if your business logic allows that):
-            // $data = implode(',', $data);
         }
         $updateStatus->update([
             'status'=>$data
