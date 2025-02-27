@@ -12,7 +12,8 @@ class ApplicantJobCategoryRepository
     {
         $user_id = Auth::user()->id;
         $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
-        if(ApplicantJobCategory::where('applicant_id', $applicantProfile->id)->exists())
+        $applicantCategory=ApplicantJobCategory::where('applicant_id', $applicantProfile->id)->first();
+        if($applicantCategory)
         {
             throw new \Exception("Applicant Job Category already created");
         }

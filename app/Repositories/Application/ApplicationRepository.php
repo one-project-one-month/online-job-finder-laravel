@@ -17,9 +17,9 @@ class ApplicationRepository{
 
         $data['applicant_id']=$applicant->id;
         $applicantId=Application::where('applicant_id',$data['applicant_id'])->first();
-        // if ( $applicantId) {
-        //     throw new \Exception("already applied");
-        // }
+        if ($applicantId) {
+            throw new \Exception("already applied");
+        }
         $data['applied_at']=Carbon::now();
         $application=Application::create($data);
         return $application;

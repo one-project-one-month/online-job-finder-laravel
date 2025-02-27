@@ -5,6 +5,7 @@
 use App\Http\Controllers\Api\Jobs\JobController;
 use App\Http\Controllers\Api\Review\ReviewController;
 use App\Http\Controllers\Api\SavedJob\SavedJobController;
+use App\Http\Controllers\ApplicantExperience\ApplicantExperienceController;
 use App\Http\Controllers\Application\ApplicationController;
 use App\Http\Controllers\SocialMedia\SocialMediaController;
 use Illuminate\Http\Request;
@@ -74,6 +75,7 @@ Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function(
     Route::delete('/applicant-job-categories/{id}',[ApplicantJobCategoryController::class, 'destroy'])->middleware(MustBeApplicant::class);
     Route::post('saves',[SavedJobController::class,'toggleSaveJob'])->middleware(MustBeApplicant::class);
     Route::apiResource('applications',ApplicationController::class)->middleware(MustBeApplicant::class);
+    Route::apiResource('experiences',ApplicantExperienceController::class)->middleware(MustBeApplicant::class);
 });
 
 

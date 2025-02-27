@@ -22,7 +22,7 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date')->nullable();
             $table->boolean('currently_working')->default(false);
-            $table->integer('version')->default(1);
+            $table->integer('lock_version')->default(0);
             $table->timestamps();
         });
     }

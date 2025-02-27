@@ -2,9 +2,9 @@
 
 namespace App\Services\ApplicantExperience;
 
-use App\Models\ApplicantProfile\ApplicantProfile;
+
 use App\Repositories\ApplicantExperience\ApplicantExperienceRepository;
-use Carbon\Carbon;
+
 
 class ApplicantExperienceService
 {
@@ -16,18 +16,7 @@ class ApplicantExperienceService
 
    public function create(array $data)
    {
-        $user = auth()->user()->id;
-        $applicant = ApplicantProfile::where('user_id',$user)->first();
 
-        if (isset($data['start_date'])) {
-            $data['start_date'] =  Carbon::parse($data['start_date'])->toDateString();
-        }
-
-        if (isset($data['end_date'])) {
-            $data['end_date'] =  Carbon::parse($data['end_date'])->toDateString();
-        }
-
-        $data['applicant_id'] = $applicant->id;
         return $this->ApplicantExperienceRepository->create($data);
    }
 
