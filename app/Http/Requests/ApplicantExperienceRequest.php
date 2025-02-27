@@ -22,7 +22,7 @@ class ApplicantExperienceRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'applicant_id' => 'required|string|exists:applicant_profiles,id',
+            'applicant_id' => 'numeric|exists:applicant_profiles,id',
             'company_name' => 'required|string|max:255',
             'location' => 'nullable|string|max:255',
             'title' => 'required|string|max:255',
@@ -31,7 +31,6 @@ class ApplicantExperienceRequest extends FormRequest
             'start_date' => 'required|date',
             'end_date' => 'nullable|date|after_or_equal:start_date',
             'currently_working' => 'boolean',
-            'version' => 'integer|min:1',
         ];
     }
 }

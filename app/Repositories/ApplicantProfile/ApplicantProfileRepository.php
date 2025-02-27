@@ -11,7 +11,7 @@ class ApplicantProfileRepository
         return ApplicantProfile::create($data);
     }
 
-    public function getall()
+    public function getAll()
     {
         return ApplicantProfile::with('location')->latest()->get();
     }

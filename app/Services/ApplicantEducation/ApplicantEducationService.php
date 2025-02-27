@@ -2,6 +2,7 @@
 
 namespace App\Services\ApplicantEducation;
 
+use App\Models\ApplicantEducation\ApplicantEducation;
 use App\Models\ApplicantProfile\ApplicantProfile;
 use App\Repositories\ApplicantEducation\ApplicantEducationRepository;
 use Carbon\Carbon;
@@ -28,8 +29,8 @@ class ApplicantEducationService
         }
 
         $data['applicant_id'] = $applicant->id;
-
-        if ($data['applicant_id'] ==$applicant->id) {
+        $applicantEducation=ApplicantEducation::where('applicant_id',$applicant->id)->first();
+        if ($applicantEducation) {
             throw new \Exception("Applicant education already created");
         }
         return $this->applicantEducationRepository->create($data);

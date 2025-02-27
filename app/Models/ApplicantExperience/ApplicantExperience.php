@@ -3,10 +3,12 @@
 namespace App\Models\ApplicantExperience;
 
 use Illuminate\Database\Eloquent\Model;
+use Reshadman\OptimisticLocking\OptimisticLocking;
 
 class ApplicantExperience extends Model
+
 {
-    protected $table = 'applicant_experiences';
+    use OptimisticLocking;
 
     protected $fillable = [
         'applicant_id',
@@ -18,7 +20,14 @@ class ApplicantExperience extends Model
         'start_date',
         'end_date',
         'currently_working',
-        'version'
+        'lock_version'
     ];
+
+    public function optimisticLockColumn(): string
+    {
+        return 'lock_version';
+    }
+
+
 
 }
