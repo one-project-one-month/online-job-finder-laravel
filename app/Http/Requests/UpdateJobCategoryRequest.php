@@ -7,7 +7,7 @@ use Illuminate\Foundation\Http\FormRequest;
 
 
 
-class JobCategoryRequest extends FormRequest
+class UpdateJobCategoryRequest extends FormRequest
 {
     public function authorize()
     {
@@ -17,7 +17,7 @@ class JobCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|string|max:255|unique:job_categories,name',
+            'name'=>'required|string|max:255' . $this->job_category,
             'description' => 'nullable|string|max:500',
         ];
     }

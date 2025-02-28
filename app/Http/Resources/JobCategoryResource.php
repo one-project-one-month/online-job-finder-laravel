@@ -13,7 +13,7 @@ class JobCategoryResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'industry' => $this->industry,
+            'name' => $this->name,
             'description' => $this->description,
             'lock_version' => $this->lock_version,
             'created_at' => $this->created_at,
