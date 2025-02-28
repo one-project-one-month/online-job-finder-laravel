@@ -20,6 +20,10 @@ class JobRepository{
         when(request('search'),function($query){
             return $query->where('title','like','%'.request('search').'%');
         })
+        ->
+        when(request('company'),function($query){
+            return $query->where('company_id',request('company'));
+        })
         ->get();
 
         return $jobs;
