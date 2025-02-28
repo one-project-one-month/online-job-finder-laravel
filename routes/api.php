@@ -22,7 +22,7 @@ use App\Http\Middleware\JWTMiddleware;
 use App\Http\Middleware\MustBeApplicant;
 use Illuminate\Support\Facades\Route;
 
-Route::prefix('v1')->group(function () {
+Route::prefix('v1/')->group(function () {
     Route::prefix('/auth')->name('auth.')->group(function () {
         Route::post('signup', [AuthController::class, 'register'])->name('register');
         Route::post('signin', [AuthController::class, 'login'])->name('sign');
@@ -34,9 +34,11 @@ Route::prefix('v1')->group(function () {
     Route::middleware([JWTMiddleware::class])->group(function () {
         /** Information */
         Route::resource('skills', SkillController::class);
+        Route::apiResource('social-media', SocialMediaController::class);
+        Route::apiResource('reviews', ReviewController::class)->middleware(MustBeApplicant::class);
 
         /** Admin */
-        Route::prefix('admin/me')->middleware([CheckAdminMiddleware::class])->group(function () {
+        Route::prefix('admin/')->middleware([CheckAdminMiddleware::class])->group(function () {
             Route::resource('job-categories', JobCategoryController::class);
             Route::apiResource('locations', LocationController::class);
         });
@@ -44,10 +46,6 @@ Route::prefix('v1')->group(function () {
 
     Route::prefix('v1/')->middleware(JWTMiddleware::class)->group(function () {
         Route::apiResource('jobs', JobController::class);
-    });
-
-    Route::middleware([JWTMiddleware::class])->group(function () {
-
     });
 
     Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class])->group(function () {
@@ -77,8 +75,7 @@ Route::prefix('v1')->group(function () {
 //Route::apiResource('applicant-skill',ApplicantSkillController::class);
 
     Route::middleware(JWTMiddleware::class)->group(function () {
-        Route::apiResource('social-media', SocialMediaController::class);
-        Route::apiResource('reviews', ReviewController::class);
+
     });
 
 });

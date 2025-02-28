@@ -8,7 +8,7 @@ use Reshadman\OptimisticLocking\OptimisticLocking;
 class SocialMedia extends Model
 {
     use OptimisticLocking;
-    protected $fillable=['profile_id','link'];
+    protected $fillable=['user_id','link'];
 
     public function optimisticLockColumn(): string
     {
