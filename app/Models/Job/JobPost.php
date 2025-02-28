@@ -2,6 +2,7 @@
 
 namespace App\Models\Job;
 
+use App\Models\CompanyProfile\CompanyProfile;
 use App\Models\JobSkill\JobSkill;
 use App\Models\Locations\Location;
 use App\Models\JobCategory\JobCategory;
@@ -26,6 +27,10 @@ class JobPost extends Model
 
     public function jobCategory(){
         return $this->belongsTo(JobCategory::class);
+    }
+
+    public function company(){
+        return $this->belongsTo(CompanyProfile::class);
     }
 
     public function skills(){
