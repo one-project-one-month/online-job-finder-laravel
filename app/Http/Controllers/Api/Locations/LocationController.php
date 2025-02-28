@@ -1,15 +1,12 @@
 <?php
-
 namespace App\Http\Controllers\Api\Locations;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\locationRequest;
+use App\Http\Requests\UpdateLocationRequest;
 use App\Http\Resources\LocationResource;
 use App\Models\Locations\Location;
 use App\Services\Locations\LocationService;
-use Illuminate\Database\Eloquent\ModelNotFoundException;
-use Illuminate\Http\Request;
-use Illuminate\Validation\ValidationException;
 
 class LocationController extends Controller
 {
@@ -24,20 +21,21 @@ class LocationController extends Controller
     {
         try {
             $locations = $this->locationService->getAll();
+
             return response()->json([
-                'message'=>'fetching successful',
-                'status'=>'success',
-                'statusCode'=>200,
-               'data'=>[
-                'locations'=> LocationResource::collection($locations)
-               ]
+                'message'    => 'fetching successful',
+                'status'     => 'success',
+                'statusCode' => 200,
+                'data'       => [
+                    'locations' => LocationResource::collection($locations),
+                ],
             ]);
         } catch (\Exception $e) {
             return response()->json([
-                'message'=>$e->getMessage(),
-                'status'=>'error',
-                'statusCode'=>500
-            ],500);
+                'message'    => $e->getMessage(),
+                'status'     => 'error',
+                'statusCode' => 500,
+            ], 500);
         }
     }
 
@@ -45,69 +43,68 @@ class LocationController extends Controller
     {
         try {
             $location = $this->locationService->show($id);
+
             return response()->json([
-                'message'=>'fetching location success',
-                'status'=>'success',
-                'statusCode'=>200,
-                'data'=>[
-                    'location'=>new LocationResource($location)
-                ]
-                ]);
+                'message'    => 'fetching location success',
+                'status'     => 'success',
+                'statusCode' => 200,
+                'data'       => [
+                    'location' => new LocationResource($location),
+                ],
+            ]);
         } catch (\Exception $e) {
             return response()->json([
                 'message' => $e->getMessage(),
-                'status'=>'error'
-            ],500);
+                'status'  => 'error',
+            ], 500);
         }
     }
 
     public function store(locationRequest $request)
     {
         try {
-
             $location = $this->locationService->create($request->toArray());
+
             return response()->json(
                 [
-                    'status' => 'success',
-                    'statusCode'=>201,
-                    'message' => 'Location created successfully',
-                    'data'=>[
-                        'location' => new LocationResource($location)
-                    ]
-                    ],201
+                    'status'     => 'success',
+                    'statusCode' => 201,
+                    'message'    => 'Location created successfully',
+                    'data'       => [
+                        'location' => new LocationResource($location),
+                    ],
+                ], 201
             );
         } catch (\Exception $e) {
             return response()->json([
-                'message' => $e->getMessage(),
-                'status'=>'error',
-                'statusCode'=>500
-            ],500);
+                'message'    => $e->getMessage(),
+                'status'     => 'error',
+                'statusCode' => 500,
+            ], 500);
         }
     }
 
-    public function update(locationRequest $request, Location $location)
+    public function update(UpdateLocationRequest $request, $id)
     {
-
-
         try {
-           $location= $this->locationService->update($request->toArray(),$location->id);
+            $location = $this->locationService->update($request->toArray(), $id);
 
             return response()->json(
                 [
-                    'status' => 'success',
-                    'statusCode'=>200,
-                    'message' => 'Location updated successfully',
-                   'data'=>[
-                    'location'=>new LocationResource($location)
-                   ]
+                    'status'     => 'success',
+                    'statusCode' => 200,
+                    'message'    => 'Location updated successfully',
+                    'data'       => [
+                        'location' => new LocationResource($location),
+                    ],
                 ]
             );
-        }  catch (\Exception $e) {
+        } catch (\Exception $e) {
             return response()->json(
-                ['message' => $e->getMessage(),
-                'statusCode'=>500,
-                'status'=>'error'
-                ] , 500);
+                ['message'   => $e->getMessage(),
+                    'statusCode' => 500,
+                    'status'     => 'error',
+                ], 500);
         }
     }
 
@@ -115,21 +112,16 @@ class LocationController extends Controller
     {
         try {
 
-            $this->locationService->delete( $location->id );
+            $this->locationService->delete($location->id);
 
-            return response()->json([
-                'status'=>'success',
-                'statusCode'=>200,
-                'message'=>'Deleted successfully'
-               ],200);
+            return response()->json([], 204);
         } catch (\Exception $e) {
             return response()->json(
                 [
-                    'message' => $e->getMessage(),
-                    'status'=>'error',
-                    'statusCode'=>500
-                ] , 500);
+                    'message'    => $e->getMessage(),
+                    'status'     => 'error',
+                    'statusCode' => 500,
+                ], 500);
         }
     }
 }
-

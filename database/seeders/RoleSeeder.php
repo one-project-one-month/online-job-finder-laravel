@@ -1,10 +1,8 @@
 <?php
-
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Role;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class RoleSeeder extends Seeder
 {
@@ -14,16 +12,18 @@ class RoleSeeder extends Seeder
     public function run(): void
     {
         Role::create([
-            'name'=>'applicant',
-            'guard_name'=>'api',
+            'name'       => 'applicant',
+            'guard_name' => 'api',
         ]);
+
         Role::create([
-            'name'=>'admin',
-            'guard_name'=>'api',
+            'name'       => 'admin',
+            'guard_name' => 'api',
         ]);
+
         Role::create([
-            'name'=>'recruiter',
-            'guard_name'=>'api',
+            'name'       => 'recruiter',
+            'guard_name' => 'api',
         ]);
     }
 }

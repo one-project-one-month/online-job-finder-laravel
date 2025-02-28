@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('job_categories', function (Blueprint $table) {
             $table->id();
-            $table->string('industry')->unique();
+            $table->string('name')->unique();
             $table->longText('description')->nullable();
             $table->unsignedBigInteger('lock_version');
             $table->timestamps();

@@ -3,7 +3,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class SkillRequest extends FormRequest
+class UpdateSkillRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,7 +21,7 @@ class SkillRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name'        => 'required|string|unique:skills,name|max:255',
+            'name'        => 'required|string|max:255|unique:skills,name,' . $this->skill,
             'description' => 'nullable|string',
         ];
     }

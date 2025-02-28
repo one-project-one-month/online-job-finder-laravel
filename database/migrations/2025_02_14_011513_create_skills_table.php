@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('skills', function (Blueprint $table) {
             $table->id();
             $table->string('name')->unique();
-            $table->longText('description');
+            $table->text('description')->nullable();
             $table->unsignedBigInteger('lock_version');
             $table->timestamps();
         });
