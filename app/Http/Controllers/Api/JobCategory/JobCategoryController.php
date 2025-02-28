@@ -5,6 +5,8 @@
 namespace App\Http\Controllers\Api\JobCategory; // Add this if it's inside the Api folder
 
 
+use App\Http\Requests\UpdateJobCategory;
+use App\Http\Requests\UpdateJobCategoryRequest;
 use App\Models\JobCategory\JobCategory;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Response;
@@ -94,10 +96,10 @@ class JobCategoryController extends Controller
        }
     }
 
-    public function update(JobCategoryRequest $request,JobCategory $jobCategory)
+    public function update(UpdateJobCategoryRequest $request,$id)
     {
       try {
-        $jobCategory = $this->jobCategoryService->updateJobCategory($request->toArray(), $jobCategory->id); // Call service to update JobCategory
+        $jobCategory = $this->jobCategoryService->updateJobCategory($request->toArray(), $id); // Call service to update JobCategory
        return response()->json([
         'status'=>'success',
         'statusCode'=>200,
