@@ -6,10 +6,12 @@ use App\Http\Requests\CompanyProfileRequest;
 use App\Http\Resources\CompanyProfileResource;
 use App\Http\Resources\Review\ReviewResource;
 use App\Models\CompanyProfile\CompanyProfile;
+use App\Models\User;
 use App\Services\CompanyProfile\CompanyProfileServices;
 use App\Services\Review\ReviewService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class CompanyProfileController extends Controller
 {
@@ -157,8 +159,14 @@ class CompanyProfileController extends Controller
         try {
             $user = Auth::user();
 
+            DB::beginTransaction();
             $this->companyProfileService->updateMyCompanyProfile($user->id, $request->toArray());
+            User::where('id', $user->id)->update([
+                'is_activated' => true,
+            ]);
+
             $companyProfile = $this->companyProfileService->getMyCompanyProfile($user->id);
+            DB::commit();
 
             return response()->json([
                 'status'     => 'success',
@@ -169,6 +177,7 @@ class CompanyProfileController extends Controller
                 ],
             ], 200);
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'status'     => 'error',
                 'message'    => $e->getMessage(),
