@@ -18,6 +18,7 @@ use App\Http\Controllers\Application\ApplicationController;
 use App\Http\Controllers\SocialMedia\SocialMediaController;
 use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\CheckRecruiterMiddleware;
+use App\Http\Middleware\IsActivated;
 use App\Http\Middleware\JWTMiddleware;
 use App\Http\Middleware\MustBeApplicant;
 use Illuminate\Support\Facades\Route;
@@ -31,7 +32,7 @@ Route::prefix('v1/')->group(function () {
         Route::post('password/change', [AuthController::class, 'changePassword']);
     });
 
-    Route::middleware([JWTMiddleware::class])->group(function () {
+    Route::middleware([JWTMiddleware::class, IsActivated::class])->group(function () {
         /** Information */
         Route::resource('skills', SkillController::class);
         Route::apiResource('social-media', SocialMediaController::class);
@@ -44,8 +45,8 @@ Route::prefix('v1/')->group(function () {
 
         /** Recruiter Profile */
         Route::prefix('recruiter/me/')->name('recruiter.')->middleware([CheckRecruiterMiddleware::class])->group(function () {
-            Route::get('', [CompanyProfileController::class, 'getMyCompanyProfile'])->name('me');
-            Route::put('', [CompanyProfileController::class, 'updateMyCompanyProfile'])->name('me.update');
+            Route::get('', [CompanyProfileController::class, 'getMyCompanyProfile'])->name('me')->withoutMiddleware(IsActivated::class);
+            Route::put('', [CompanyProfileController::class, 'updateMyCompanyProfile'])->name('me.update')->withoutMiddleware(IsActivated::class);
             Route::get('reviews', [CompanyProfileController::class, 'getReviews'])->name('reviews');
             Route::apiResource('jobs', JobController::class);
             Route::get('jobs/{job_id}/applications', [JobController::class, 'getApplications'])->name('jobs.show.applications');
