@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Skills\SkillController;
 use App\Http\Controllers\ApplicantEducation\ApplicantEducationController;
 use App\Http\Controllers\ApplicantExperience\ApplicantExperienceController;
 use App\Http\Controllers\Application\ApplicationController;
+use App\Http\Controllers\ProfilePhoto\ProfilePhotoController;
 use App\Http\Controllers\SocialMedia\SocialMediaController;
 use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\CheckRecruiterMiddleware;
@@ -28,8 +29,10 @@ Route::prefix('v1/')->group(function () {
         Route::post('signin', [AuthController::class, 'login'])->name('sign');
         Route::post('signout', [AuthController::class, 'logout'])->middleware(JWTMiddleware::class);
         Route::get('user', [AuthController::class, 'getUser'])->middleware(JWTMiddleware::class);
+        Route::post('user/profile-upload',[ProfilePhotoController::class,'profileUpload'])->middleware(JWTMiddleware::class);
         Route::post('password/change', [AuthController::class, 'changePassword']);
     });
+
 
     Route::middleware([JWTMiddleware::class])->group(function () {
         /** Information */
@@ -55,6 +58,7 @@ Route::prefix('v1/')->group(function () {
         Route::put('profile/{id}', [CompanyProfileController::class, 'update'])->middleware(CheckRecruiterMiddleware::class);
         Route::delete('profile/{id}', [CompanyProfileController::class, 'destroy'])->middleware(CheckRecruiterMiddleware::class);
         Route::patch('update-status/{id}', [ApplicationController::class, 'updateStatus']);
+
     });
 
     Route::prefix('applicant/me')->middleware(JWTMiddleware::class)->group(function () {

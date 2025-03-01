@@ -113,10 +113,7 @@ class CompanyProfileController extends Controller
             try{
                 $companyProfile = $this->companyProfileService->deleteCompanyProfile($id);
                 return response()->json([
-                    'status'=>'success',
-                    'statusCode'=>200,
-                    'message'=>'Company Profile deleted successfully',
-                ],200);
+                ],204);
             }catch (\Exception $e) {
                 return response()->json([
                     'status'=>'error',
@@ -126,4 +123,5 @@ class CompanyProfileController extends Controller
                 ],500);
             }
         }
+
 }
