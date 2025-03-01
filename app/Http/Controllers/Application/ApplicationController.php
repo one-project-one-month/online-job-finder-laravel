@@ -105,10 +105,7 @@ class ApplicationController extends Controller
             $application=$this->applicationService->delete($id);
 
             return response()->json([
-             'message'=>'applications delete successfully',
-             'status'=>'success',
-             'statusCode'=>200,
-         ],200);
+         ],204);
             } catch (\Exception $e) {
              return response()->json([
                  'message'=>$e->getMessage(),

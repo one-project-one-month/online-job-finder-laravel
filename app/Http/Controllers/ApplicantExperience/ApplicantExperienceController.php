@@ -4,6 +4,7 @@ namespace App\Http\Controllers\ApplicantExperience;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\ApplicantExperienceRequest;
 use App\Http\Resources\ApplicantEducationResource;
 use App\Http\Resources\ApplicantExperienceResource;
@@ -84,15 +85,17 @@ class ApplicantExperienceController extends Controller
     public function destroy($id)
     {
         try{
+            if (Gate::denies('delete', $id)) {
+                return response()->json([
+                    'message'    => 'Unauthorized action',
+                    'status'     => 'error',
+                    'statusCode' => 403,
+                ], 403);
+            }
             $applicantExperience = $this->applicantExperienceService->destroy($id);
             return response()->json([
-                'status' => 'success',
-                'statusCode' => 200,
-                'message' => 'Data deleted Successfully',
-                'data' => [
-                  'applicantExperience' => new ApplicantExperienceResource($applicantExperience)
-                ]
-                ],200);
+
+                ],204);
         } catch(\Exception $e){
             return response()->json([
                 'status' => 'error',
@@ -105,6 +108,13 @@ class ApplicantExperienceController extends Controller
     public function update(ApplicantExperienceRequest $request, $id)
     {
         try{
+            if (Gate::denies('update', $id)) {
+                return response()->json([
+                    'message'    => 'Unauthorized action',
+                    'status'     => 'error',
+                    'statusCode' => 403,
+                ], 403);
+            }
             $applicantExperience = $this->applicantExperienceService->update($request->toArray(),$id);
             return response()->json([
                 'status' => 'success',

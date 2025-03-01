@@ -124,9 +124,6 @@ class ResumeController extends Controller
     {
         $resume = $this->resumeService->deleteResume($resume);
         return response()->json([
-            'message'    => 'delete success',
-            'status'     => 'success',
-            'statusCode' => 200,
-        ], 200);
+        ], 204);
     }
 }

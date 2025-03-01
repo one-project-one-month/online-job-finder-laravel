@@ -2,9 +2,11 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
-use App\Repositories\Locations\LocationRepositoryInterface;
+use App\Policies\SocialMedia\SocialMediaPolicy;
 use App\Repositories\Locations\LocationRepository;
+use App\Repositories\Locations\LocationRepositoryInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -15,7 +17,8 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        //
+        Gate::define('update', [SocialMediaPolicy::class, 'update']);
+        Gate::define('delete', [SocialMediaPolicy::class, 'delete']);
     }
 }
 
