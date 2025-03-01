@@ -4,6 +4,7 @@ namespace App\Models\ApplicantProfile;
 use App\Models\JobCategory\JobCategory;
 use App\Models\Locations\Location;
 use App\Models\Skills\Skill;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Reshadman\OptimisticLocking\OptimisticLocking;
 
@@ -23,6 +24,11 @@ class ApplicantProfile extends Model
     public function optimisticLockColumn(): string
     {
         return 'lock_version';
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
     }
 
     public function location()
