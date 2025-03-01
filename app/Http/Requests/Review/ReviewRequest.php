@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests\Review;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -21,11 +20,12 @@ class ReviewRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->merge(['company_id' => $this->route('company_id')]);
+
         return [
-            'applicant_id'=>'exists:applicant_profiles,id',
-            'company_id'=>'required|exists:company_profiles,id',
-            'comment'=>'nullable|string|min:3',
-            'rating'=>'numeric|min:0|max:5'
+            'company_id'   => 'required|exists:company_profiles,id',
+            'comment'      => 'nullable|string|min:3',
+            'rating'       => 'numeric|min:0|max:5',
         ];
     }
 }

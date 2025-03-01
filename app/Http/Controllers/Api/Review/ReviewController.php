@@ -1,120 +1,142 @@
 <?php
-
 namespace App\Http\Controllers\Api\Review;
 
-use App\Http\Requests\Review\UpdateReviewRequest;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Services\Review\ReviewService;
+use App\Http\Middleware\MustBeApplicant;
 use App\Http\Requests\Review\ReviewRequest;
 use App\Http\Resources\Review\ReviewResource;
-use App\Repositories\Review\ReviewRepository;
+use App\Models\Review\Review;
+use App\Services\Review\ReviewService;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
+use Illuminate\Support\Facades\Gate;
 
-class ReviewController extends Controller
+class ReviewController extends Controller implements HasMiddleware
 {
     protected $reviewService;
 
-    public function __construct(ReviewService $reviewService){
-        $this->reviewService=$reviewService;
+    public function __construct(ReviewService $reviewService)
+    {
+        $this->reviewService = $reviewService;
     }
 
-    public function index(){
-     try {
-        $ReviewList=$this->reviewService->getAllReview();
-        return response()->json([
-            'message'=>'review fetching successful',
-            'statusCode'=>200,
-            'status'=>'success',
-            'data'=>[
-                'review'=>ReviewResource::collection($ReviewList)
-            ]
-            ],200);
-     } catch (\Exception $e) {
-        return response()->json([
-            'message'=>$e->getMessage(),
-            'statusCode'=>500,
-            'status'=>'error',
-
-        ],500);
-     }
+    public static function middleware(): array
+    {
+        return [
+            new Middleware(middleware: MustBeApplicant::class, except: ['index', 'show']),
+        ];
     }
 
-    public function store(ReviewRequest $request){
+    public function index(Request $request)
+    {
         try {
-           $createReview=$this->reviewService->createReview($request->toArray());
-           return response()->json([
-               'message'=>'review created successfully',
-               'statusCode'=>201,
-               'status'=>'success',
-               'data'=>[
-                   'review'=>new ReviewResource($createReview)
-               ]
-               ],201);
-        } catch (\Exception $e) {
-           return response()->json([
-               'message'=>$e->getMessage(),
-               'statusCode'=>500,
-               'status'=>'error',
-           ],500);
-        }
-       }
+            $reviews = $this->reviewService->getAllReviews($request);
 
-       public function show($id){
+            return response()->json([
+                'message'    => 'review fetching successful',
+                'statusCode' => 200,
+                'status'     => 'success',
+                'data'       => [
+                    'reviews' => ReviewResource::collection($reviews),
+                ],
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+
+            ], 500);
+        }
+    }
+
+    public function store(ReviewRequest $request)
+    {
         try {
-           $review=$this->reviewService->showReviewById($id);
-           return response()->json([
-               'message'=>'review fetched successfully',
-               'statusCode'=>200,
-               'status'=>'success',
-               'data'=>[
-                   'review'=>new ReviewResource($review)
-               ]
-               ],200);
-        } catch (\Exception $e) {
-           return response()->json([
-               'message'=>$e->getMessage(),
-               'statusCode'=>500,
-               'status'=>'error',
-           ],500);
-        }
-       }
+            $createdReview = $this->reviewService->createReview($request->toArray());
+            $review        = $this->reviewService->showReviewById($createdReview->id);
 
-       public function update(UpdateReviewRequest $request , $id){
+            return response()->json([
+                'message'    => 'review created successfully',
+                'statusCode' => 201,
+                'status'     => 'success',
+                'data'       => [
+                    'review' => new ReviewResource($review),
+                ],
+            ], 201);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
+        }
+    }
+
+    public function show($id)
+    {
         try {
-           $updateReview=$this->reviewService->updateReview($request->toArray(),$id);
-           return response()->json([
-               'message'=>'review updated successfully',
-               'statusCode'=>200,
-               'status'=>'success',
-               'data'=>[
-                   'review'=>new ReviewResource($updateReview)
-               ]
-               ],200);
+            $review = $this->reviewService->showReviewById($id);
+            return response()->json([
+                'message'    => 'review fetched successfully',
+                'statusCode' => 200,
+                'status'     => 'success',
+                'data'       => [
+                    'review' => new ReviewResource($review),
+                ],
+            ], 200);
         } catch (\Exception $e) {
-           return response()->json([
-               'message'=>$e->getMessage(),
-               'statusCode'=>500,
-               'status'=>'error',
-           ],500);
+            return response()->json([
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
         }
-       }
+    }
 
-       public function destroy($id){
+    public function update(ReviewRequest $request, $company_id, $review_id)
+    {
+        $review = Review::findOrFail($review_id);
+        Gate::authorize('update', $review);
+
         try {
-           $review=$this->reviewService->destroyReviewById($id);
-           return response()->json([
-               'message'=>'review deleted successfully',
-               'statusCode'=>200,
-               'status'=>'success',
-               ],200);
-        } catch (\Exception $e) {
-           return response()->json([
-               'message'=>$e->getMessage(),
-               'statusCode'=>500,
-               'status'=>'error',
-           ],500);
-        }
-       }
+            $this->reviewService->updateReview($request->toArray(), $review_id);
+            $review = $this->reviewService->showReviewById($review_id);
 
+            return response()->json([
+                'message'    => 'review updated successfully',
+                'statusCode' => 200,
+                'status'     => 'success',
+                'data'       => [
+                    'review' => new ReviewResource($review),
+                ],
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
+        }
+    }
+
+    public function destroy($company_id, $review_id)
+    {
+        $review = Review::findOrFail($review_id);
+        Gate::authorize('delete', $review);
+
+        try {
+            $review->delete();
+
+            return response()->json([], 204);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
+        }
+    }
 
 }
