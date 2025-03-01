@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Resources\Review;
 
 use App\Http\Resources\ApplicantProfileResource;
@@ -17,15 +16,13 @@ class ReviewResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'applicant_id'=>$this->applicant_id,
-            'company_id'=>$this->company_id,
-            'rating'=>$this->rating,
-            'comment'=>$this->comment,
-            'created_at'=>$this->created_at,
-            'updated_at'=>$this->updated_at,
-            'applicant'=>ApplicantProfileResource::make($this->whenLoaded('applicant')),
-            'company'=>CompanyProfileResource::make($this->whenLoaded('company')),
+            'id'         => $this->id,
+            'rating'     => $this->rating,
+            'comment'    => $this->comment,
+            'createdAt' => $this->created_at,
+            'updatedAt' => $this->updated_at,
+            'applicant'  => ApplicantProfileResource::make($this->whenLoaded('applicant')),
+            // 'company'    => CompanyProfileResource::make($this->whenLoaded('company')),
         ];
     }
 }

@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -15,17 +14,17 @@ class ApplicantProfileResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id'=>$this->id,
-            'user_id'=>$this->user_id,
-            'full_name'=>$this->full_name,
-            'phone'=>$this->phone,
-            'address'=>$this->address,
-            'location_id'=>$this->location_id,
-            'description'=>$this->description,
+            'id'           => $this->id,
+            'user_id'      => $this->user_id,
+            'fullName'     => $this->full_name,
+            'phone'        => $this->phone,
+            'address'      => $this->address,
+            'location_id'  => $this->location_id,
+            'description'  => $this->description,
             'lock_version' => $this->lock_version,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'location'=>new LocationResource($this->location)
+            'created_at'   => $this->created_at,
+            'updated_at'   => $this->updated_at,
+            'location'     => new LocationResource($this->location),
         ];
     }
 }

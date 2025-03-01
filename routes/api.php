@@ -37,54 +37,45 @@ Route::prefix('v1/')->group(function () {
         Route::apiResource('social-media', SocialMediaController::class);
 
         /** Admin */
-        Route::prefix('admin/')->middleware([CheckAdminMiddleware::class])->group(function () {
+        Route::prefix('admin/')->group(function () {
             Route::resource('job-categories', JobCategoryController::class);
             Route::apiResource('locations', LocationController::class);
         });
 
         /** Recruiter Profile */
-        Route::prefix('recruiter/me/')->middleware([CheckRecruiterMiddleware::class])->group(function () {
-            Route::get('', [CompanyProfileController::class, 'index']);
-            Route::put('', [CompanyProfileController::class, 'store']);
-            Route::get('reviews', [CompanyProfileController::class, 'getReviews']);
-            // Route::get('profile/{id}', [CompanyProfileController::class, 'show']);
-            // Route::put('profile/{id}', [CompanyProfileController::class, 'update']);
-            // Route::delete('profile/{id}', [CompanyProfileController::class, 'destroy']);
+        Route::prefix('recruiter/me/')->name('recruiter.')->middleware([CheckRecruiterMiddleware::class])->group(function () {
+            Route::get('', [CompanyProfileController::class, 'getMyCompanyProfile'])->name('me');
+            Route::put('', [CompanyProfileController::class, 'updateMyCompanyProfile'])->name('me.update');
+            Route::get('reviews', [CompanyProfileController::class, 'getReviews'])->name('reviews');
             Route::apiResource('jobs', JobController::class);
-            Route::get('jobs/{job_id}/applications', [JobController::class, 'applications']);
-            Route::get('jobs/{job_id}/shortlist', [JobController::class, 'applications']);
-            Route::patch('applications/{id}/status', [ApplicationController::class, 'updateStatus']);
+            Route::get('jobs/{job_id}/applications', [JobController::class, 'getApplications'])->name('jobs.show.applications');
+            Route::get('jobs/{job_id}/shortlist', [JobController::class, 'getShortList'])->name('jobs.show.shortlist');
+            Route::patch('applications/{id}/status', [ApplicationController::class, 'updateStatus'])->name('applications.status.update');
         });
 
         /** Applicant Profile */
-        Route::prefix('applicant/me')->middleware(MustBeApplicant::class)->group(function () {
-            Route::apiResource('', ApplicantProfileController::class);
-            Route::apiResource('educations', ApplicantEducationController::class);
-            Route::apiResource('experiences', ApplicantExperienceController::class);
-            Route::apiResource('resumes', ResumeController::class);
-            Route::apiResource('skills', ApplicantSkillController::class);
-            Route::apiResource('job-categories', ApplicantJobCategoryController::class);
-            Route::post('saves', [SavedJobController::class, 'toggleSaveJob']);
-            Route::apiResource('applications', ApplicationController::class);
+        // Route::prefix('applicant/me')->middleware(MustBeApplicant::class)->group(function () {
+        //     Route::get('', ApplicantProfileController::class);
+        //     Route::put('', ApplicantProfileController::class);
+        //     Route::apiResource('educations', ApplicantEducationController::class);
+        //     Route::apiResource('experiences', ApplicantExperienceController::class);
+        //     Route::apiResource('resumes', ResumeController::class);
+        //     Route::apiResource('skills', ApplicantSkillController::class);
+        //     Route::apiResource('job-categories', ApplicantJobCategoryController::class);
+        //     Route::post('saves', [SavedJobController::class, 'toggleSaveJob']);
+        //     Route::apiResource('applications', ApplicationController::class);
+        // });
+
+        Route::prefix("recruiters/")->name('recruiters.')->group(function () {
+            Route::get('', [CompanyProfileController::class, 'index'])->name('index');
+            Route::get('{id}', [CompanyProfileController::class, 'show'])->name('show');
+            Route::get('{id}/jobs', [CompanyProfileController::class, 'getJobs'])->name('jobs');
+            Route::apiResource('{company_id}/reviews', ReviewController::class);
         });
 
-        Route::prefix("recruiters/")->group(function () {
-            Route::get('', [ReviewController::class, 'index']);
-            Route::get('{id}', [ReviewController::class, 'show']);
-            Route::get('{id}/jobs', [ReviewController::class, 'jobs']);
-            Route::apiResource('{id}/reviews', ReviewController::class)->middleware(MustBeApplicant::class);
-        });
-
-        Route::prefix("accounts/")->group(function () {
-            Route::get('', [ReviewController::class, 'index']);
-            Route::get('{id}', [ReviewController::class, 'show']);
-        });
+        // Route::prefix("accounts/")->group(function () {
+        //     Route::get('', [ReviewController::class, 'index']);
+        //     Route::get('{id}', [ReviewController::class, 'show']);
+        // });
     });
-
-//Route::apiResource('applicant-skill',ApplicantSkillController::class);
-
-    Route::middleware(JWTMiddleware::class)->group(function () {
-
-    });
-
 });

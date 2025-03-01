@@ -2,19 +2,29 @@
 namespace App\Http\Controllers\Api\Locations;
 
 use App\Http\Controllers\Controller;
+use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Requests\locationRequest;
 use App\Http\Requests\UpdateLocationRequest;
 use App\Http\Resources\LocationResource;
 use App\Models\Locations\Location;
 use App\Services\Locations\LocationService;
+use Illuminate\Routing\Controllers\HasMiddleware;
+use Illuminate\Routing\Controllers\Middleware;
 
-class LocationController extends Controller
+class LocationController extends Controller implements HasMiddleware
 {
     private $locationService;
 
     public function __construct(LocationService $locationService)
     {
         $this->locationService = $locationService;
+    }
+
+    public static function middleware(): array
+    {
+        return [
+            new Middleware(middleware: CheckAdminMiddleware::class, except: ['index', 'show']),
+        ];
     }
 
     public function index()

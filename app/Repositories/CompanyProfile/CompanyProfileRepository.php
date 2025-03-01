@@ -1,29 +1,33 @@
 <?php
-
 namespace App\Repositories\CompanyProfile;
+
 use App\Models\CompanyProfile\CompanyProfile;
 
-class CompanyProfileRepositories
+class CompanyProfileRepository
 {
     public function create($validatedData)
     {
-        $user=auth()->user();
-        $validatedData['user_id']=$user->id;
-        $existCompanyProfile=CompanyProfile::where('user_id',$user->id)->first();
+        $user                     = auth()->user();
+        $validatedData['user_id'] = $user->id;
+        $existCompanyProfile      = CompanyProfile::where('user_id', $user->id)->first();
         logger($existCompanyProfile);
         if ($existCompanyProfile) {
             throw new \Exception("Company profile already created");
         }
-        $companyProfile= CompanyProfile::create($validatedData);
+        $companyProfile = CompanyProfile::create($validatedData);
         return $companyProfile;
-
 
     }
 
-    public function all ()
+    public function all($request)
     {
         // Get all company profiles
         return CompanyProfile::with('location')->get();
+    }
+
+    public function getMyCompanyProfile($user_id)
+    {
+        return CompanyProfile::with(['location'])->where('user_id', $user_id)->first();
     }
 
     public function find($id)
@@ -39,6 +43,19 @@ class CompanyProfileRepositories
         $companyProfile->update($validatedData);
 
         return $companyProfile;
+    }
+
+    public function updateByUserId($user_id, $validatedData)
+    {
+        $companyProfile = CompanyProfile::where('user_id', $user_id)->first();
+
+        if ($companyProfile) {
+            return $companyProfile->update($validatedData);
+        }
+
+        $validatedData['user_id'] = $user_id;
+
+        return CompanyProfile::create($validatedData);
     }
 
     public function delete($id)

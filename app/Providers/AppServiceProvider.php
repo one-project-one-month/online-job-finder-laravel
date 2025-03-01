@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Models\Review\Review;
+use App\Policies\ReviewPolicy;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\ServiceProvider;
 use App\Policies\SocialMedia\SocialMediaPolicy;
@@ -19,6 +21,8 @@ class AppServiceProvider extends ServiceProvider
     {
         Gate::define('update', [SocialMediaPolicy::class, 'update']);
         Gate::define('delete', [SocialMediaPolicy::class, 'delete']);
+
+        Gate::policy(Review::class, ReviewPolicy::class);
     }
 }
 

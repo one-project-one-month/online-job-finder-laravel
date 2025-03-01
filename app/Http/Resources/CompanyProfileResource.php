@@ -1,6 +1,6 @@
 <?php
-
 namespace App\Http\Resources;
+
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class CompanyProfileResource extends JsonResource
@@ -13,17 +13,15 @@ class CompanyProfileResource extends JsonResource
     public function toArray($request)
     {
         return [
-            'id' => $this->id,
-            'user_id'=>$this->user_id,
-            'company_name' => $this->company_name,
-            'phone' => $this->phone,
-            'website' => $this->website,
-            'address' => $this->address,
-            'location_id' => $this->location_id,
+            'id'          => $this->id,
+            'companyName' => $this->company_name,
+            'phone'       => $this->phone,
+            'website'     => $this->website,
+            'address'     => $this->address,
             'description' => $this->description,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
-            'location'=>new LocationResource($this->whenLoaded('location'))
+            'createdAt'   => $this->created_at,
+            'updatedAt'   => $this->updated_at,
+            'location'    => new LocationResource($this->whenLoaded('location')),
         ];
     }
 }

@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('company_name');
             $table->string('phone')->nullable();
             $table->string('website')->nullable();
-            $table->string('address')->nullable();
+            $table->text('address')->nullable();
             $table->unsignedBigInteger('location_id')->nullable();
             $table->text('description')->nullable();
             $table->integer('lock_version')->default(0);

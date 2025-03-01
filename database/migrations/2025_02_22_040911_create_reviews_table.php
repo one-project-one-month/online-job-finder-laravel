@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('applicant_id');
             $table->unsignedBigInteger('company_id');
-            $table->double('rating')->nullable();
+            $table->float('rating')->nullable();
             $table->text('comment')->nullable();
             $table->integer('lock_version')->default(0);
             $table->timestamps();
