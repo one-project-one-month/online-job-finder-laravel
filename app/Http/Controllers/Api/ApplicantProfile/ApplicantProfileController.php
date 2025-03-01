@@ -118,10 +118,7 @@ class ApplicantProfileController extends Controller
         try {
             $this->applicantProfileService->delete($id);
             return response()->json([
-                'status' => 'success',
-                'message' => 'deleted successful',
-                'statusCode'=>200
-            ], 200);
+            ], 204);
         } catch (\Exception $e) {
             return response()->json([
                 'status' => 'fail to delete',

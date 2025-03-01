@@ -1,13 +1,14 @@
 <?php
 namespace App\Http\Controllers\SocialMedia;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Gate;
+use App\Models\SocialMedia\SocialMedia;
 use App\Http\Requests\SocialMediaRequest;
 use App\Http\Resources\SocialMediaResource;
-use App\Models\SocialMedia\SocialMedia;
 use App\Services\SocialMedia\SocialMediaService;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class SocialMediaController extends Controller
 {
@@ -81,7 +82,7 @@ class SocialMediaController extends Controller
 
         try {
             $socialMedia = $this->socialMedia->getSocialMediaById($id);
-            
+
             return response()->json([
                 'message'    => 'social media fetched successfully',
                 'status'     => 'success',
@@ -103,6 +104,13 @@ class SocialMediaController extends Controller
     public function update(SocialMediaRequest $request, $id)
     {
         try {
+            if (Gate::denies('update', $id)) {
+                return response()->json([
+                    'message'    => 'Unauthorized action',
+                    'status'     => 'error',
+                    'statusCode' => 403,
+                ], 403);
+            }
             $updateSocialMedia = $this->socialMedia->updateSocialMedia($request->toArray(), $id);
 
             return response()->json([
@@ -125,6 +133,13 @@ class SocialMediaController extends Controller
 
     public function destroy($id)
     {
+        if (Gate::denies('delete', $id)) {
+            return response()->json([
+                'message'    => 'Unauthorized action',
+                'status'     => 'error',
+                'statusCode' => 403,
+            ], 403);
+        }
         $this->socialMedia->deleteSocialMedia($id);
         return response()->json([
             'message'    => 'social media deleted successfully',
