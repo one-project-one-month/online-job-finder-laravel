@@ -15,6 +15,7 @@ use App\Http\Controllers\Api\Skills\SkillController;
 use App\Http\Controllers\ApplicantEducation\ApplicantEducationController;
 use App\Http\Controllers\ApplicantExperience\ApplicantExperienceController;
 use App\Http\Controllers\Application\ApplicationController;
+use App\Http\Controllers\ProfilePhoto\ProfilePhotoController;
 use App\Http\Controllers\SocialMedia\SocialMediaController;
 use App\Http\Middleware\CheckAdminMiddleware;
 use App\Http\Middleware\CheckRecruiterMiddleware;
@@ -29,10 +30,16 @@ Route::prefix('v1/')->group(function () {
         Route::post('signin', [AuthController::class, 'login'])->name('sign');
         Route::post('signout', [AuthController::class, 'logout'])->middleware(JWTMiddleware::class);
         Route::get('user', [AuthController::class, 'getUser'])->middleware(JWTMiddleware::class);
+        Route::post('user/profile-upload',[ProfilePhotoController::class,'profileUpload'])->middleware(JWTMiddleware::class);
         Route::post('password/change', [AuthController::class, 'changePassword']);
     });
 
+
+
+    Route::middleware([JWTMiddleware::class])->group(function () {
+
     Route::middleware([JWTMiddleware::class, IsActivated::class])->group(function () {
+
         /** Information */
         Route::resource('skills', SkillController::class);
         Route::apiResource('social-media', SocialMediaController::class);
@@ -42,6 +49,23 @@ Route::prefix('v1/')->group(function () {
             Route::resource('job-categories', JobCategoryController::class);
             Route::apiResource('locations', LocationController::class);
         });
+
+    });
+
+    Route::prefix('v1/')->middleware(JWTMiddleware::class)->group(function () {
+        Route::apiResource('jobs', JobController::class);
+    });
+
+    Route::prefix('recruiter/me/')->middleware([JWTMiddleware::class])->group(function () {
+        Route::get('profile', [CompanyProfileController::class, 'index']);
+        Route::post('profile', [CompanyProfileController::class, 'store'])->middleware(CheckRecruiterMiddleware::class);
+        Route::get('profile/{id}', [CompanyProfileController::class, 'show']);
+        Route::put('profile/{id}', [CompanyProfileController::class, 'update'])->middleware(CheckRecruiterMiddleware::class);
+        Route::delete('profile/{id}', [CompanyProfileController::class, 'destroy'])->middleware(CheckRecruiterMiddleware::class);
+        Route::patch('update-status/{id}', [ApplicationController::class, 'updateStatus']);
+
+    });
+
 
         /** Recruiter Profile */
         Route::prefix('recruiter/me/')->name('recruiter.')->middleware([CheckRecruiterMiddleware::class])->group(function () {

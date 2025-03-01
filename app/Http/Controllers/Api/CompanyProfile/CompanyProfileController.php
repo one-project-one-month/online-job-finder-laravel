@@ -188,21 +188,22 @@ class CompanyProfileController extends Controller
     }
 
     public function destroy($id)
-    {
-        try {
-            $companyProfile = $this->companyProfileService->deleteCompanyProfile($id);
-            return response()->json([
-                'status'     => 'success',
-                'statusCode' => 200,
-                'message'    => 'Company Profile deleted successfully',
-            ], 200);
-        } catch (\Exception $e) {
-            return response()->json([
-                'status'     => 'error',
-                'message'    => $e->getMessage(),
-                'statusCode' => 500,
+        {
+            try{
+                $companyProfile = $this->companyProfileService->deleteCompanyProfile($id);
+                return response()->json([
+                ],204);
+            }catch (\Exception $e) {
+                return response()->json([
+                    'status'=>'error',
+                    'message'=>$e->getMessage(),
+                    'statusCode'=>500
+
+                ],500);
+            }
+        }
+
 
             ], 500);
-        }
-    }
+
 }
