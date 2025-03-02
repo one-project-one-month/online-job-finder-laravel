@@ -204,6 +204,6 @@ class CompanyProfileController extends Controller
         }
 
 
-            ], 500);
+
 
 }
