@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Api\SavedJob;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\SavedJob\SavedJobRequest;
+use App\Http\Resources\Job\JobResource;
+use App\Http\Resources\SavedJob\SavedJobResource;
 use App\Models\ApplicantProfile\ApplicantProfile;
 use App\Models\SavedJob\SavedJob;
 use Illuminate\Http\Request;
@@ -23,9 +25,10 @@ class SavedJobController extends Controller
                 'message'=>'job unsaved successfully',
                 'status'=>'success',
                 'statusCode'=>200,
+
             ],200);
         }else{
-           SavedJob::create([
+         $createSavedJob=  SavedJob::create([
             'job_post_id'=>$request->job_post_id,
             'applicant_id'=>$applicant->id
            ]);
@@ -33,7 +36,10 @@ class SavedJobController extends Controller
            return response()->json([
             'message'=>'job saved',
             'status'=>'success',
-            'statusCode'=>201
+            'statusCode'=>201,
+            'data'=>[
+                'job'=>SavedJobResource::make($createSavedJob)
+            ]
            ],201);
         }
     }

@@ -3,6 +3,7 @@
 namespace App\Repositories\ApplicantProfile;
 
 use App\Models\ApplicantProfile\ApplicantProfile;
+use App\Models\CompanyProfile\CompanyProfile;
 
 class ApplicantProfileRepository
 {
@@ -33,5 +34,21 @@ class ApplicantProfileRepository
         $applicantProfile = ApplicantProfile::findOrFail($id);
         $applicantProfile->delete();
         return $applicantProfile;
+    }
+
+    public function getMyApplicantProfile($user_id){
+        return ApplicantProfile::with('location')->where('user_id',$user_id)->first();
+    }
+
+    public function updateMyApplicantProfile($user_id,$data){
+        $applicantProfile=ApplicantProfile::where('user_id',$user_id)->first();
+
+        if ($applicantProfile) {
+           return $applicantProfile->update($data);
+        }
+
+        $data['user_id']=$user_id;
+
+        return ApplicantProfile::create($data);
     }
 }

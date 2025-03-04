@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Job;
 
+use App\Models\Application\Application;
 use App\Models\Job\Job;
 use App\Models\CompanyProfile\CompanyProfile;
 use App\Models\Job\JobPost;
@@ -70,5 +71,14 @@ class JobRepository{
         $job=JobPost::findOrFail($id);
         $job->delete();
         return $job;
+    }
+
+    public function getApplicationsById($id){
+        $jobApplications=Application::where('job_post_id',$id)->get();
+        return $jobApplications;
+    }
+    public function getShortList($id){
+        $shortListApplications=Application::where('status','Accepted')->where('job_post_id',$id)->get();
+        return $shortListApplications;
     }
 }

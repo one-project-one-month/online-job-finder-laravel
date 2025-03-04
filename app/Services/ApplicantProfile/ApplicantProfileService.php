@@ -47,4 +47,12 @@ class ApplicantProfileService
 
         return $this->applicantProfileRepository->delete($id);
     }
+
+    public function getMyApplicantProfile($user_id){
+        return $this->applicantProfileRepository->getMyApplicantProfile($user_id);
+    }
+
+    public function updateMyCompanyProfile($user_id,$data){
+        return $this->applicantProfileRepository->updateMyApplicantProfile($user_id,$data);
+    }
 }

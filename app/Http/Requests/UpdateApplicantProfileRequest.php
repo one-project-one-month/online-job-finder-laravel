@@ -4,14 +4,14 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CompanyProfileRequest extends FormRequest
+class UpdateApplicantProfileRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return auth()->check();;
+        return true;
     }
 
     /**
@@ -22,12 +22,11 @@ class CompanyProfileRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'company_name' => 'required|string|max:255',
-            'phone' => 'nullable|string|max:20|unique:company_profiles,phone',
-            'website' => 'nullable|url|max:255',
-            'address' => 'nullable|string|max:255',
-            'location_id' => 'nullable|exists:locations,id',
-            'description' => 'nullable|string',
+            'full_name'=>'required|string|max:100',
+            'phone'=>'required|numeric|min:15|unique:applicant_profiles,phone'.$this->applicant_profile,
+            'address'=>'required|string',
+            'location_id'=>'required|exists:locations,id',
+            'description'=>'required|string'
         ];
     }
 }

@@ -32,5 +32,13 @@ class JobService{
         return $this->jobRepo->delete($id);
     }
 
+    public function getApplicationsByJobId($id){
+        return $this->jobRepo->getApplicationsById($id);
+    }
+
+    public function getShortListByJobId($id){
+        return $this->jobRepo->getShortList($id);
+    }
+
 
 }

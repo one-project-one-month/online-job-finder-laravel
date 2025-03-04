@@ -16,7 +16,7 @@ class ApplicationRepository{
         }
 
         $data['applicant_id']=$applicant->id;
-        $applicantId=Application::where('applicant_id',$data['applicant_id'])->first();
+        $applicantId=Application::where('applicant_id',$data['applicant_id'])->where('job_post_id',$data['job_post_id'])->first();
         if ($applicantId) {
             throw new \Exception("already applied");
         }
@@ -57,6 +57,10 @@ class ApplicationRepository{
         $updateStatus->update([
             'status'=>$data
         ]);
+        $updateStatus->where('status','Accepted')->first();
+        if ($updateStatus) {
+            throw new \Exception("already accepted");
+        }
         return $updateStatus;
     }
 
