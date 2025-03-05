@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Job\JobRequest;
 use App\Http\Resources\Application\ApplicationResource;
 use App\Http\Resources\Job\JobResource;
+use App\Models\CompanyProfile\CompanyProfile;
 use App\Models\Job\Job;
 use App\Models\Job\JobPost;
 use App\Services\Job\JobService;
@@ -20,10 +21,12 @@ class JobController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
      try {
-        $jobList=$this->jobService->getAllJobs();
+        $user=auth()->user();
+        $company=CompanyProfile::where('user_id',$user->id)->firstOrFail();
+        $jobList=$this->jobService->getJobsByCompanyId($company->id);
         return response()->json([
             'message'=>'job fetch successfully',
             'status'=>'success',

@@ -12,8 +12,8 @@ class JobService{
         $this->jobRepo=$jobRepo;
     }
 
-    public function getAllJobs(){
-        return $this->jobRepo->get();
+    public function getJobsByCompanyId($company_id){
+        return $this->jobRepo->getJobsByCompanyId($company_id);
     }
 
     public function createJob($data){

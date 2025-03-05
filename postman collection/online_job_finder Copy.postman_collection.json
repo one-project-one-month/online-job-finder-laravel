@@ -1,10 +1,9 @@
 {
 	"info": {
-		"_postman_id": "0ea3ab18-2dad-462b-b8ab-9efdc7a3501e",
-		"name": "online_job_finder",
+		"_postman_id": "06010e52-1682-438a-b2c3-5026200f1fdf",
+		"name": "online_job_finder Copy",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "9114770",
-		"_collection_link": "https://planetary-space-436479.postman.co/workspace/4e07e3b8-1f01-4dd6-8a6f-d5cd8d1d9708/collection/9114770-0ea3ab18-2dad-462b-b8ab-9efdc7a3501e?action=share&source=collection_link&creator=9114770"
+		"_exporter_id": "32211058"
 	},
 	"item": [
 		{
@@ -31,15 +30,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"username\": \"Recruiter\",\r\n    \"email\": \"recruiter@gmail.com\",\r\n    \"password\": \"moewaiyan\",\r\n    \"password_confirmation\": \"moewaiyan\",\r\n    \"role_id\": \"3\"\r\n}"
+							"raw": "{\r\n    \"username\": \"recruiter2\",\r\n    \"email\": \"recruiter2@gmail.com\",\r\n    \"password\": \"moewaiyan\",\r\n    \"password_confirmation\": \"moewaiyan\",\r\n    \"role_id\": \"3\"\r\n}"
 						},
 						"url": {
-							"raw": "{{url}}/auth/signup",
+							"raw": "{{url}}auth/signup",
 							"host": [
-								"{{url}}"
+								"{{url}}auth"
 							],
 							"path": [
-								"auth",
 								"signup"
 							]
 						},
@@ -83,15 +81,14 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"email\":\"admin@gmail.com\",\r\n      \"password\":\"moewaiyan\"\r\n}"
+							"raw": "{\r\n     \"email\":\"applicant@gmail.com\",\r\n      \"password\":\"moewaiyan\"\r\n}"
 						},
 						"url": {
-							"raw": "{{url}}/auth/signin",
+							"raw": "{{url}}auth/signin",
 							"host": [
-								"{{url}}"
+								"{{url}}auth"
 							],
 							"path": [
-								"auth",
 								"signin"
 							]
 						},
@@ -217,6 +214,51 @@
 							"path": [
 								"auth",
 								"user"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "profile-upload",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "profile_photo",
+									"type": "file",
+									"src": "/C:/Users/ACER/Pictures/Screenshots/Screenshot 2025-02-07 101728.png",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{url}}auth/user/profile-upload",
+							"host": [
+								"{{url}}auth"
+							],
+							"path": [
+								"user",
+								"profile-upload"
 							]
 						}
 					},
@@ -1086,6 +1128,48 @@
 					"response": []
 				},
 				{
+					"name": "updateMyCompanyProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n\"company_name\":\"recruiter 2 company\",\r\n\"phone\":\"0978403960\",\r\n\"website\":\"https://www.youtube.com/\",\r\n\"address\":\"yangon\",\r\n\"location_id\":\"1\",\r\n\"description\":\"hi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}recruiter/me",
+							"host": [
+								"{{url}}recruiter"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
 					"name": "delete",
 					"request": {
 						"auth": {
@@ -1145,7 +1229,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQ0NDUyLCJleHAiOjE3NDAyNDgwNTIsIm5iZiI6MTc0MDI0NDQ1MiwianRpIjoiRzFGMkFXTlFRTU1UZWtMaCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.W_XzAPwPy7fna47Ha8F5wYwrOsoB7lHPm3jKN0pTGd0",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNzk5OTkzLCJleHAiOjE3NDA4MDM1OTMsIm5iZiI6MTc0MDc5OTk5MywianRpIjoiYkF4V05jdXpxUGt1cUZSOSIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Ph-6iDeb8mErn9JSC8ZbRwXvsN-UXOB2kUBH3uKpbZk",
 									"type": "string"
 								}
 							]
@@ -1165,7 +1249,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n\"full_name\":\"Moe Wai Yan\",\r\n\"phone\":\"095407282\",\r\n\"address\":\"meikhtila\",\r\n\"location_id\":\"3\",\r\n\"description\":\"hi\"\r\n\r\n\r\n\r\n\r\n}",
+							"raw": "{\r\n    \r\n\"full_name\":\"Shan Shan\",\r\n\"phone\":\"09759406961\",\r\n\"address\":\"meikhtila\",\r\n\"location_id\":\"3\",\r\n\"description\":\"hi\"\r\n\r\n\r\n\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1384,6 +1468,149 @@
 								"me",
 								"profile",
 								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getMyApplicantProfile",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}applicant/me",
+							"host": [
+								"{{url}}applicant"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateMyApplicantProfile",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \r\n\"full_name\":\"Moe Wai Yan\",\r\n\"phone\":\"095407282\",\r\n\"address\":\"yangon\",\r\n\"location_id\":\"3\",\r\n\"description\":\"hi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}applicant/me",
+							"host": [
+								"{{url}}applicant"
+							],
+							"path": [
+								"me"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "applicant list",
+			"item": [
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}accounts/2",
+							"host": [
+								"{{url}}accounts"
+							],
+							"path": [
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}accounts",
+							"host": [
+								"{{url}}accounts"
 							]
 						}
 					},
@@ -2044,16 +2271,6 @@
 						}
 					],
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNjY2MzI1LCJleHAiOjE3NDA2Njk5MjUsIm5iZiI6MTc0MDY2NjMyNSwianRpIjoiTE9qaVd0aURiZUFhUDRqNiIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.yadLOLWTT1V2dU3CQxxL4GLPXV173X3vBNKlAWTJJhA",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -2071,25 +2288,23 @@
 								"value": "multipart/form-data",
 								"type": "text",
 								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"resume_id\":1,\r\n    \"job_post_id\":3\r\n}"
+							"raw": "{\r\n    \"resume_id\":2,\r\n    \"job_post_id\":2\r\n}"
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applications",
-							"protocol": "http",
+							"raw": "{{url}}applicant/me/applications",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}applicant"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
 								"me",
 								"applications"
 							]
@@ -2184,6 +2399,42 @@
 								"api",
 								"applicant",
 								"me",
+								"applications"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "jobApplications",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}recruiter/me/jobs/2/applications",
+							"host": [
+								"{{url}}recruiter"
+							],
+							"path": [
+								"me",
+								"jobs",
+								"2",
 								"applications"
 							]
 						}
@@ -2294,17 +2545,53 @@
 				{
 					"name": "update-status",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDk3MTk2LCJleHAiOjE3NDA1MDA3OTYsIm5iZiI6MTc0MDQ5NzE5NiwianRpIjoidEpmM3ZPa3VuckFpalVOaiIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.HMU73jrOneL_W5dih_dJwo8GNIGgN2EEYeremJAV3UE",
-									"type": "string"
-								}
-							]
-						},
 						"method": "PATCH",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "multipart/form-data",
+								"type": "text",
+								"disabled": true
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"status\":\"Accepted\"\r\n}"
+						},
+						"url": {
+							"raw": "{{url}}recruiter/me/applications/3/status",
+							"host": [
+								"{{url}}recruiter"
+							],
+							"path": [
+								"me",
+								"applications",
+								"3",
+								"status"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getShorListApplications",
+					"request": {
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -2321,28 +2608,23 @@
 								"value": "application/json",
 								"type": "text",
 								"disabled": true
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"status\":\"Seen\"\r\n}"
-						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/recruiter/me/update-status/7",
-							"protocol": "http",
+							"raw": "{{url}}recruiter/me/jobs/1/shortlist",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}recruiter"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"recruiter",
 								"me",
-								"update-status",
-								"7"
+								"jobs",
+								"1",
+								"shortlist"
 							]
 						}
 					},
@@ -2724,7 +3006,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTc1NTY1LCJleHAiOjE3Mzk5NzkxNjYsIm5iZiI6MTczOTk3NTU2NiwianRpIjoiWEJJNWNFbXY4cXFFemJmMCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FzBNLSGuB4Nkw8EsWmF85kJmfYW6_fVBXztkECuXcFM",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwNzc1LCJleHAiOjE3NDA4MDQzNzUsIm5iZiI6MTc0MDgwMDc3NSwianRpIjoiOE04Z3ZrcUxsTlk0NzBhNiIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TQNhLbw78hFhCG42M1hewluKYfcHWg33nLlNV-oHamY",
 									"type": "string"
 								}
 							]
@@ -2740,6 +3022,11 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Bearer",
+								"value": "{{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -2752,19 +3039,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/social-media/2",
-							"protocol": "http",
+							"raw": "{{url}}social-media/3",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}social-media"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"social-media",
-								"2"
+								"3"
 							]
 						}
 					},
@@ -2867,7 +3147,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTc1NTY1LCJleHAiOjE3Mzk5NzkxNjYsIm5iZiI6MTczOTk3NTU2NiwianRpIjoiWEJJNWNFbXY4cXFFemJmMCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FzBNLSGuB4Nkw8EsWmF85kJmfYW6_fVBXztkECuXcFM",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwODIzLCJleHAiOjE3NDA4MDQ0MjMsIm5iZiI6MTc0MDgwMDgyMywianRpIjoicUxIOTV3d0hyWXFQTkF0bCIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0._kGbqoVU-P8MfI2_VAf3paBHlrPGTWSO6SC0C-zCttE",
 									"type": "string"
 								}
 							]
@@ -2886,19 +3166,12 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/social-media/1",
-							"protocol": "http",
+							"raw": "{{url}}social-media/3",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}social-media"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"social-media",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -2972,7 +3245,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzOTc4LCJleHAiOjE3NDAyNDc1NzgsIm5iZiI6MTc0MDI0Mzk3OCwianRpIjoiRU1JYlAzV3JIcTJSbk4yVCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kkF9ZH2mrSMGVdH28ZC4-Jm_RWQlWpp3OLEOzZXiVIE",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwOTMyLCJleHAiOjE3NDA4MDQ1MzIsIm5iZiI6MTc0MDgwMDkzMiwianRpIjoiRE04TktKS1FJTFFDekM5biIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.2w--4UiOY-4dGkqpyKNmjYZ8b_lcDyQCd-xh09hLjro",
 									"type": "string"
 								}
 							]
@@ -3000,18 +3273,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/education/1",
-							"protocol": "http",
+							"raw": "{{url}}applicant/me/education/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}applicant"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
 								"me",
 								"education",
 								"1"
@@ -3121,7 +3387,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMTAzMDA4LCJleHAiOjE3NDAxMDY2MDgsIm5iZiI6MTc0MDEwMzAwOCwianRpIjoiWmc4bXNYaGkzTWpQREV1ZCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.wGcOOgrMvDuXaBBZg-hQY3tt7x4XteCP_DbIgJQeOwk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwOTgzLCJleHAiOjE3NDA4MDQ1ODMsIm5iZiI6MTc0MDgwMDk4MywianRpIjoiSERab0VYVTVRd0x0Q0M1bCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.7eW_VCPTQeyFiikUdlxmGEAbNGlwY3cXVQ4QQmsVEuA",
 									"type": "string"
 								}
 							]
@@ -3137,24 +3403,22 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/education/2",
-							"protocol": "http",
+							"raw": "{{url}}applicant/me/education/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}applicant"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
 								"me",
 								"education",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -3168,16 +3432,6 @@
 				{
 					"name": "create",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNjE5NDUxLCJleHAiOjE3NDA2MjMwNTIsIm5iZiI6MTc0MDYxOTQ1MiwianRpIjoicDF3NE1HbnlMTXhKUzg4UCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6taJL3iJHm2XLfpEQjqD7nstxIBaUkGUXjZ3be0qiyk",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -3189,11 +3443,16 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Bearer",
+								"value": "{{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"company_name\":\"YNA Company\",\r\n    \"location\":\"Yangon\",\r\n    \"title\":\"junior web developer\",\r\n    \"job_type\":\"blah blah\",\t\r\n    \"start_date\":\"2-2-2023\",\r\n    \"end_date\":\"2-2-2025\",\r\n\r\n}",
+							"raw": "{\r\n    \"company_name\":\"YNA Company\",\r\n    \"location\":\"Yangon\",\r\n    \"title\":\"junior web developer\",\r\n    \"job_type\":\"blah blah\",\t\r\n    \"start_date\":\"2-2-2023\",\r\n    \"end_date\":\"2-2-2025\"\r\n\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3201,18 +3460,11 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/experiences",
-							"protocol": "http",
+							"raw": "{{url}}applicant/me/experiences",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}applicant"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
 								"me",
 								"experiences"
 							]
@@ -3228,7 +3480,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNjE5NDUxLCJleHAiOjE3NDA2MjMwNTIsIm5iZiI6MTc0MDYxOTQ1MiwianRpIjoicDF3NE1HbnlMTXhKUzg4UCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6taJL3iJHm2XLfpEQjqD7nstxIBaUkGUXjZ3be0qiyk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwNTQwLCJleHAiOjE3NDA4MDQxNDAsIm5iZiI6MTc0MDgwMDU0MCwianRpIjoiREZUODhZTHVka3NCZ1BaUSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kqp7VppeWUacGeflJI0qvxRluRLiG79SuJT8pDnTBJo",
 									"type": "string"
 								}
 							]
@@ -3244,6 +3496,11 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Bearer",
+								"value": "{{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
@@ -3256,21 +3513,14 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/experiences/3",
-							"protocol": "http",
+							"raw": "{{url}}applicant/me/experiences/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}applicant"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
 								"me",
 								"experiences",
-								"3"
+								"1"
 							]
 						}
 					},
@@ -3377,7 +3627,7 @@
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNjE5NDUxLCJleHAiOjE3NDA2MjMwNTIsIm5iZiI6MTc0MDYxOTQ1MiwianRpIjoicDF3NE1HbnlMTXhKUzg4UCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6taJL3iJHm2XLfpEQjqD7nstxIBaUkGUXjZ3be0qiyk",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwNjY3LCJleHAiOjE3NDA4MDQyNjcsIm5iZiI6MTc0MDgwMDY2NywianRpIjoiY1hZRFZDU3pKY1lUamw4MCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Qcrml7zoeoLBn2kt1z1pNHGQnQXd9AGhKxc9XWYsn_M",
 									"type": "string"
 								}
 							]
@@ -3396,18 +3646,11 @@
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/experiences/1",
-							"protocol": "http",
+							"raw": "{{url}}applicant/me/experiences/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}applicant"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
 								"me",
 								"experiences",
 								"1"
@@ -3424,16 +3667,6 @@
 				{
 					"name": "create",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDgxNzQ3LCJleHAiOjE3NDA0ODUzNDcsIm5iZiI6MTc0MDQ4MTc0NywianRpIjoiUnlKRTBjZzZyYnNPcGUwZyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Gx0mGd7WB6m4UpMVlae5vmE0LmeNtHr1xZ_7lj6H6wA",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -3445,11 +3678,16 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"Senior Web Developer\",\r\n    \"job_category_id\":4,\r\n    \"location_id\":3,\r\n    \"type\":\"OnSite\",\r\n    \"description\":\"blah\",\t\r\n    \"requirements\":\"need skills and good communication\",\r\n    \"num_of_posts\":1,\r\n    \"salary\":\"200000\",\r\n    \"address\":\"insein\",\r\n    \"status\":\"Open\",\r\n    \"skill_ids\":[2,3]\r\n}",
+							"raw": "{\r\n    \"title\":\"Mobile  Developer\",\r\n    \"job_category_id\":1,\r\n    \"location_id\":1,\r\n    \"type\":\"OnSite\",\r\n    \"description\":\"blah\",\t\r\n    \"requirements\":\"need skills and good communication\",\r\n    \"num_of_posts\":1,\r\n    \"salary\":\"200000\",\r\n    \"address\":\"insein\",\r\n    \"status\":\"Open\",\r\n    \"skill_ids\":[1,2]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3457,18 +3695,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/jobs",
-							"protocol": "http",
+							"raw": "{{url}}recruiter/me/jobs",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}recruiter"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"v1",
+								"me",
 								"jobs"
 							]
 						}
@@ -3531,18 +3763,8 @@
 					"response": []
 				},
 				{
-					"name": "get all",
+					"name": "get companyId",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDc4MTE4LCJleHAiOjE3NDA0ODE3MTgsIm5iZiI6MTc0MDQ3ODExOCwianRpIjoiMzZpRklodnk2Q0ZBMk4yNyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kxGpdBVYcyCkJ5IsH9_V_YvPN1olP2780NgEfkjhP7I",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -3554,32 +3776,55 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/jobs?jobCategory=4&location=3",
-							"protocol": "http",
+							"raw": "{{url}}recruiter/me/jobs",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}recruiter"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"v1",
+								"me",
 								"jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get jobs",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}recruiters/1/jobs",
+							"host": [
+								"{{url}}recruiters"
 							],
-							"query": [
-								{
-									"key": "jobCategory",
-									"value": "4"
-								},
-								{
-									"key": "location",
-									"value": "3"
-								}
+							"path": [
+								"1",
+								"jobs"
 							]
 						}
 					},
@@ -3680,21 +3925,79 @@
 			]
 		},
 		{
+			"name": "jobList",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}jobs",
+							"host": [
+								"{{url}}jobs"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}jobs/1",
+							"host": [
+								"{{url}}jobs"
+							],
+							"path": [
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
 			"name": "save job",
 			"item": [
 				{
 					"name": "create",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDk1NzM0LCJleHAiOjE3NDA0OTkzMzQsIm5iZiI6MTc0MDQ5NTczNCwianRpIjoiSVRMcnFvclBldmhTRVZ2TyIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6ed0EmNAK16TTBzG-ylSeh5PK2oGZPVLLJ9M47qwCd4",
-									"type": "string"
-								}
-							]
-						},
 						"method": "POST",
 						"header": [
 							{
@@ -3706,11 +4009,16 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"job_post_id\":2\r\n}",
+							"raw": "",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3718,18 +4026,57 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/saves",
-							"protocol": "http",
+							"raw": "{{url}}jobs/2/save",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}jobs"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
+								"2",
+								"save"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "savedJobsList",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}applicant/me/saves",
+							"host": [
+								"{{url}}applicant"
+							],
+							"path": [
 								"me",
 								"saves"
 							]
@@ -3744,18 +4091,11 @@
 			"item": [
 				{
 					"name": "create",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjAwNTY3LCJleHAiOjE3NDAyMDQxNjcsIm5iZiI6MTc0MDIwMDU2NywianRpIjoiR3VqZ3d5TmN1cThlRXVzYSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TvIBdQD0a3y54O9tipiwf6BcaqhU2O_F2yeIsf_dfqw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -3766,11 +4106,16 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"company_id\":\"2\",\r\n    \"comment\":\"This company is not bad\",\r\n    \"rating\":\"5\"\r\n}",
+							"raw": "{\r\n    \"comment\":\"This company is good\",\r\n    \"rating\":\"5\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -3778,17 +4123,12 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/reviews",
-							"protocol": "http",
+							"raw": "{{url}}recruiters/2/reviews",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}recruiters"
 							],
-							"port": "8000",
 							"path": [
-								"api",
+								"2",
 								"reviews"
 							]
 						}
@@ -3831,19 +4171,13 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/reviews/1",
-							"protocol": "http",
+							"raw": "{{url}}recruiters/1/reviews",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}recruiters"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"reviews",
-								"1"
+								"1",
+								"reviews"
 							]
 						}
 					},
@@ -3852,16 +4186,6 @@
 				{
 					"name": "get all",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjAwNTY3LCJleHAiOjE3NDAyMDQxNjcsIm5iZiI6MTc0MDIwMDU2NywianRpIjoiR3VqZ3d5TmN1cThlRXVzYSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TvIBdQD0a3y54O9tipiwf6BcaqhU2O_F2yeIsf_dfqw",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -3873,21 +4197,50 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/reviews",
-							"protocol": "http",
+							"raw": "{{url}}accounts",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}accounts"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "account review show",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}accounts/2",
+							"host": [
+								"{{url}}accounts"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"reviews"
+								"2"
 							]
 						}
 					},
