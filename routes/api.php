@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApplicantList\ApplicantListController;
 use App\Http\Middleware\IsActivated;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\JWTMiddleware;
@@ -76,8 +77,8 @@ Route::prefix('v1/')->group(function () {
         });
 
         Route::prefix("accounts/")->group(function () {
-            Route::get('', [ReviewController::class, 'index']);
-            Route::get('{id}', [ReviewController::class, 'show']);
+            Route::get('', [ApplicantListController::class, 'index']);
+            Route::get('{id}', [ApplicantListController::class, 'show']);
         });
 
     });
