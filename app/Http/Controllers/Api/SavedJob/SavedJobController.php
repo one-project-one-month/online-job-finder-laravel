@@ -8,39 +8,37 @@ use App\Http\Resources\Job\JobResource;
 use App\Http\Resources\SavedJob\SavedJobResource;
 use App\Models\ApplicantProfile\ApplicantProfile;
 use App\Models\SavedJob\SavedJob;
+use App\Services\SavedJob\SavedJobService;
 use Illuminate\Http\Request;
 
 class SavedJobController extends Controller
 {
+    protected $savedJobService;
 
-
-    public function toggleSaveJob(SavedJobRequest $request){
-        $user=auth()->user();
-        $applicant=ApplicantProfile::where('user_id',$user->id)->first();
-        $saveJob=SavedJob::where('job_post_id',$request->job_post_id)->first();
-
-        if ($saveJob) {
-            $saveJob->delete();
-            return response()->json([
-                'message'=>'job unsaved successfully',
-                'status'=>'success',
-                'statusCode'=>200,
-
-            ],200);
-        }else{
-         $createSavedJob=  SavedJob::create([
-            'job_post_id'=>$request->job_post_id,
-            'applicant_id'=>$applicant->id
-           ]);
-
-           return response()->json([
-            'message'=>'job saved',
-            'status'=>'success',
-            'statusCode'=>201,
-            'data'=>[
-                'job'=>SavedJobResource::make($createSavedJob)
-            ]
-           ],201);
-        }
+    public function __construct(SavedJobService $savedJobService){
+        $this->savedJobService=$savedJobService;
     }
+
+    public function index(){
+
+        try {
+            $savedJobsList=$this->savedJobService->savedJobsList();
+            return response()->json([
+              'message'    => 'applicant  fetching successful',
+              'statusCode' => 200,
+              'status'     => 'success',
+              'data'       => [
+                  'applicant' => SavedJobResource::collection($savedJobsList),
+              ],
+          ], 200);
+          } catch (\Exception $e) {
+              return response()->json([
+                  'message'    => $e->getMessage(),
+                  'statusCode' => 500,
+                  'status'     => 'error',
+
+              ], 500);
+          }
+    }
+
 }
