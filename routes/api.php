@@ -68,6 +68,18 @@ Route::prefix('v1/')->group(function () {
             Route::patch('applications/{id}/status', [ApplicationController::class, 'updateStatus'])->name('applications.status.update');
         });
 
+        Route::prefix("recruiters/")->name('recruiters.')->group(function () {
+            Route::get('', [CompanyProfileController::class, 'index'])->name('index');
+            Route::get('{id}', [CompanyProfileController::class, 'show'])->name('show');
+            Route::get('{id}/jobs', [CompanyProfileController::class, 'getJobs'])->name('jobs');
+            Route::apiResource('{company_id}/reviews', ReviewController::class);
+        });
+
+        Route::prefix("accounts/")->group(function () {
+            Route::get('', [ReviewController::class, 'index']);
+            Route::get('{id}', [ReviewController::class, 'show']);
+        });
+
     });
 
 
@@ -75,15 +87,6 @@ Route::prefix('v1/')->group(function () {
 
 
 
-    Route::prefix("recruiters/")->name('recruiters.')->group(function () {
-        Route::get('', [CompanyProfileController::class, 'index'])->name('index');
-        Route::get('{id}', [CompanyProfileController::class, 'show'])->name('show');
-        Route::get('{id}/jobs', [CompanyProfileController::class, 'getJobs'])->name('jobs');
-        Route::apiResource('{company_id}/reviews', ReviewController::class);
-    });
 
-    // Route::prefix("accounts/")->group(function () {
-    //     Route::get('', [ReviewController::class, 'index']);
-    //     Route::get('{id}', [ReviewController::class, 'show']);
-    // });
+
 });

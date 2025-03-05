@@ -2,6 +2,7 @@
 namespace App\Repositories\CompanyProfile;
 
 use App\Models\CompanyProfile\CompanyProfile;
+use App\Models\Job\JobPost;
 
 class CompanyProfileRepository
 {
@@ -65,5 +66,10 @@ class CompanyProfileRepository
         $companyProfile->delete();
 
         return $companyProfile;
+    }
+
+    public function getJobs($id){
+        $jobs=JobPost::with('company','jobCategory','location')->where('company_id',$id)->get();
+        return $jobs;
     }
 }

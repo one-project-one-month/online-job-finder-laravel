@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\CompanyProfile;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CompanyProfileRequest;
 use App\Http\Resources\CompanyProfileResource;
+use App\Http\Resources\Job\JobResource;
 use App\Http\Resources\Review\ReviewResource;
 use App\Models\CompanyProfile\CompanyProfile;
 use App\Models\User;
@@ -67,9 +68,26 @@ class CompanyProfileController extends Controller
         }
     }
 
-    public function getJobs(Request $request)
+    public function getJobs($id)
     {
 
+       try {
+        $getJobs= $this->companyProfileService->getJobs($id);
+        return response()->json([
+            'status'     => 'success',
+            'statusCode' => 200,
+            'message'    => 'fetching successful',
+            'data'       => [
+                'jobs' =>  JobResource::collection($getJobs),
+            ],
+        ], 200);
+    } catch (\Exception $e) {
+        return response()->json([
+            'status'     => 'error',
+            'message'    => $e->getMessage(),
+            'statusCode' => 500,
+        ], 500);
+    }
     }
 
     public function store(CompanyProfileRequest $request)
