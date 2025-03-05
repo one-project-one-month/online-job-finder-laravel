@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Api\ApplicantList\ApplicantListController;
+use App\Http\Controllers\Api\JobList\JobListController;
 use App\Http\Middleware\IsActivated;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\JWTMiddleware;
@@ -54,7 +55,7 @@ Route::prefix('v1/')->group(function () {
             Route::apiResource('resumes', ResumeController::class);
             Route::apiResource('skills', ApplicantSkillController::class);
             Route::apiResource('job-categories', ApplicantJobCategoryController::class);
-            Route::post('saves', [SavedJobController::class, 'toggleSaveJob']);
+            Route::get('saves', [SavedJobController::class, 'index']);
             Route::apiResource('applications', ApplicationController::class);
         });
 
@@ -63,7 +64,7 @@ Route::prefix('v1/')->group(function () {
             Route::get('', [CompanyProfileController::class, 'getMyCompanyProfile'])->name('me')->withoutMiddleware(IsActivated::class);
             Route::put('', [CompanyProfileController::class, 'updateMyCompanyProfile'])->name('me.update')->withoutMiddleware(IsActivated::class);
             Route::get('reviews', [CompanyProfileController::class, 'getReviews'])->name('reviews');
-            Route::apiResource('jobs', JobController::class)->withoutMiddleware(IsActivated::class);
+            Route::apiResource('jobs', JobController::class);
             Route::get('jobs/{job_id}/applications', [JobController::class, 'getApplications'])->name('jobs.show.applications')->withoutMiddleware(IsActivated::class);
             Route::get('jobs/{job_id}/shortlist', [JobController::class, 'getShortList'])->name('jobs.show.shortlist');
             Route::patch('applications/{id}/status', [ApplicationController::class, 'updateStatus'])->name('applications.status.update');
@@ -81,6 +82,10 @@ Route::prefix('v1/')->group(function () {
             Route::get('{id}', [ApplicantListController::class, 'show']);
         });
 
+
+        Route::get('jobs', [JobListController::class, 'index']);
+        Route::get('jobs/{id}', [JobListController::class, 'show']);
+        Route::post('jobs/{id}/save', [JobListController::class, 'toggleSaveJob']);
     });
 
 

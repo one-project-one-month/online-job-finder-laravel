@@ -23,7 +23,7 @@ class SavedJobRequest extends FormRequest
     {
         return [
             'applicant_id'=>'exists:applicant_profiles,id',
-            'job_post_id'=>'required|numeric|exists:job_posts,id'
+            'job_post_id'=>'numeric|exists:job_posts,id'
         ];
     }
 }
