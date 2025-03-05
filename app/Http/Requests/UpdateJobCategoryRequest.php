@@ -17,7 +17,7 @@ class UpdateJobCategoryRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'=>'required|string|max:255' . $this->job_category,
+            'name'=>'required|string|max:255|unique:job_categories,name' . $this->job_category,
             'description' => 'nullable|string|max:500',
         ];
     }

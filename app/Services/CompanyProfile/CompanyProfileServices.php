@@ -52,4 +52,8 @@ class CompanyProfileServices
 
         return $companyProfile;
     }
+
+    public function getJobs($id){
+        return $this->companyProfileRepository->getJobs($id);
+    }
 }
