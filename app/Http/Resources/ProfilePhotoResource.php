@@ -15,7 +15,7 @@ class ProfilePhotoResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'profile_photo'=>asset($this->profile_photo)
+            'file_path'=>asset($this->file_path)
         ];
         }
 }
