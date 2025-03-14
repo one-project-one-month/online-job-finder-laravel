@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Middleware\IsDeveloper;
 use Wotz\SwaggerUi\Http\Middleware\EnsureUserIsAuthorized;
 
-return [
-    'developer_mails' => env('DEVELOPER_MAILS'),
-    
+return [    
     'files' => [
         [
             /*
@@ -34,6 +33,7 @@ return [
              */
             'middleware' => [
                 'web',
+                IsDeveloper::class,
                 EnsureUserIsAuthorized::class,
             ],
 
