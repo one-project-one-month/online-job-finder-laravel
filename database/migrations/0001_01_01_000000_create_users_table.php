@@ -20,7 +20,9 @@ return new class extends Migration
             $table->unsignedBigInteger('role_id')->default(0);
             $table->boolean('is_activated')->default(0);
             $table->boolean('is_information_completed')->default(0);
-            $table->string('profile_photo')->nullable();
+            // $table->string('profile_photo')->nullable();
+            $table->string('name')->nullable();
+            $table->string('file_path')->nullable();
             $table->unsignedBigInteger('lock_version')->default(0);
             $table->rememberToken();
             $table->timestamps();
