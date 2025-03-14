@@ -30,7 +30,7 @@ Route::prefix('v1/')->group(function () {
     Route::prefix('/auth')->name('auth.')->group(function () {
         Route::post('signup', [AuthController::class, 'register'])->name('register');
         Route::post('signin', [AuthController::class, 'login'])->name('login');
-        Route::post('signout', [AuthController::class, 'logout'])->name('logout');->middleware(JWTMiddleware::class);
+        Route::post('signout', [AuthController::class, 'logout'])->name('logout')->middleware(JWTMiddleware::class);
         Route::get('user', [AuthController::class, 'getUser'])->name('user')->middleware(JWTMiddleware::class);
         Route::post('user/profile-upload', [UserController::class, 'uploadProfile'])->name('upload-profile')->middleware(JWTMiddleware::class);
         Route::post('password/change', [AuthController::class, 'changePassword'])->name('password.change')->middleware(JWTMiddleware::class);
