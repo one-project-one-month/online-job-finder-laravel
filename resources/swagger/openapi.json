@@ -1,0 +1,2428 @@
+{
+  "openapi": "3.0.3",
+  "info": {
+    "title": "online_job_finder",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "servers": [
+    {
+      "url": "{{url}}"
+    },
+    {
+      "url": "{{url}}auth"
+    },
+    {
+      "url": "{{url}}social-media"
+    },
+    {
+      "url": "http://127.0.0.1"
+    }
+  ],
+  "paths": {
+    "/available-roles": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "Get Available Roles",
+        "description": "Get Available Roles",
+        "operationId": "getAvailableRoles",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/signup": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "register",
+        "description": "The `POST` request to `/api/register` is used to register a user. The request should include a form-data body with a parameter `name` of type text.\n\n### Response\n\nThe response of the request is in the `text/html` format and contains HTML content. To document the response as a JSON schema, the response should be parsed and converted into a JSON schema manually, as the response itself is not in JSON format.",
+        "operationId": "register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "recruiter2@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "moewaiyan"
+                  },
+                  "password_confirmation": {
+                    "type": "string",
+                    "example": "moewaiyan"
+                  },
+                  "role_id": {
+                    "type": "string",
+                    "example": "3"
+                  },
+                  "username": {
+                    "type": "string",
+                    "example": "recruiter2"
+                  }
+                }
+              },
+              "examples": {
+                "register": {
+                  "value": {
+                    "email": "recruiter2@gmail.com",
+                    "password": "moewaiyan",
+                    "password_confirmation": "moewaiyan",
+                    "role_id": "3",
+                    "username": "recruiter2"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/auth/signin": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "login",
+        "description": "The `POST` request to `/api/register` is used to register a user. The request should include a form-data body with a parameter `name` of type text.\n\n### Response\n\nThe response of the request is in the `text/html` format and contains HTML content. To document the response as a JSON schema, the response should be parsed and converted into a JSON schema manually, as the response itself is not in JSON format.",
+        "operationId": "login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "email": {
+                    "type": "string",
+                    "example": "applicant@gmail.com"
+                  },
+                  "password": {
+                    "type": "string",
+                    "example": "moewaiyan"
+                  }
+                }
+              },
+              "examples": {
+                "login": {
+                  "value": {
+                    "email": "applicant@gmail.com",
+                    "password": "moewaiyan"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/auth/signout": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "logout",
+        "description": "The `POST` request to `/api/register` is used to register a user. The request should include a form-data body with a parameter `name` of type text.\n\n### Response\n\nThe response of the request is in the `text/html` format and contains HTML content. To document the response as a JSON schema, the response should be parsed and converted into a JSON schema manually, as the response itself is not in JSON format.",
+        "operationId": "logout",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/auth/password/change": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "password change",
+        "description": "The `POST` request to `/api/register` is used to register a user. The request should include a form-data body with a parameter `name` of type text.\n\n### Response\n\nThe response of the request is in the `text/html` format and contains HTML content. To document the response as a JSON schema, the response should be parsed and converted into a JSON schema manually, as the response itself is not in JSON format.",
+        "operationId": "passwordChange",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "current_password": {
+                    "type": "string",
+                    "example": "moewaiyan"
+                  },
+                  "new_password": {
+                    "type": "string",
+                    "example": "moewaiyan"
+                  },
+                  "new_password_confirmation": {
+                    "type": "string",
+                    "example": "moewaiyan"
+                  }
+                }
+              },
+              "examples": {
+                "password change": {
+                  "value": {
+                    "current_password": "moewaiyan",
+                    "new_password": "moewaiyan",
+                    "new_password_confirmation": "moewaiyan"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/auth/user": {
+      "get": {
+        "tags": [
+          "users"
+        ],
+        "summary": "get user",
+        "description": "get user",
+        "operationId": "getUser",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/auth/user/profile-upload": {
+      "post": {
+        "tags": [
+          "users"
+        ],
+        "summary": "profile-upload",
+        "description": "profile-upload",
+        "operationId": "profileUpload",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "profile_photo": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/skills": {
+      "get": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "AI"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "AI"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "description": "AI",
+                    "name": "AI"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/skills/1": {
+      "get": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/skills/5": {
+      "put": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "Node"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "NodeJS"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "description": "Node",
+                    "name": "NodeJS"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/skills/6": {
+      "delete": {
+        "tags": [
+          "skills"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/social-media": {
+      "get": {
+        "tags": [
+          "socialMedia"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "post": {
+        "tags": [
+          "socialMedia"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "link": {
+                    "type": "string",
+                    "example": "www.youtube.com"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "link": "www.youtube.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/social-media/2": {
+      "get": {
+        "tags": [
+          "socialMedia"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/social-media/3": {
+      "put": {
+        "tags": [
+          "socialMedia"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update1",
+        "parameters": [
+          {
+            "name": "bearer",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "{{token}}"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "link": {
+                    "type": "string",
+                    "example": "www.facebook.com"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "link": "www.facebook.com"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/3": {
+      "delete": {
+        "tags": [
+          "socialMedia"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete1",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/admin/me/job-categories": {
+      "get": {
+        "tags": [
+          "job categories"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll2",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/admin/me/jobCategories/1": {
+      "get": {
+        "tags": [
+          "job categories"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show2",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "job categories"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "industry": {
+                    "type": "string",
+                    "example": "Web Developer"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "industry": "Web Developer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/admin/me/jobCategories": {
+      "post": {
+        "tags": [
+          "job categories"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create2",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "industry": {
+                    "type": "string",
+                    "example": "Mobile Developer"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "industry": "Mobile Developer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/api/jobCategories/5": {
+      "delete": {
+        "tags": [
+          "job categories"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete2",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/admin/me/locations": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll3",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "locations"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "Thailand is blah blah"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Thailand"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "description": "Thailand is blah blah",
+                    "name": "Thailand"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/admin/me/locations/1": {
+      "get": {
+        "tags": [
+          "locations"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show3",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/admin/me/locations/6": {
+      "put": {
+        "tags": [
+          "locations"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update3",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "description": {
+                    "type": "string",
+                    "example": "Thailand is blah blah"
+                  },
+                  "name": {
+                    "type": "string",
+                    "example": "Thailand"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "description": "Thailand is blah blah",
+                    "name": "Thailand"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "delete": {
+        "tags": [
+          "locations"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete3",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/applicant/me/experiences": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "experiences"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll4",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "applicant_profile",
+          "experiences"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create4",
+        "parameters": [
+          {
+            "name": "bearer",
+            "in": "header",
+            "schema": {
+              "type": "string",
+              "example": "Bearer {{token}}"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "company_name": {
+                    "type": "string",
+                    "example": "YNA Company"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "example": "2-2-2025"
+                  },
+                  "job_type": {
+                    "type": "string",
+                    "example": "blah blah"
+                  },
+                  "location": {
+                    "type": "string",
+                    "example": "Yangon"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "example": "2-2-2023"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "junior web developer"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "company_name": "YNA Company",
+                    "end_date": "2-2-2025",
+                    "job_type": "blah blah",
+                    "location": "Yangon",
+                    "start_date": "2-2-2023",
+                    "title": "junior web developer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/applicant/me/experiences/1": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "experiences"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show4",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "put": {
+        "tags": [
+          "applicant_profile",
+          "experiences"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update4",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "company_name": {
+                    "type": "string",
+                    "example": "YNA Company update"
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "example": "2023-2-2"
+                  },
+                  "job_type": {
+                    "type": "string",
+                    "example": "blah blah"
+                  },
+                  "location": {
+                    "type": "string",
+                    "example": "Yangon"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "example": "2023-2-2"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "junior web developer"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "company_name": "YNA Company update",
+                    "end_date": "2023-2-2",
+                    "job_type": "blah blah",
+                    "location": "Yangon",
+                    "start_date": "2023-2-2",
+                    "title": "junior web developer"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "delete": {
+        "tags": [
+          "applicant_profile",
+          "experiences"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete4",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me/skills": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "skills1"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll5",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "applicant_profile",
+          "skills1"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create5",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "skill_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "example": 2
+                    },
+                    "example": [
+                      2,
+                      3
+                    ]
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "skill_ids": [
+                      2,
+                      3
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me/resumes": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "resumes"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll6",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "applicant_profile",
+          "resumes"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create6",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "file_path": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "is_default": {
+                    "type": "string",
+                    "example": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me/resumes/1": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "resumes"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show5",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "applicant_profile",
+          "resumes"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update5",
+        "requestBody": {
+          "content": {
+            "multipart/form-data": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "_method": {
+                    "type": "string",
+                    "example": "PUT"
+                  },
+                  "file_path": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "delete": {
+        "tags": [
+          "applicant_profile",
+          "resumes"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete5",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      }
+    },
+    "/applicant/me/default-resume": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "resumes"
+        ],
+        "summary": "Default Resume",
+        "description": "Default Resume",
+        "operationId": "defaultResume",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me/job-categories": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "job_categories"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll7",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "applicant_profile",
+          "job_categories"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "job_category_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "example": [
+                      1,
+                      2
+                    ]
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "job_category_ids": [
+                      1,
+                      2
+                    ]
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me/saves": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "Saved Jobs"
+        ],
+        "summary": "savedJobsList",
+        "description": "savedJobsList",
+        "operationId": "savedjobslist",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "savedJobsList": {
+                  "value": ""
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/applicant/me/applications": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "applications"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll8",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me/educations": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "educations"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll9",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "post": {
+        "tags": [
+          "applicant_profile",
+          "educations"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "degree": {
+                    "type": "string",
+                    "example": "Bachelor's"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Studied software development and algorithms."
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "example": "2025-01-01"
+                  },
+                  "field_of_study": {
+                    "type": "string",
+                    "example": "Computer Science ss"
+                  },
+                  "school_name": {
+                    "type": "string",
+                    "example": "University of Yangon"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "example": "2020-09-01"
+                  },
+                  "still_attending": {
+                    "type": "string",
+                    "example": "1"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "degree": "Bachelor's",
+                    "description": "Studied software development and algorithms.",
+                    "end_date": "2025-01-01",
+                    "field_of_study": "Computer Science ss",
+                    "school_name": "University of Yangon",
+                    "start_date": "2020-09-01",
+                    "still_attending": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me/educations/1": {
+      "get": {
+        "tags": [
+          "applicant_profile",
+          "educations"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show6",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "put": {
+        "tags": [
+          "applicant_profile",
+          "educations"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update6",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "degree": {
+                    "type": "string",
+                    "example": "Bachelor's"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "Studied software development and algorithms."
+                  },
+                  "end_date": {
+                    "type": "string",
+                    "example": "2025-01-01"
+                  },
+                  "field_of_study": {
+                    "type": "string",
+                    "example": "Computer Science"
+                  },
+                  "school_name": {
+                    "type": "string",
+                    "example": "University of Yangon update"
+                  },
+                  "start_date": {
+                    "type": "string",
+                    "example": "2020-09-01"
+                  },
+                  "still_attending": {
+                    "type": "string",
+                    "example": "1"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "degree": "Bachelor's",
+                    "description": "Studied software development and algorithms.",
+                    "end_date": "2025-01-01",
+                    "field_of_study": "Computer Science",
+                    "school_name": "University of Yangon update",
+                    "start_date": "2020-09-01",
+                    "still_attending": "1"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "delete": {
+        "tags": [
+          "applicant_profile",
+          "educations"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete6",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/applicant/me": {
+      "get": {
+        "tags": [
+          "applicant_profile"
+        ],
+        "summary": "My Profile",
+        "description": "My Profile",
+        "operationId": "myProfile",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "put": {
+        "tags": [
+          "applicant_profile"
+        ],
+        "summary": "Update My Profile",
+        "description": "Update My Profile",
+        "operationId": "updateMyProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "example": "yangon"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "hi"
+                  },
+                  "full_name": {
+                    "type": "string",
+                    "example": "Moe Wai Yan"
+                  },
+                  "location_id": {
+                    "type": "string",
+                    "example": "3"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "095407282"
+                  }
+                }
+              },
+              "examples": {
+                "Update My Profile": {
+                  "value": {
+                    "address": "yangon",
+                    "description": "hi",
+                    "full_name": "Moe Wai Yan",
+                    "location_id": "3",
+                    "phone": "095407282"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/recruiter/me/jobs": {
+      "get": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "Get All",
+        "description": "Get All",
+        "operationId": "getAll10",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create9",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "example": "insein"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "blah"
+                  },
+                  "job_category_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "location_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "num_of_posts": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "requirements": {
+                    "type": "string",
+                    "example": "need skills and good communication"
+                  },
+                  "salary": {
+                    "type": "string",
+                    "example": "200000"
+                  },
+                  "skill_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "example": 1
+                    },
+                    "example": [
+                      1,
+                      2
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Open"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Mobile  Developer"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "OnSite"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "address": "insein",
+                    "description": "blah",
+                    "job_category_id": 1,
+                    "location_id": 1,
+                    "num_of_posts": 1,
+                    "requirements": "need skills and good communication",
+                    "salary": "200000",
+                    "skill_ids": [
+                      1,
+                      2
+                    ],
+                    "status": "Open",
+                    "title": "Mobile  Developer",
+                    "type": "OnSite"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recruiter/me/jobs/3": {
+      "get": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show7",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "delete": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete7",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/recruiter/me/jobs/1/applications": {
+      "get": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "Applications",
+        "description": "Applications",
+        "operationId": "applications",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/recruiter/me/applications/1/status": {
+      "patch": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "Update Application Status",
+        "description": "Update Application Status",
+        "operationId": "updateApplicationStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "status": {
+                    "type": "string",
+                    "example": "Accepted"
+                  }
+                }
+              },
+              "examples": {
+                "Update Application Status": {
+                  "value": {
+                    "status": "Accepted"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/recruiter/me/jobs/1/shortlist": {
+      "get": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "Shortlist",
+        "description": "Shortlist",
+        "operationId": "shortlist",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/recruiter/me/jobs/2": {
+      "put": {
+        "tags": [
+          "recruiter_profile",
+          "jobs"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update7",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "example": "insein"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "blah"
+                  },
+                  "job_category_id": {
+                    "type": "number",
+                    "example": 4
+                  },
+                  "location_id": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "num_of_posts": {
+                    "type": "number",
+                    "example": 1
+                  },
+                  "requirements": {
+                    "type": "string",
+                    "example": "need skills and good communication"
+                  },
+                  "salary": {
+                    "type": "string",
+                    "example": "200000"
+                  },
+                  "skill_ids": {
+                    "type": "array",
+                    "items": {
+                      "type": "number",
+                      "example": 3
+                    },
+                    "example": [
+                      3,
+                      4
+                    ]
+                  },
+                  "status": {
+                    "type": "string",
+                    "example": "Open"
+                  },
+                  "title": {
+                    "type": "string",
+                    "example": "Junoir Web Developer update"
+                  },
+                  "type": {
+                    "type": "string",
+                    "example": "OnSite"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "address": "insein",
+                    "description": "blah",
+                    "job_category_id": 4,
+                    "location_id": 1,
+                    "num_of_posts": 1,
+                    "requirements": "need skills and good communication",
+                    "salary": "200000",
+                    "skill_ids": [
+                      3,
+                      4
+                    ],
+                    "status": "Open",
+                    "title": "Junoir Web Developer update",
+                    "type": "OnSite"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/recruiter/me": {
+      "get": {
+        "tags": [
+          "recruiter_profile"
+        ],
+        "summary": "Get My Profile",
+        "description": "Get My Profile",
+        "operationId": "getMyProfile",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ]
+      },
+      "put": {
+        "tags": [
+          "recruiter_profile"
+        ],
+        "summary": "Update My Profile",
+        "description": "Update My Profile",
+        "operationId": "updateMyProfile1",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "address": {
+                    "type": "string",
+                    "example": "yangon"
+                  },
+                  "company_name": {
+                    "type": "string",
+                    "example": "recruiter 2 company"
+                  },
+                  "description": {
+                    "type": "string",
+                    "example": "hi"
+                  },
+                  "location_id": {
+                    "type": "string",
+                    "example": "1"
+                  },
+                  "phone": {
+                    "type": "string",
+                    "example": "0978403960"
+                  },
+                  "website": {
+                    "type": "string",
+                    "example": "https://www.youtube.com/"
+                  }
+                }
+              },
+              "examples": {
+                "Update My Profile": {
+                  "value": {
+                    "address": "yangon",
+                    "company_name": "recruiter 2 company",
+                    "description": "hi",
+                    "location_id": "1",
+                    "phone": "0978403960",
+                    "website": "https://www.youtube.com/"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recruiter/me/reviews": {
+      "get": {
+        "tags": [
+          "recruiter_profile"
+        ],
+        "summary": "Reviews",
+        "description": "Reviews",
+        "operationId": "reviews",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/accounts": {
+      "get": {
+        "tags": [
+          "applicant list"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll11",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/accounts/1": {
+      "get": {
+        "tags": [
+          "applicant list"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show8",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recruiters/1/reviews": {
+      "get": {
+        "tags": [
+          "recruiters",
+          "reviews"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll12",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "recruiters",
+          "reviews"
+        ],
+        "summary": "create",
+        "description": "create",
+        "operationId": "create10",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "example": "This company is good"
+                  },
+                  "rating": {
+                    "type": "string",
+                    "example": "5"
+                  }
+                }
+              },
+              "examples": {
+                "create": {
+                  "value": {
+                    "comment": "This company is good",
+                    "rating": "5"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recruiters/1/reviews/1": {
+      "get": {
+        "tags": [
+          "recruiters",
+          "reviews"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show9",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "put": {
+        "tags": [
+          "recruiters",
+          "reviews"
+        ],
+        "summary": "update",
+        "description": "update",
+        "operationId": "update8",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "comment": {
+                    "type": "string",
+                    "example": "This company is good update"
+                  },
+                  "rating": {
+                    "type": "string",
+                    "example": "5"
+                  }
+                }
+              },
+              "examples": {
+                "update": {
+                  "value": {
+                    "comment": "This company is good update",
+                    "rating": "5"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      },
+      "delete": {
+        "tags": [
+          "recruiters",
+          "reviews"
+        ],
+        "summary": "delete",
+        "description": "delete",
+        "operationId": "delete8",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        },
+        "security": [
+          {}
+        ]
+      }
+    },
+    "/recruiters": {
+      "get": {
+        "tags": [
+          "recruiters"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll13",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recruiters/1": {
+      "get": {
+        "tags": [
+          "recruiters"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show10",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/recruiters/1/jobs": {
+      "get": {
+        "tags": [
+          "recruiters"
+        ],
+        "summary": "Jobs by Specific Recruiter",
+        "description": "Jobs by Specific Recruiter",
+        "operationId": "jobsBySpecificRecruiter",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/jobs": {
+      "get": {
+        "tags": [
+          "jobList"
+        ],
+        "summary": "get all",
+        "description": "get all",
+        "operationId": "getAll14",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/jobs/1": {
+      "get": {
+        "tags": [
+          "jobList"
+        ],
+        "summary": "show",
+        "description": "show",
+        "operationId": "show11",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/jobs/1/save": {
+      "post": {
+        "tags": [
+          "jobList"
+        ],
+        "summary": "Save Job",
+        "description": "Save Job",
+        "operationId": "saveJob",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "examples": {
+                "Save Job": {
+                  "value": ""
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/jobs/1/apply": {
+      "post": {
+        "tags": [
+          "jobList"
+        ],
+        "summary": "Apply",
+        "description": "Apply",
+        "operationId": "apply",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "resume_id": {
+                    "type": "number",
+                    "example": 3
+                  }
+                }
+              },
+              "examples": {
+                "Apply": {
+                  "value": {
+                    "resume_id": 3
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    },
+    "/api/roles": {
+      "get": {
+        "summary": "getAllRoles",
+        "description": "getAllRoles",
+        "operationId": "getallroles",
+        "responses": {
+          "200": {
+            "description": ""
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "users"
+    },
+    {
+      "name": "skills"
+    },
+    {
+      "name": "socialMedia"
+    },
+    {
+      "name": "job categories"
+    },
+    {
+      "name": "locations"
+    },
+    {
+      "name": "applicant_profile"
+    },
+    {
+      "name": "experiences"
+    },
+    {
+      "name": "skills1"
+    },
+    {
+      "name": "resumes"
+    },
+    {
+      "name": "job_categories"
+    },
+    {
+      "name": "Saved Jobs"
+    },
+    {
+      "name": "applications"
+    },
+    {
+      "name": "educations"
+    },
+    {
+      "name": "recruiter_profile"
+    },
+    {
+      "name": "jobs"
+    },
+    {
+      "name": "applicant list"
+    },
+    {
+      "name": "recruiters"
+    },
+    {
+      "name": "reviews"
+    },
+    {
+      "name": "jobList"
+    }
+  ]
+}
