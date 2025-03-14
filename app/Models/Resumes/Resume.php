@@ -22,9 +22,10 @@ class Resume extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function getFilePathAttribute($value)
+    public function getFilePathAttribute($file_path)
     {
+        $storageService = new StorageService();
 
-        return $value ? StorageService::getUrl($value) : null;
+        return ($file_path && $storageService->exists($file_path)) ? $storageService->getUrl($file_path) : null;
     }
 }

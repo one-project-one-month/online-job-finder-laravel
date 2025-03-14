@@ -28,7 +28,7 @@ class SavedJobController extends Controller
               'statusCode' => 200,
               'status'     => 'success',
               'data'       => [
-                  'applicant' => SavedJobResource::collection($savedJobsList),
+                  'savedJobs' => SavedJobResource::collection($savedJobsList),
               ],
           ], 200);
           } catch (\Exception $e) {

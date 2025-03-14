@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -22,7 +21,8 @@ class ResumeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'file_path' => 'nullable|mimes:png,jpg|max:2048',
+            'file_path'  => 'nullable|mimes:png,jpg,pdf,doc,docx',
+            'is_default' => 'nullable|boolean',
         ];
     }
 }

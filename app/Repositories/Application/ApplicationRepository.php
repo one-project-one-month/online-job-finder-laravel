@@ -11,6 +11,7 @@ class ApplicationRepository{
     public function create($data){
         $user=auth()->user();
         $applicant=ApplicantProfile::where('user_id',$user->id)->first();
+
         if (!$applicant) {
             throw new \Exception("Applicant user is not found");
         }
@@ -51,16 +52,16 @@ class ApplicationRepository{
 
     public function updateStatus($data,$id){
         $updateStatus=Application::findOrFail($id);
-        if (is_array($data)) {
-            $data = reset($data);
-        }
+    
         $updateStatus->update([
-            'status'=>$data
+            'status'=>$data['status']
         ]);
-        $updateStatus->where('status','Accepted')->first();
-        if ($updateStatus) {
-            throw new \Exception("already accepted");
-        }
+
+        // $updateStatus->where('status','Accepted')->first();
+        // if ($updateStatus) {
+        //     throw new \Exception("already accepted");
+        // }
+
         return $updateStatus;
     }
 

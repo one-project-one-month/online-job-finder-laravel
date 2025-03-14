@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -22,11 +21,11 @@ class RegisterRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'username'=>'required|string|max:255',
-            'email'=>'required|email|unique:users,email',
-            'password'=>'required|confirmed',
-            'role_id'=>'required|exists:roles,id',
-            'profile_photo'=>'nullable'
+            'username'      => 'required|email|unique:users,username',
+            'email'         => 'required|email|unique:users,email',
+            'password'      => 'required|confirmed',
+            'role_id'       => 'required|exists:roles,id',
+            'profile_photo' => 'nullable|image|mimes:jpg,jpeg,png',
         ];
     }
 }

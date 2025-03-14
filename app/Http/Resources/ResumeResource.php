@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
@@ -15,10 +14,11 @@ class ResumeResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            'id' => $this->id,
-            'user_id' => $this->user_id,
-            'file_path' => $this->file_path,
-            'lock_version' => $this->lock_version,
+            'id'         => $this->id,
+            'user_id'    => $this->user_id,
+            'name'       => $this->name,
+            'file_path'  => $this->file_path,
+            'is_default' => (bool) $this->is_default,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

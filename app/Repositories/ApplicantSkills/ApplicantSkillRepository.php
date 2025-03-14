@@ -13,9 +13,7 @@ class ApplicantSkillRepository
         $user_id = Auth::user()->id;
 
         $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
-        if (ApplicantSkill::where('applicant_id', $applicantProfile->id)->exists()) {
-            throw new \Exception("Applicant skills already created");
-        }
+
         $applicantProfile->skills()->sync($data['skill_ids']);
 
 

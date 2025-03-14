@@ -1,14 +1,11 @@
 <?php
-
 namespace App\Http\Controllers\ApplicantExperience;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Gate;
 use App\Http\Requests\ApplicantExperienceRequest;
-use App\Http\Resources\ApplicantEducationResource;
 use App\Http\Resources\ApplicantExperienceResource;
 use App\Services\ApplicantExperience\ApplicantExperienceService;
+use Illuminate\Support\Facades\Gate;
 
 class ApplicantExperienceController extends Controller
 {
@@ -21,22 +18,43 @@ class ApplicantExperienceController extends Controller
 
     public function index()
     {
-        try{
+        try {
             $applicantExperience = $this->applicantExperienceService->getAll();
             return response()->json([
-                'status' => 'success',
+                'status'     => 'success',
                 'statusCode' => 200,
-                'message' => 'Data retrieved Successfully',
-                'data' => [
-                  'applicantExperience' =>  ApplicantExperienceResource::collection($applicantExperience)
-                ]
-                ],200);
-        } catch(\Exception $e){
+                'message'    => 'Data retrieved Successfully',
+                'data'       => [
+                    'experiences' => ApplicantExperienceResource::collection($applicantExperience),
+                ],
+            ], 200);
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status'     => 'error',
                 'statusCode' => 500,
-                'message' => $e->getMessage()
-            ],500);
+                'message'    => $e->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function show($id)
+    {
+        try {
+            $applicantExperience = $this->applicantExperienceService->show($id);
+            return response()->json([
+                'status'     => 'success',
+                'statusCode' => 200,
+                'message'    => 'Data retrieved Successfully',
+                'data'       => [
+                    'experience' => new ApplicantExperienceResource($applicantExperience),
+                ],
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'status'     => 'error',
+                'statusCode' => 500,
+                'message'    => $e->getMessage(),
+            ], 500);
         }
     }
 
@@ -45,46 +63,53 @@ class ApplicantExperienceController extends Controller
         try {
             $applicantExperience = $this->applicantExperienceService->create($request->toArray());
             return response()->json([
-                'status' => 'success',
+                'status'     => 'success',
                 'statusCode' => 201,
-                'message' => 'Data stored Successfully',
-                'data' => [
-                  'applicantExperience' => new ApplicantExperienceResource($applicantExperience)
-                ]
-            ],201);
-        } catch(\Exception $e){
+                'message'    => 'Data stored Successfully',
+                'data'       => [
+                    'experience' => new ApplicantExperienceResource($applicantExperience),
+                ],
+            ], 201);
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status'     => 'error',
                 'statusCode' => 500,
-                'message' => $e->getMessage()
-            ],500);
+                'message'    => $e->getMessage(),
+            ], 500);
         }
     }
 
-    public function show($id)
+    public function update(ApplicantExperienceRequest $request, $id)
     {
-        try{
-            $applicantExperience = $this->applicantExperienceService->show($id);
+        try {
+            if (Gate::denies('update', $id)) {
+                return response()->json([
+                    'message'    => 'Unauthorized action',
+                    'status'     => 'error',
+                    'statusCode' => 403,
+                ], 403);
+            }
+            $applicantExperience = $this->applicantExperienceService->update($request->toArray(), $id);
             return response()->json([
-                'status' => 'success',
+                'status'     => 'success',
                 'statusCode' => 200,
-                'message' => 'Data retrieved Successfully',
-                'data' => [
-                  'applicantExperience' => new ApplicantExperienceResource($applicantExperience)
-                ]
-                ],200);
-        } catch(\Exception $e){
+                'message'    => 'Data updated Successfully',
+                'data'       => [
+                    'experience' => new ApplicantExperienceResource($applicantExperience),
+                ],
+            ], 200);
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status'     => 'error',
                 'statusCode' => 500,
-                'message' => $e->getMessage()
-            ],500);
+                'message'    => $e->getMessage(),
+            ], 500);
         }
     }
 
     public function destroy($id)
     {
-        try{
+        try {
             if (Gate::denies('delete', $id)) {
                 return response()->json([
                     'message'    => 'Unauthorized action',
@@ -95,42 +120,13 @@ class ApplicantExperienceController extends Controller
             $applicantExperience = $this->applicantExperienceService->destroy($id);
             return response()->json([
 
-                ],204);
-        } catch(\Exception $e){
+            ], 204);
+        } catch (\Exception $e) {
             return response()->json([
-                'status' => 'error',
+                'status'     => 'error',
                 'statusCode' => 500,
-                'message' => $e->getMessage()
-            ],500);
+                'message'    => $e->getMessage(),
+            ], 500);
         }
     }
-
-    public function update(ApplicantExperienceRequest $request, $id)
-    {
-        try{
-            if (Gate::denies('update', $id)) {
-                return response()->json([
-                    'message'    => 'Unauthorized action',
-                    'status'     => 'error',
-                    'statusCode' => 403,
-                ], 403);
-            }
-            $applicantExperience = $this->applicantExperienceService->update($request->toArray(),$id);
-            return response()->json([
-                'status' => 'success',
-                'statusCode' => 200,
-                'message' => 'Data updated Successfully',
-                'data' => [
-                  'applicantExperience' => new ApplicantExperienceResource($applicantExperience)
-                ]
-                ],200);
-        } catch(\Exception $e){
-            return response()->json([
-                'status' => 'error',
-                'statusCode' => 500,
-                'message' => $e->getMessage()
-            ],500);
-        }
-    }
-
 }

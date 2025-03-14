@@ -22,7 +22,7 @@ class UpdateStatusRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'status' => 'required|in:Pending,Seen,Accepted,Rejected',
+            'status' => 'required|in:Seen,Accepted,Rejected',
         ];
     }
 }

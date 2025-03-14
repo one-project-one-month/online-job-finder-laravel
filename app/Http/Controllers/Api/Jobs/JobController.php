@@ -165,7 +165,7 @@ class JobController extends Controller
                   'status'=>'success',
                   'statusCode'=>200,
                   'data'=>[
-                      'jobApplications'=>ApplicationResource::collection($shortListApplications)
+                      'shortlist'=>ApplicationResource::collection($shortListApplications)
                   ]
               ],200);
            } catch (\Exception $e) {

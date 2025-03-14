@@ -1,12 +1,10 @@
 <?php
-
 namespace App\Http\Controllers\ProfilePhoto;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ProfilePhoto\ProfilePhotoRequest;
 use App\Http\Resources\ProfilePhotoResource;
 use App\Services\Storage\StorageService;
-use Illuminate\Http\Request;
 
 class ProfilePhotoController extends Controller
 {
@@ -17,12 +15,12 @@ class ProfilePhotoController extends Controller
         $this->storageService = $storageService;
     }
 
-    public function profileUpload( ProfilePhotoRequest $request){
-        $user = auth()->user();
-        $filePath = $this->storageService->store('public/uploads',$request->file('file_path','public'));
-        // $filePath = '/storage'. $request->file('file_path')->store('/profile_photos', 'public');
-        $name = $request->file('file_path')->getClientOriginalName();
-        $user->name = $name;
+    public function profileUpload(ProfilePhotoRequest $request)
+    {
+        $user     = auth()->user();
+        $filePath = $this->storageService->store('profile_pictures', $request->file('file_path', 'public'));
+        $name            = $request->file('file_path')->getClientOriginalName();
+        $user->name      = $name;
         $user->file_path = $filePath;
         $user->save();
 

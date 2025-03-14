@@ -10,6 +10,7 @@ use App\Services\Storage\StorageService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ResumeController extends Controller
 {
@@ -26,6 +27,7 @@ class ResumeController extends Controller
     {
         try {
             $resumes = $this->resumeService->getAllResumes();
+
             return response()->json([
                 'message'    => 'fetching successful',
                 'status'     => 'success',
@@ -35,40 +37,6 @@ class ResumeController extends Controller
                 ],
             ], 200);
         } catch (Exception $e) {
-            return response()->json([
-                'message'    => $e->getMessage(),
-                'statusCode' => 500,
-                'status'     => 'error',
-            ], 500);
-        }
-    }
-
-    public function store(ResumeRequest $request)
-    {
-
-        try {
-            $user = Auth::user();
-
-            $file_path = $this->storageService->store('resumes', $request->file('file_path'));
-            $name      = $request->file('file_path')->getClientOriginalName();
-
-            $resume = $this->resumeService->createResume([
-                'user_id'   => $user->id,
-                'name'      => $name,
-                'file_path' => $file_path,
-            ]);
-
-            return response()->json(
-                [
-                    'status'     => 'success',
-                    'statusCode' => 201,
-                    'message'    => 'Resumes uploaded successfully',
-                    'data'       => [
-                        'resume' => new ResumeResource($resume),
-                    ],
-                ], 201
-            );
-        } catch (\Exception $e) {
             return response()->json([
                 'message'    => $e->getMessage(),
                 'statusCode' => 500,
@@ -89,6 +57,56 @@ class ResumeController extends Controller
                     'resume' => new ResumeResource($resume),
                 ],
             ], 200);
+        } catch (\Exception $e) {
+            return response()->json([
+                'message'    => $e->getMessage(),
+                'statusCode' => 500,
+                'status'     => 'error',
+            ], 500);
+        }
+    }
+
+    public function getDefaultResume() 
+    {
+        $resume = $this->resumeService->getDefaultResume();
+        return response()->json([
+            'status'     => 'success',
+            'statusCode' => 200,
+            'message'    => 'fetching resume success',
+            'data'       => [
+                'resume' => new ResumeResource($resume),
+            ],
+        ], 200);
+    }
+
+    public function store(ResumeRequest $request)
+    {
+
+        try {
+            $user = Auth::user();
+
+            $file_path = $this->storageService->store('resumes', $request->file('file_path'));
+            $name      = $request->file('file_path')->getClientOriginalName();
+
+            DB::beginTransaction();
+            $resume = $this->resumeService->createResume([
+                'user_id'   => $user->id,
+                'name'      => $name,
+                'file_path' => $file_path,
+                'is_default' => $request->is_default,
+            ]);
+            DB::commit();
+
+            return response()->json(
+                [
+                    'status'     => 'success',
+                    'statusCode' => 201,
+                    'message'    => 'Resumes uploaded successfully',
+                    'data'       => [
+                        'resume' => new ResumeResource($resume),
+                    ],
+                ], 201
+            );
         } catch (\Exception $e) {
             return response()->json([
                 'message'    => $e->getMessage(),

@@ -12,16 +12,12 @@ class ApplicantJobCategoryRepository
     {
         $user_id = Auth::user()->id;
         $applicantProfile = ApplicantProfile::where('user_id', $user_id)->firstOrFail();
-        $applicantCategory=ApplicantJobCategory::where('applicant_id', $applicantProfile->id)->first();
-        if($applicantCategory)
-        {
-            throw new \Exception("Applicant Job Category already created");
-        }
+       
         $applicantProfile->job_categories()->sync($data['job_category_ids']);
 
         return ApplicantJobCategory::where('applicant_id', $applicantProfile->id)
                            ->with('applicantProfile', 'jobCategory')
-                           ->first();
+                           ->get();
     }
 
     public function getAll()

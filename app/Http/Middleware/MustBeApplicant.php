@@ -20,7 +20,7 @@ class MustBeApplicant
 
         return response()->json([
             "status"  => false,
-            "message" => "Unauthorized Access",
+            "message" => "You're not an Applicant",
         ], 403);
     }
 }

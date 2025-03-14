@@ -16,6 +16,12 @@ class ResumeRepository
             'is_default' => $data['is_default'] ?? false,
         ]);
 
+        if ($data['is_default'] == true) {
+            Resume::where('user_id', $data['user_id'])->whereNot('id', $resume->id)->update([
+                'is_default' => false,
+            ]);
+        }
+
         return $resume;
     }
 
@@ -28,6 +34,12 @@ class ResumeRepository
     public function find($id)
     {
         $resume = Resume::findOrFail($id);
+        return $resume;
+    }
+
+    public function getDefaultResume()
+    {
+        $resume = Resume::where('is_default', true)->firstOrFail();
         return $resume;
     }
 
@@ -44,11 +56,11 @@ class ResumeRepository
 
     public function delete($id)
     {
-        $Resume = Resume::findOrFail($id);
-        $existApplication=Application::where('resume_id',$id)->first();
-       if ($existApplication) {
-        throw new \Exception("You can't delete this resume");
-       }
+        $Resume           = Resume::findOrFail($id);
+        $existApplication = Application::where('resume_id', $id)->first();
+        if ($existApplication) {
+            throw new \Exception("You can't delete this resume");
+        }
         $Resume->delete();
         return $Resume;
     }

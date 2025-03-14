@@ -17,7 +17,6 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
-
         try {
             $user = User::create([
                 'username' => $request->username,
@@ -27,10 +26,12 @@ class AuthController extends Controller
             ]);
 
             $role = Role::where('id', $request->role_id)->where('guard_name', 'api')->first();
+
             if ($role) {
                 $user->assignRole($role);
             }
-            $user = User::with('role')->find($user->id);
+
+            $user = User::with('role')->findOrFail($user->id);
 
             return response()->json([
                 'message' => 'User Created Successful',
@@ -56,13 +57,15 @@ class AuthController extends Controller
 
             if (! $user) {
                 return response()->json([
-                    'message' => 'user not found',
+                    'message' => 'Your email or password could potentially be incorrect',
                     'status'  => 'error',
-                ], 404);
+                ], 401);
             }
+
             if (! Hash::check($request->password, $user->password)) {
                 return response()->json([
-                    'error' => 'Invalid password.',
+                    'message' => 'Your email or password could potentially be incorrect',
+                    'status'  => 'error',
                 ], 401);
             }
 
@@ -90,14 +93,7 @@ class AuthController extends Controller
         try {
             $user = Auth::user();
 
-            $user = User::with('role')->find($user->id);
-
-            if (! $user) {
-                return response()->json([
-                    'Message' => 'User not found',
-                    'status'  => 'error',
-                ], 404);
-            }
+            $user = User::with('role')->findOrFail($user->id);
 
             return response()->json([
                 'message' => 'fetching user success',
@@ -117,6 +113,7 @@ class AuthController extends Controller
     public function logout()
     {
         JWTAuth::invalidate(JWTAuth::getToken());
+
         return response()->json([
             'message' => 'Signout successful',
         ]);
@@ -136,15 +133,11 @@ class AuthController extends Controller
         $user->password = Hash::make($request->new_password);
         $user->save();
 
-        JWTAuth::invalidate(JWTAuth::getToken());
-        $newToken = JWTAuth::fromUser($user);
-
         return response()->json([
-            'message' => 'Password changed successfully',
+            'message' => 'Password changed successfully. Login Back!',
             'status'  => 'success',
             'data'    => [
                 'user'  => new UserResource($user),
-                'token' => $newToken,
             ],
         ], 200);
     }

@@ -3,6 +3,8 @@
 namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
+
+use App\Services\Storage\StorageService;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -28,9 +30,7 @@ class User extends Authenticatable implements JWTSubject
         'role_id',
         'is_activated',
         'is_information_completed',
-        // 'profile_photo',
-        'name',
-        'file_path',
+        'profile_photo',
         'role_id',
         'lock_version',
     ];
@@ -71,6 +71,13 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    public function getProfilePhotoAttribute($profile_photo)
+    {
+        $storageService = new StorageService();
+
+        return ($profile_photo && $storageService->exists($profile_photo)) ? $storageService->getUrl($profile_photo) : null;
     }
 
     public function role(){

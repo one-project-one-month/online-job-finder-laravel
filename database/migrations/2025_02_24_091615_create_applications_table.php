@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('applications', function (Blueprint $table) {
             $table->id();
             $table->unsignedInteger('job_post_id');
-            $table->enum('status',['Pending','Seen','Accepted','Rejected'])->default('Pending');
+            $table->enum('status', ['Pending', 'Seen', 'Accepted', 'Rejected'])->default('Pending');
             $table->unsignedInteger('applicant_id');
             $table->integer('resume_id');
             $table->integer('lock_version');

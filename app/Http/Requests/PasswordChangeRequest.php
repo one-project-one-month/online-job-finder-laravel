@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Http\Rules\MatchOldPassword;
 use Illuminate\Foundation\Http\FormRequest;
 
 class PasswordChangeRequest extends FormRequest
@@ -22,10 +23,11 @@ class PasswordChangeRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'current_password' => 'required',
+            'current_password' => ['required', new MatchOldPassword],
             'new_password' => 'required|min:6|confirmed',
         ];
     }
+    
 
     public function messages(): array
     {

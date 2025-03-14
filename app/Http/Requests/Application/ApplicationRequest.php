@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Requests\Application;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -21,12 +20,11 @@ class ApplicationRequest extends FormRequest
      */
     public function rules(): array
     {
+        $this->merge(['job_post_id' => $this->route('job_post_id')]);
+
         return [
-            'job_post_id'=>'required|numeric|exists:Job_posts,id',
-            'applicant_id'=>'numeric|exists:applicant_profiles,id'
-            ,'status'=>'numeric|in:Pending,Seen,Accepted'
-            ,'resume_id'=>'required|numeric|exists:resumes,id'
-            ,'applied_at'=>'date'
+            'job_post_id' => 'required|numeric|exists:Job_posts,id',
+            'resume_id'   => 'required|numeric|exists:resumes,id',
         ];
     }
 }
