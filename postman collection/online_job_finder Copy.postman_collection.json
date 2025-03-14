@@ -1,14 +1,46 @@
 {
 	"info": {
-		"_postman_id": "06010e52-1682-438a-b2c3-5026200f1fdf",
-		"name": "online_job_finder Copy",
+		"_postman_id": "160237a4-cfef-417c-bdff-5e21c0371c0c",
+		"name": "online_job_finder",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "32211058"
+		"_exporter_id": "9114770",
+		"_collection_link": "https://planetary-space-436479.postman.co/workspace/Learning-Management-System~4e07e3b8-1f01-4dd6-8a6f-d5cd8d1d9708/collection/9114770-160237a4-cfef-417c-bdff-5e21c0371c0c?action=share&source=collection_link&creator=9114770"
 	},
 	"item": [
 		{
 			"name": "users",
 			"item": [
+				{
+					"name": "Get Available Roles",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/available-roles",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"available-roles"
+							]
+						}
+					},
+					"response": []
+				},
 				{
 					"name": "register",
 					"request": {
@@ -81,14 +113,15 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n     \"email\":\"applicant@gmail.com\",\r\n      \"password\":\"moewaiyan\"\r\n}"
+							"raw": "{\r\n    \"email\": \"applicant@gmail.com\",\r\n    \"password\": \"moewaiyan\"\r\n}"
 						},
 						"url": {
-							"raw": "{{url}}auth/signin",
+							"raw": "{{url}}/auth/signin",
 							"host": [
-								"{{url}}auth"
+								"{{url}}"
 							],
 							"path": [
+								"auth",
 								"signin"
 							]
 						},
@@ -135,14 +168,7 @@
 					"name": "password change",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjM2Njc5LCJleHAiOjE3NDAyNDAyNzksIm5iZiI6MTc0MDIzNjY3OSwianRpIjoicjhOa1RYUkZrZmM0QUJnVCIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.45cp6pHuYKJGwp6b8t0NdZAg7niLgLSFymC4wUEkqXI",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "POST",
 						"header": [
@@ -164,7 +190,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"current_password\":\"moewaiyan12\",\r\n    \"new_password\":\"moewaiyan\",\r\n    \"new_password_confirmation\":\"moewaiyan\"\r\n}",
+							"raw": "{\r\n    \"current_password\":\"moewaiyan\",\r\n    \"new_password\":\"moewaiyan\",\r\n    \"new_password_confirmation\":\"moewaiyan\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -172,13 +198,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/auth//password/change",
+							"raw": "{{url}}/auth/password/change",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
 								"auth",
-								"",
 								"password",
 								"change"
 							]
@@ -246,17 +271,17 @@
 								{
 									"key": "profile_photo",
 									"type": "file",
-									"src": "/C:/Users/ACER/Pictures/Screenshots/Screenshot 2025-02-07 101728.png",
-									"disabled": true
+									"src": "/C:/Users/User/Pictures/Screenshots/Screenshot 2025-03-02 035709.png"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{url}}auth/user/profile-upload",
+							"raw": "{{url}}/auth/user/profile-upload",
 							"host": [
-								"{{url}}auth"
+								"{{url}}"
 							],
 							"path": [
+								"auth",
 								"user",
 								"profile-upload"
 							]
@@ -267,7 +292,7 @@
 			]
 		},
 		{
-			"name": "locations",
+			"name": "skills",
 			"item": [
 				{
 					"name": "get all",
@@ -294,14 +319,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/admin/me/locations",
+							"raw": "{{url}}/skills",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"admin",
-								"me",
-								"locations"
+								"skills"
 							]
 						}
 					},
@@ -332,14 +355,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/admin/me/locations/1",
+							"raw": "{{url}}/skills/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"admin",
-								"me",
-								"locations",
+								"skills",
 								"1"
 							]
 						}
@@ -372,7 +393,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Thailand\",\r\n    \"description\": \"Thailand is blah blah\"\r\n}",
+							"raw": "{\r\n    \"name\": \"AI\",\r\n    \"description\": \"AI\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -380,14 +401,12 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/admin/me/locations",
+							"raw": "{{url}}/skills",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"admin",
-								"me",
-								"locations"
+								"skills"
 							]
 						}
 					},
@@ -402,6 +421,11 @@
 						"method": "PUT",
 						"header": [
 							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							},
+							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
@@ -410,16 +434,11 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"Thailand\",\r\n    \"description\": \"Thailand is blah blah\"\r\n}",
+							"raw": "{\r\n    \"name\":\"NodeJS\",\r\n    \"description\":\"Node\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -427,15 +446,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/admin/me/locations/6",
+							"raw": "{{url}}/skills/5",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"admin",
-								"me",
-								"locations",
-								"6"
+								"skills",
+								"5"
 							]
 						}
 					},
@@ -463,15 +480,233 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/admin/me/locations/6",
+							"raw": "{{url}}/skills/6",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"admin",
-								"me",
-								"locations",
+								"skills",
 								"6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "socialMedia",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzMTIzLCJleHAiOjE3NDAyNDY3MjMsIm5iZiI6MTc0MDI0MzEyMywianRpIjoiS1ZGZ3pJR1pMMWJlQkxLQSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4wOCjK7zAH_nLJ7zgx58EO1PAu3yEPRt2ojFRME3jr8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/social-media",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"social-media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "show",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTc1NTY1LCJleHAiOjE3Mzk5NzkxNjYsIm5iZiI6MTczOTk3NTU2NiwianRpIjoiWEJJNWNFbXY4cXFFemJmMCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FzBNLSGuB4Nkw8EsWmF85kJmfYW6_fVBXztkECuXcFM",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/social-media/2",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"social-media",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzMTIzLCJleHAiOjE3NDAyNDY3MjMsIm5iZiI6MTc0MDI0MzEyMywianRpIjoiS1ZGZ3pJR1pMMWJlQkxLQSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4wOCjK7zAH_nLJ7zgx58EO1PAu3yEPRt2ojFRME3jr8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"link\":\"www.youtube.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/social-media",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"social-media"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwNzc1LCJleHAiOjE3NDA4MDQzNzUsIm5iZiI6MTc0MDgwMDc3NSwianRpIjoiOE04Z3ZrcUxsTlk0NzBhNiIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TQNhLbw78hFhCG42M1hewluKYfcHWg33nLlNV-oHamY",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Bearer",
+								"value": "{{token}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"link\":\"www.facebook.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}/social-media/3",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"social-media",
+								"3"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwODIzLCJleHAiOjE3NDA4MDQ0MjMsIm5iZiI6MTc0MDgwMDgyMywianRpIjoicUxIOTV3d0hyWXFQTkF0bCIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0._kGbqoVU-P8MfI2_VAf3paBHlrPGTWSO6SC0C-zCttE",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}social-media/3",
+							"host": [
+								"{{url}}social-media"
+							],
+							"path": [
+								"3"
 							]
 						}
 					},
@@ -718,7 +953,7 @@
 			]
 		},
 		{
-			"name": "skills",
+			"name": "locations",
 			"item": [
 				{
 					"name": "get all",
@@ -745,12 +980,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/skills",
+							"raw": "{{url}}/admin/me/locations",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"skills"
+								"admin",
+								"me",
+								"locations"
 							]
 						}
 					},
@@ -781,12 +1018,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}/skills/1",
+							"raw": "{{url}}/admin/me/locations/1",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"skills",
+								"admin",
+								"me",
+								"locations",
 								"1"
 							]
 						}
@@ -819,7 +1058,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\": \"AI\",\r\n    \"description\": \"AI\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Thailand\",\r\n    \"description\": \"Thailand is blah blah\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -827,12 +1066,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/skills",
+							"raw": "{{url}}/admin/me/locations",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"skills"
+								"admin",
+								"me",
+								"locations"
 							]
 						}
 					},
@@ -847,11 +1088,6 @@
 						"method": "PUT",
 						"header": [
 							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							},
-							{
 								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
@@ -860,11 +1096,16 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"name\":\"NodeJS\",\r\n    \"description\":\"Node\"\r\n}",
+							"raw": "{\r\n    \"name\": \"Thailand\",\r\n    \"description\": \"Thailand is blah blah\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -872,265 +1113,24 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}/skills/5",
+							"raw": "{{url}}/admin/me/locations/6",
 							"host": [
 								"{{url}}"
 							],
 							"path": [
-								"skills",
-								"5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}/skills/6",
-							"host": [
-								"{{url}}"
-							],
-							"path": [
-								"skills",
+								"admin",
+								"me",
+								"locations",
 								"6"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "company_profile",
-			"item": [
-				{
-					"name": "create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjM3NDQzLCJleHAiOjE3NDAyNDEwNDMsIm5iZiI6MTc0MDIzNzQ0MywianRpIjoiOVdBQWtQREx0Skt4NkFQdSIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.0iAKT9nKeSsZEByO-79Ixa3KGLrOPoeC7diFgo5iwRQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n\"company_name\":\"It company\",\r\n\"phone\":\"09759406961\",\r\n\"website\":\"https://www.youtube.com/\",\r\n\"address\":\"09759406961\",\r\n\"location_id\":\"1\",\r\n\"description\":\"hi\"\r\n\r\n\r\n\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/recruiter/me/profile",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"recruiter",
-								"me",
-								"profile"
-							]
-						}
-					},
-					"response": []
 				},
 				{
-					"name": "show",
+					"name": "delete",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTMxNDIyLCJleHAiOjE3Mzk5MzUwMjIsIm5iZiI6MTczOTkzMTQyMiwianRpIjoiSW00OWpqNXVNeXE5SnA4UCIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.njturhxzN-i6FWyQNkRjusUOB5Q7sbEhXCRD7C3tOzc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/recruiter/me/profile/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"recruiter",
-								"me",
-								"profile",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQxMDcyLCJleHAiOjE3NDAyNDQ2NzIsIm5iZiI6MTc0MDI0MTA3MiwianRpIjoiMnBySWpueHJuQVBPNVBENCIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Qiz_Lztqv743MNEmeTSmfvsA3mPmBtn6vb2p0uv9xOc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/recruiter/me/profile",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"recruiter",
-								"me",
-								"profile"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTMxNDIyLCJleHAiOjE3Mzk5MzUwMjIsIm5iZiI6MTczOTkzMTQyMiwianRpIjoiSW00OWpqNXVNeXE5SnA4UCIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.njturhxzN-i6FWyQNkRjusUOB5Q7sbEhXCRD7C3tOzc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \r\n\"company_name\":\"It company update\",\r\n\"phone\":\"09759406961\",\r\n\"website\":\"https://www.youtube.com/\",\r\n\"address\":\"yangon\",\r\n\"location_id\":\"1\",\r\n\"description\":\"hi\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/recruiter/me/profile/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"recruiter",
-								"me",
-								"profile",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "updateMyCompanyProfile",
-					"request": {
-						"method": "PUT",
+						"method": "DELETE",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -1148,69 +1148,16 @@
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \r\n\"company_name\":\"recruiter 2 company\",\r\n\"phone\":\"0978403960\",\r\n\"website\":\"https://www.youtube.com/\",\r\n\"address\":\"yangon\",\r\n\"location_id\":\"1\",\r\n\"description\":\"hi\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
 						"url": {
-							"raw": "{{url}}recruiter/me",
+							"raw": "{{url}}/admin/me/locations/6",
 							"host": [
-								"{{url}}recruiter"
+								"{{url}}"
 							],
 							"path": [
-								"me"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQxMDcyLCJleHAiOjE3NDAyNDQ2NzIsIm5iZiI6MTc0MDI0MTA3MiwianRpIjoiMnBySWpueHJuQVBPNVBENCIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Qiz_Lztqv743MNEmeTSmfvsA3mPmBtn6vb2p0uv9xOc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/recruiter/me/profile/4",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"recruiter",
+								"admin",
 								"me",
-								"profile",
-								"4"
+								"locations",
+								"6"
 							]
 						}
 					},
@@ -1222,72 +1169,1032 @@
 			"name": "applicant_profile",
 			"item": [
 				{
-					"name": "create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNzk5OTkzLCJleHAiOjE3NDA4MDM1OTMsIm5iZiI6MTc0MDc5OTk5MywianRpIjoiYkF4V05jdXpxUGt1cUZSOSIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Ph-6iDeb8mErn9JSC8ZbRwXvsN-UXOB2kUBH3uKpbZk",
-									"type": "string"
+					"name": "experiences",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/experiences",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"experiences"
+									]
 								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
 							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \r\n\"full_name\":\"Shan Shan\",\r\n\"phone\":\"09759406961\",\r\n\"address\":\"meikhtila\",\r\n\"location_id\":\"3\",\r\n\"description\":\"hi\"\r\n\r\n\r\n\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/profile",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"profile"
-							]
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/experiences/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"experiences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Bearer",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"company_name\":\"YNA Company\",\r\n    \"location\":\"Yangon\",\r\n    \"title\":\"junior web developer\",\r\n    \"job_type\":\"blah blah\",\t\r\n    \"start_date\":\"2-2-2023\",\r\n    \"end_date\":\"2-2-2025\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/experiences",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"experiences"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"company_name\":\"YNA Company update\",\r\n    \"location\":\"Yangon\",\r\n    \"title\":\"junior web developer\",\r\n    \"job_type\":\"blah blah\",\t\r\n    \"start_date\":\"2023-2-2\",\r\n    \"end_date\":\"2023-2-2\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/experiences/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"experiences",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/experiences/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"experiences",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					},
-					"response": []
+					]
 				},
 				{
-					"name": "show",
+					"name": "skills",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/skills",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"skills"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"skill_ids\": [\r\n        2,\r\n        3\r\n    ]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/skills",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"skills"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "resumes",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/resumes",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"resumes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/resumes/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"resumes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Default Resume",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/default-resume",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"default-resume"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"var template = `\r",
+											"<style type=\"text/css\">\r",
+											"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
+											"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
+											"    .tftable tr {background-color:#ffffff;}\r",
+											"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
+											"    .tftable tr:hover {background-color:#e0ffff;}\r",
+											"</style>\r",
+											"\r",
+											"<table class=\"tftable\" border=\"1\">\r",
+											"    <tr>\r",
+											"        <th>Error</th>\r",
+											"    </tr>\r",
+											"    <tr>\r",
+											"        <td>{{response.error}}</td>\r",
+											"    </tr>\r",
+											"</table>\r",
+											"`;\r",
+											"\r",
+											"function constructVisualizerPayload() {\r",
+											"    return { response: pm.response.json() }\r",
+											"}\r",
+											"\r",
+											"pm.visualizer.set(template, constructVisualizerPayload());"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_path",
+											"type": "file",
+											"src": "/C:/Users/User/Pictures/Screenshots/Screenshot 2025-03-02 035709.png"
+										},
+										{
+											"key": "is_default",
+											"value": "1",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/resumes",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"resumes"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5ODgzMDgxLCJleHAiOjE3Mzk4ODY2ODEsIm5iZiI6MTczOTg4MzA4MSwianRpIjoiRE0wSkJMSFJTc29kNVg5eCIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.ZWV0vg10sd-zyEeKq92WUP0vhg5tQvcjtKfabRJkUr8",
+											"type": "string"
+										}
+									]
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "multipart/form-data",
+										"type": "text",
+										"disabled": true
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text",
+										"disabled": true
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "file_path",
+											"type": "file",
+											"src": "/C:/Users/ACER/Downloads/Dragon ball HD wallpaper.jpg"
+										},
+										{
+											"key": "_method",
+											"value": "PUT",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/resumes/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"resumes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "bearer",
+									"bearer": [
+										{
+											"key": "token",
+											"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNzMyNDI5LCJleHAiOjE3NDA3MzYwMjksIm5iZiI6MTc0MDczMjQyOSwianRpIjoiSnFBUmd2S1lzOFdTa1ZheiIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.-4BAoPo25KLsvcZ_G7qZUKYiTHR7hdr1L1KQRfKAD6I",
+											"type": "string"
+										}
+									]
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/resumes/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"resumes",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "job_categories",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/job-categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"job-categories"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"job_category_ids\":[1,2]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/job-categories",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"job-categories"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "Saved Jobs",
+					"item": [
+						{
+							"name": "savedJobsList",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/saves",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"saves"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "applications",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/applications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"applications"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "educations",
+					"item": [
+						{
+							"name": "get all",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/educations",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"educations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/educations/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"educations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"school_name\":\"University of Yangon\",\r\n    \"degree\":\"Bachelor's\",\r\n    \"field_of_study\":\"Computer Science ss\",\r\n    \"start_date\":\"2020-09-01\",\r\n    \"end_date\":\"2025-01-01\",\t\r\n    \"still_attending\":\"1\",\r\n    \"description\":\"Studied software development and algorithms.\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/educations",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"educations"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"school_name\":\"University of Yangon update\",\r\n    \"degree\":\"Bachelor's\",\r\n    \"field_of_study\":\"Computer Science\",\r\n    \"start_date\":\"2020-09-01\",\r\n    \"end_date\":\"2025-01-01\",\t\r\n    \"still_attending\":\"1\",\r\n    \"description\":\"Studied software development and algorithms.\"\r\n\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/applicant/me/educations/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"educations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/applicant/me/educations/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"applicant",
+										"me",
+										"educations",
+										"1"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				},
+				{
+					"name": "My Profile",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzMTIzLCJleHAiOjE3NDAyNDY3MjMsIm5iZiI6MTc0MDI0MzEyMywianRpIjoiS1ZGZ3pJR1pMMWJlQkxLQSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4wOCjK7zAH_nLJ7zgx58EO1PAu3yEPRt2ojFRME3jr8",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "GET",
 						"header": [
@@ -1300,88 +2207,31 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/profile/3",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"profile",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzMTIzLCJleHAiOjE3NDAyNDY3MjMsIm5iZiI6MTc0MDI0MzEyMywianRpIjoiS1ZGZ3pJR1pMMWJlQkxLQSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4wOCjK7zAH_nLJ7zgx58EO1PAu3yEPRt2ojFRME3jr8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
 							},
 							{
-								"key": "Accept",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/profile/",
-							"protocol": "http",
+							"raw": "{{url}}/applicant/me",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"applicant",
-								"me",
-								"profile",
-								""
+								"me"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "update",
+					"name": "Update My Profile",
 					"request": {
 						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTM0NjY2LCJleHAiOjE3Mzk5MzgyNjYsIm5iZiI6MTczOTkzNDY2NiwianRpIjoieW1ybHNLbUl2aFNzeWZ6eCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6ABMTbQYALf7Oszv7iWJO2LfDfZAHfrSdKzQJfYgXxo",
-									"type": "string"
-								}
-							]
+							"type": "noauth"
 						},
 						"method": "PUT",
 						"header": [
@@ -1394,11 +2244,16 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n\"full_name\":\"hi\",\r\n\"phone\":\"095407282\",\r\n\"address\":\"meikhtila\",\r\n\"location_id\":\"3\",\r\n\"description\":\"hi\"\r\n}",
+							"raw": "{\r\n    \"full_name\": \"Moe Wai Yan\",\r\n    \"phone\": \"095407282\",\r\n    \"address\": \"yangon\",\r\n    \"location_id\": \"3\",\r\n    \"description\": \"hi\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1406,100 +2261,395 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/profile/1",
-							"protocol": "http",
+							"raw": "{{url}}/applicant/me",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
 								"applicant",
-								"me",
-								"profile",
-								"1"
+								"me"
 							]
 						}
 					},
 					"response": []
+				}
+			]
+		},
+		{
+			"name": "recruiter_profile",
+			"item": [
+				{
+					"name": "jobs",
+					"item": [
+						{
+							"name": "Get All",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/recruiter/me/jobs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/recruiter/me/jobs/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"jobs",
+										"3"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Applications",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/recruiter/me/jobs/1/applications",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"jobs",
+										"1",
+										"applications"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Update Application Status",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"status\": \"Accepted\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/recruiter/me/applications/1/status",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"applications",
+										"1",
+										"status"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "Shortlist",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/recruiter/me/jobs/1/shortlist",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"jobs",
+										"1",
+										"shortlist"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Mobile  Developer\",\r\n    \"job_category_id\":1,\r\n    \"location_id\":1,\r\n    \"type\":\"OnSite\",\r\n    \"description\":\"blah\",\t\r\n    \"requirements\":\"need skills and good communication\",\r\n    \"num_of_posts\":1,\r\n    \"salary\":\"200000\",\r\n    \"address\":\"insein\",\r\n    \"status\":\"Open\",\r\n    \"skill_ids\":[1,2]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/recruiter/me/jobs",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"jobs"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"title\":\"Junoir Web Developer update\",\r\n    \"job_category_id\":4,\r\n    \"location_id\":1,\r\n    \"type\":\"OnSite\",\r\n    \"description\":\"blah\",\t\r\n    \"requirements\":\"need skills and good communication\",\r\n    \"num_of_posts\":1,\r\n    \"salary\":\"200000\",\r\n    \"address\":\"insein\",\r\n    \"status\":\"Open\",\r\n    \"skill_ids\":[3,4]\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/recruiter/me/jobs/2",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"jobs",
+										"2"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/recruiter/me/jobs/3",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiter",
+										"me",
+										"jobs",
+										"3"
+									]
+								}
+							},
+							"response": []
+						}
+					]
 				},
 				{
-					"name": "delete",
+					"name": "Get My Profile",
 					"request": {
 						"auth": {
 							"type": "bearer",
 							"bearer": [
 								{
 									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTc1NTY1LCJleHAiOjE3Mzk5NzkxNjYsIm5iZiI6MTczOTk3NTU2NiwianRpIjoiWEJJNWNFbXY4cXFFemJmMCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FzBNLSGuB4Nkw8EsWmF85kJmfYW6_fVBXztkECuXcFM",
+									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTMxNDIyLCJleHAiOjE3Mzk5MzUwMjIsIm5iZiI6MTczOTkzMTQyMiwianRpIjoiSW00OWpqNXVNeXE5SnA4UCIsInN1YiI6IjUiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.njturhxzN-i6FWyQNkRjusUOB5Q7sbEhXCRD7C3tOzc",
 									"type": "string"
 								}
 							]
 						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/profile/4",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"profile",
-								"4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getMyApplicantProfile",
-					"request": {
 						"method": "GET",
 						"header": [
 							{
-								"key": "Accept",
+								"key": "Content-Type",
 								"value": "application/json",
 								"type": "text"
 							},
 							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
+								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "{{url}}applicant/me",
+							"raw": "{{url}}/recruiter/me",
 							"host": [
-								"{{url}}applicant"
+								"{{url}}"
 							],
 							"path": [
+								"recruiter",
 								"me"
 							]
 						}
@@ -1507,10 +2657,15 @@
 					"response": []
 				},
 				{
-					"name": "updateMyApplicantProfile",
+					"name": "Update My Profile",
 					"request": {
 						"method": "PUT",
 						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
 							{
 								"key": "Accept",
 								"value": "application/json",
@@ -1520,16 +2675,11 @@
 								"key": "Authorization",
 								"value": "Bearer {{token}}",
 								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
 							}
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \r\n\"full_name\":\"Moe Wai Yan\",\r\n\"phone\":\"095407282\",\r\n\"address\":\"yangon\",\r\n\"location_id\":\"3\",\r\n\"description\":\"hi\"\r\n}",
+							"raw": "{\r\n    \"company_name\": \"recruiter 2 company\",\r\n    \"phone\": \"0978403960\",\r\n    \"website\": \"https://www.youtube.com/\",\r\n    \"address\": \"yangon\",\r\n    \"location_id\": \"1\",\r\n    \"description\": \"hi\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1537,12 +2687,51 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}applicant/me",
+							"raw": "{{url}}/recruiter/me",
 							"host": [
-								"{{url}}applicant"
+								"{{url}}"
 							],
 							"path": [
+								"recruiter",
 								"me"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Reviews",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{url}}/recruiter/me/reviews",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								"recruiter",
+								"me",
+								"reviews"
 							]
 						}
 					},
@@ -1554,39 +2743,6 @@
 			"name": "applicant list",
 			"item": [
 				{
-					"name": "show",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}accounts/2",
-							"host": [
-								"{{url}}accounts"
-							],
-							"path": [
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
 					"name": "get all",
 					"request": {
 						"method": "GET",
@@ -1608,69 +2764,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}accounts",
+							"raw": "{{url}}/accounts",
 							"host": [
-								"{{url}}accounts"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "applicant_skill",
-			"item": [
-				{
-					"name": "create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQ0NDUyLCJleHAiOjE3NDAyNDgwNTIsIm5iZiI6MTc0MDI0NDQ1MiwianRpIjoiRzFGMkFXTlFRTU1UZWtMaCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.W_XzAPwPy7fna47Ha8F5wYwrOsoB7lHPm3jKN0pTGd0",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \r\n\"skill_ids\":[2,3]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-skill",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-skill"
+								"accounts"
 							]
 						}
 					},
@@ -1679,16 +2778,6 @@
 				{
 					"name": "show",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQ0NDUyLCJleHAiOjE3NDAyNDgwNTIsIm5iZiI6MTc0MDI0NDQ1MiwianRpIjoiRzFGMkFXTlFRTU1UZWtMaCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.W_XzAPwPy7fna47Ha8F5wYwrOsoB7lHPm3jKN0pTGd0",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -1700,173 +2789,21 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-skill/3",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-skill",
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQ0NDUyLCJleHAiOjE3NDAyNDgwNTIsIm5iZiI6MTc0MDI0NDQ1MiwianRpIjoiRzFGMkFXTlFRTU1UZWtMaCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.W_XzAPwPy7fna47Ha8F5wYwrOsoB7lHPm3jKN0pTGd0",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
 							},
 							{
-								"key": "Accept",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-skill",
-							"protocol": "http",
+							"raw": "{{url}}/accounts/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-skill"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMzgyNzMzLCJleHAiOjE3NDAzODYzMzMsIm5iZiI6MTc0MDM4MjczMywianRpIjoiTmxuRGI4VFE4TDhyQ1VEQSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.lNyhAZlv3bWNmZzGAWtUhVJviWQd7Sr8OxWphJxC3SU",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \r\n\"skill_ids\":[1,2]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-skill/5",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
+								"accounts",
 								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-skill",
-								"5"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQ0NDUyLCJleHAiOjE3NDAyNDgwNTIsIm5iZiI6MTc0MDI0NDQ1MiwianRpIjoiRzFGMkFXTlFRTU1UZWtMaCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.W_XzAPwPy7fna47Ha8F5wYwrOsoB7lHPm3jKN0pTGd0",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-skill/5",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-skill",
-								"5"
 							]
 						}
 					},
@@ -1875,403 +2812,222 @@
 			]
 		},
 		{
-			"name": "resumes",
+			"name": "recruiters",
 			"item": [
 				{
-					"name": "create",
-					"event": [
+					"name": "reviews",
+					"item": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var template = `\r",
-									"<style type=\"text/css\">\r",
-									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
-									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
-									"    .tftable tr {background-color:#ffffff;}\r",
-									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
-									"    .tftable tr:hover {background-color:#e0ffff;}\r",
-									"</style>\r",
-									"\r",
-									"<table class=\"tftable\" border=\"1\">\r",
-									"    <tr>\r",
-									"        <th>Error</th>\r",
-									"    </tr>\r",
-									"    <tr>\r",
-									"        <td>{{response.error}}</td>\r",
-									"    </tr>\r",
-									"</table>\r",
-									"`;\r",
-									"\r",
-									"function constructVisualizerPayload() {\r",
-									"    return { response: pm.response.json() }\r",
-									"}\r",
-									"\r",
-									"pm.visualizer.set(template, constructVisualizerPayload());"
+							"name": "get all",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
 								],
-								"type": "text/javascript",
-								"packages": {}
-							}
-						}
-					],
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDA3OTEwLCJleHAiOjE3NDA0MTE1MTAsIm5iZiI6MTc0MDQwNzkxMCwianRpIjoiN0daUjc3cDkwQlZaYjRRMSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.XwRDbIP5loTyTHz0F7C4bwHoc3bagQYF9rJGDYC_zOM",
-									"type": "string"
+								"url": {
+									"raw": "{{url}}/recruiters/1/reviews",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiters",
+										"1",
+										"reviews"
+									]
 								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
 							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file_path",
-									"type": "file",
-									"src": "/C:/Users/ACER/Pictures/Screenshots/Screenshot 2025-02-18 143513.png"
-								},
-								{
-									"key": "",
-									"value": "",
-									"type": "text",
-									"disabled": true
-								}
-							]
+							"response": []
 						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/resumes",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"resumes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5ODc3MzkyLCJleHAiOjE3Mzk4ODA5OTIsIm5iZiI6MTczOTg3NzM5MiwianRpIjoiQlZZS2ozUVVBbVU5clVFUCIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.A6Vc924SnJHLMUebdlEcjv24IPaC52htyAfRnv7rkfA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/resumes/4",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"resumes",
-								"4"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQyMTA5LCJleHAiOjE3NDAyNDU3MDksIm5iZiI6MTc0MDI0MjEwOSwianRpIjoiMmY3cjRhOFgzWlNGOW50MCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.sjVk-UVriV6Oe3j4aX3lMVQAIpP-cBuwYT-JHT_f9u0",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/resumes",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"resumes"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "test",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"hi\":\"hello\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/test",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"test"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5ODgzMDgxLCJleHAiOjE3Mzk4ODY2ODEsIm5iZiI6MTczOTg4MzA4MSwianRpIjoiRE0wSkJMSFJTc29kNVg5eCIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.ZWV0vg10sd-zyEeKq92WUP0vhg5tQvcjtKfabRJkUr8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "formdata",
-							"formdata": [
-								{
-									"key": "file_path",
-									"type": "file",
-									"src": "/C:/Users/ACER/Downloads/Dragon ball HD wallpaper.jpg"
-								},
-								{
-									"key": "_method",
-									"value": "PUT",
-									"type": "text"
-								}
-							]
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/resumes/9",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"resumes",
-								"9"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNzMyNDI5LCJleHAiOjE3NDA3MzYwMjksIm5iZiI6MTc0MDczMjQyOSwianRpIjoiSnFBUmd2S1lzOFdTa1ZheiIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.-4BAoPo25KLsvcZ_G7qZUKYiTHR7hdr1L1KQRfKAD6I",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/resumes/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"resumes",
-								"2"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "applicant_application",
-			"item": [
-				{
-					"name": "create",
-					"event": [
 						{
-							"listen": "test",
-							"script": {
-								"exec": [
-									"var template = `\r",
-									"<style type=\"text/css\">\r",
-									"    .tftable {font-size:14px;color:#333333;width:100%;border-width: 1px;border-color: #87ceeb;border-collapse: collapse;}\r",
-									"    .tftable th {font-size:18px;background-color:#87ceeb;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;text-align:left;}\r",
-									"    .tftable tr {background-color:#ffffff;}\r",
-									"    .tftable td {font-size:14px;border-width: 1px;padding: 8px;border-style: solid;border-color: #87ceeb;}\r",
-									"    .tftable tr:hover {background-color:#e0ffff;}\r",
-									"</style>\r",
-									"\r",
-									"<table class=\"tftable\" border=\"1\">\r",
-									"    <tr>\r",
-									"        <th>Error</th>\r",
-									"    </tr>\r",
-									"    <tr>\r",
-									"        <td>{{response.error}}</td>\r",
-									"    </tr>\r",
-									"</table>\r",
-									"`;\r",
-									"\r",
-									"function constructVisualizerPayload() {\r",
-									"    return { response: pm.response.json() }\r",
-									"}\r",
-									"\r",
-									"pm.visualizer.set(template, constructVisualizerPayload());"
+							"name": "show",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
 								],
-								"type": "text/javascript",
-								"packages": {}
-							}
+								"url": {
+									"raw": "{{url}}/recruiters/1/reviews/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiters",
+										"1",
+										"reviews",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "create",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\":\"This company is good\",\r\n    \"rating\":\"5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/recruiters/1/reviews",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiters",
+										"1",
+										"reviews"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "update",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"comment\":\"This company is good update\",\r\n    \"rating\":\"5\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{url}}/recruiters/1/reviews/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiters",
+										"1",
+										"reviews",
+										"1"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "delete",
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Authorization",
+										"value": "Bearer {{token}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{url}}/recruiters/1/reviews/1",
+									"host": [
+										"{{url}}"
+									],
+									"path": [
+										"recruiters",
+										"1",
+										"reviews",
+										"1"
+									]
+								}
+							},
+							"response": []
 						}
-					],
+					]
+				},
+				{
+					"name": "get all",
 					"request": {
-						"method": "POST",
+						"method": "GET",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -2284,29 +3040,18 @@
 								"type": "text"
 							},
 							{
-								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"type": "text",
-								"disabled": true
-							},
-							{
 								"key": "Authorization",
 								"value": "Bearer {{token}}",
 								"type": "text"
 							}
 						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"resume_id\":2,\r\n    \"job_post_id\":2\r\n}"
-						},
 						"url": {
-							"raw": "{{url}}applicant/me/applications",
+							"raw": "{{url}}/recruiters",
 							"host": [
-								"{{url}}applicant"
+								"{{url}}"
 							],
 							"path": [
-								"me",
-								"applications"
+								"recruiters"
 							]
 						}
 					},
@@ -2315,16 +3060,6 @@
 				{
 					"name": "show",
 					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDk1NzM0LCJleHAiOjE3NDA0OTkzMzQsIm5iZiI6MTc0MDQ5NTczNCwianRpIjoiSVRMcnFvclBldmhTRVZ2TyIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6ed0EmNAK16TTBzG-ylSeh5PK2oGZPVLLJ9M47qwCd4",
-									"type": "string"
-								}
-							]
-						},
 						"method": "GET",
 						"header": [
 							{
@@ -2336,77 +3071,28 @@
 								"key": "Accept",
 								"value": "application/json",
 								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applications/6",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applications",
-								"6"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDgyMjE0LCJleHAiOjE3NDA0ODU4MTQsIm5iZiI6MTc0MDQ4MjIxNCwianRpIjoiZ3p0bkljWDdNS2lPM0ZQWCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0._HjcaM-g3qB6R2NNxKsa7gW48b26Spl_IzCLzm_fHOc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
 							},
 							{
-								"key": "Accept",
-								"value": "application/json",
+								"key": "Authorization",
+								"value": "Bearer {{token}}",
 								"type": "text"
 							}
 						],
 						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applications",
-							"protocol": "http",
+							"raw": "{{url}}/recruiters/1",
 							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
+								"{{url}}"
 							],
-							"port": "8000",
 							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applications"
+								"recruiters",
+								"1"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "jobApplications",
+					"name": "Jobs by Specific Recruiter",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -2427,1496 +3113,14 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}recruiter/me/jobs/2/applications",
+							"raw": "{{url}}/recruiters/1/jobs",
 							"host": [
-								"{{url}}recruiter"
+								"{{url}}"
 							],
 							"path": [
-								"me",
-								"jobs",
-								"2",
-								"applications"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "test",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"hi\":\"hello\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/test",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"test"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDgyMjE0LCJleHAiOjE3NDA0ODU4MTQsIm5iZiI6MTc0MDQ4MjIxNCwianRpIjoiZ3p0bkljWDdNS2lPM0ZQWCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0._HjcaM-g3qB6R2NNxKsa7gW48b26Spl_IzCLzm_fHOc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": ""
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applications/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applications",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update-status",
-					"request": {
-						"method": "PATCH",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"status\":\"Accepted\"\r\n}"
-						},
-						"url": {
-							"raw": "{{url}}recruiter/me/applications/3/status",
-							"host": [
-								"{{url}}recruiter"
-							],
-							"path": [
-								"me",
-								"applications",
-								"3",
-								"status"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "getShorListApplications",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "multipart/form-data",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text",
-								"disabled": true
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}recruiter/me/jobs/1/shortlist",
-							"host": [
-								"{{url}}recruiter"
-							],
-							"path": [
-								"me",
-								"jobs",
-								"1",
-								"shortlist"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDgyMjE0LCJleHAiOjE3NDA0ODU4MTQsIm5iZiI6MTc0MDQ4MjIxNCwianRpIjoiZ3p0bkljWDdNS2lPM0ZQWCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0._HjcaM-g3qB6R2NNxKsa7gW48b26Spl_IzCLzm_fHOc",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applications/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applications",
-								"2"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "applicant job categories",
-			"item": [
-				{
-					"name": "create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMzgyNzMzLCJleHAiOjE3NDAzODYzMzMsIm5iZiI6MTc0MDM4MjczMywianRpIjoiTmxuRGI4VFE4TDhyQ1VEQSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.lNyhAZlv3bWNmZzGAWtUhVJviWQd7Sr8OxWphJxC3SU",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"job_category_ids\":[1,2]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-job-categories",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-job-categories"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3Bhc3N3b3JkL2NoYW5nZSIsImlhdCI6MTc0MDIzNjcxMiwiZXhwIjoxNzQwMjQwMzEyLCJuYmYiOjE3NDAyMzY3MTIsImp0aSI6InFtNlhuUDRoQ3NkS3lrS2wiLCJzdWIiOiIxIiwicHJ2IjoiMjNiZDVjODk0OWY2MDBhZGIzOWU3MDFjNDAwODcyZGI3YTU5NzZmNyJ9.GGkO6GO1Sbrj9_K86_-iR09VxzEyIUQX3PdX2J60xLQ",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/admin/me/jobCategories/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"admin",
-								"me",
-								"jobCategories",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMzgyNzMzLCJleHAiOjE3NDAzODYzMzMsIm5iZiI6MTc0MDM4MjczMywianRpIjoiTmxuRGI4VFE4TDhyQ1VEQSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.lNyhAZlv3bWNmZzGAWtUhVJviWQd7Sr8OxWphJxC3SU",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-job-categories",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-job-categories"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMzgyNzMzLCJleHAiOjE3NDAzODYzMzMsIm5iZiI6MTc0MDM4MjczMywianRpIjoiTmxuRGI4VFE4TDhyQ1VEQSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.lNyhAZlv3bWNmZzGAWtUhVJviWQd7Sr8OxWphJxC3SU",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n   \"job_category_ids\":[3,4]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/applicant-job-categories/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"applicant-job-categories",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMzgyNzMzLCJleHAiOjE3NDAzODYzMzMsIm5iZiI6MTc0MDM4MjczMywianRpIjoiTmxuRGI4VFE4TDhyQ1VEQSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.lNyhAZlv3bWNmZzGAWtUhVJviWQd7Sr8OxWphJxC3SU",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/jobCategories/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"jobCategories",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "socialMedia",
-			"item": [
-				{
-					"name": "create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzMTIzLCJleHAiOjE3NDAyNDY3MjMsIm5iZiI6MTc0MDI0MzEyMywianRpIjoiS1ZGZ3pJR1pMMWJlQkxLQSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4wOCjK7zAH_nLJ7zgx58EO1PAu3yEPRt2ojFRME3jr8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"link\":\"www.youtube.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/social-media",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"social-media"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwNzc1LCJleHAiOjE3NDA4MDQzNzUsIm5iZiI6MTc0MDgwMDc3NSwianRpIjoiOE04Z3ZrcUxsTlk0NzBhNiIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TQNhLbw78hFhCG42M1hewluKYfcHWg33nLlNV-oHamY",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Bearer",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"link\":\"www.facebook.com\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}social-media/3",
-							"host": [
-								"{{url}}social-media"
-							],
-							"path": [
-								"3"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzMTIzLCJleHAiOjE3NDAyNDY3MjMsIm5iZiI6MTc0MDI0MzEyMywianRpIjoiS1ZGZ3pJR1pMMWJlQkxLQSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.4wOCjK7zAH_nLJ7zgx58EO1PAu3yEPRt2ojFRME3jr8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/social-media",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"social-media"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzM5OTc1NTY1LCJleHAiOjE3Mzk5NzkxNjYsIm5iZiI6MTczOTk3NTU2NiwianRpIjoiWEJJNWNFbXY4cXFFemJmMCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.FzBNLSGuB4Nkw8EsWmF85kJmfYW6_fVBXztkECuXcFM",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/social-media/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"social-media",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwODIzLCJleHAiOjE3NDA4MDQ0MjMsIm5iZiI6MTc0MDgwMDgyMywianRpIjoicUxIOTV3d0hyWXFQTkF0bCIsInN1YiI6IjQiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0._kGbqoVU-P8MfI2_VAf3paBHlrPGTWSO6SC0C-zCttE",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}social-media/3",
-							"host": [
-								"{{url}}social-media"
-							],
-							"path": [
-								"3"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "applicant education",
-			"item": [
-				{
-					"name": "create",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzOTc4LCJleHAiOjE3NDAyNDc1NzgsIm5iZiI6MTc0MDI0Mzk3OCwianRpIjoiRU1JYlAzV3JIcTJSbk4yVCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kkF9ZH2mrSMGVdH28ZC4-Jm_RWQlWpp3OLEOzZXiVIE",
-									"type": "string"
-								}
-							]
-						},
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"school_name\":\"University of Yangon\",\r\n    \"degree\":\"Bachelor's\",\r\n    \"field_of_study\":\"Computer Science ss\",\r\n    \"start_date\":\"2020-09-01\",\r\n    \"end_date\":\"2025-01-01\",\t\r\n    \"still_attending\":\"1\",\r\n    \"description\":\"Studied software development and algorithms.\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/education",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"education"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwOTMyLCJleHAiOjE3NDA4MDQ1MzIsIm5iZiI6MTc0MDgwMDkzMiwianRpIjoiRE04TktKS1FJTFFDekM5biIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.2w--4UiOY-4dGkqpyKNmjYZ8b_lcDyQCd-xh09hLjro",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"school_name\":\"University of Yangon update\",\r\n    \"degree\":\"Bachelor's\",\r\n    \"field_of_study\":\"Computer Science\",\r\n    \"start_date\":\"2020-09-01\",\r\n    \"end_date\":\"2025-01-01\",\t\r\n    \"still_attending\":\"1\",\r\n    \"description\":\"Studied software development and algorithms.\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}applicant/me/education/1",
-							"host": [
-								"{{url}}applicant"
-							],
-							"path": [
-								"me",
-								"education",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjQzOTc4LCJleHAiOjE3NDAyNDc1NzgsIm5iZiI6MTc0MDI0Mzk3OCwianRpIjoiRU1JYlAzV3JIcTJSbk4yVCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kkF9ZH2mrSMGVdH28ZC4-Jm_RWQlWpp3OLEOzZXiVIE",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/education",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"education"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMTAzMDA4LCJleHAiOjE3NDAxMDY2MDgsIm5iZiI6MTc0MDEwMzAwOCwianRpIjoiWmc4bXNYaGkzTWpQREV1ZCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.wGcOOgrMvDuXaBBZg-hQY3tt7x4XteCP_DbIgJQeOwk",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/education/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"education",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwOTgzLCJleHAiOjE3NDA4MDQ1ODMsIm5iZiI6MTc0MDgwMDk4MywianRpIjoiSERab0VYVTVRd0x0Q0M1bCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.7eW_VCPTQeyFiikUdlxmGEAbNGlwY3cXVQ4QQmsVEuA",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}applicant/me/education/1",
-							"host": [
-								"{{url}}applicant"
-							],
-							"path": [
-								"me",
-								"education",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "applicant experience",
-			"item": [
-				{
-					"name": "create",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Bearer",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"company_name\":\"YNA Company\",\r\n    \"location\":\"Yangon\",\r\n    \"title\":\"junior web developer\",\r\n    \"job_type\":\"blah blah\",\t\r\n    \"start_date\":\"2-2-2023\",\r\n    \"end_date\":\"2-2-2025\"\r\n\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}applicant/me/experiences",
-							"host": [
-								"{{url}}applicant"
-							],
-							"path": [
-								"me",
-								"experiences"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwNTQwLCJleHAiOjE3NDA4MDQxNDAsIm5iZiI6MTc0MDgwMDU0MCwianRpIjoiREZUODhZTHVka3NCZ1BaUSIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kqp7VppeWUacGeflJI0qvxRluRLiG79SuJT8pDnTBJo",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Bearer",
-								"value": "{{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"company_name\":\"YNA Company update\",\r\n    \"location\":\"Yangon\",\r\n    \"title\":\"junior web developer\",\r\n    \"job_type\":\"blah blah\",\t\r\n    \"start_date\":\"2023-2-2\",\r\n    \"end_date\":\"2023-2-2\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}applicant/me/experiences/1",
-							"host": [
-								"{{url}}applicant"
-							],
-							"path": [
-								"me",
-								"experiences",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNjE5NDUxLCJleHAiOjE3NDA2MjMwNTIsIm5iZiI6MTc0MDYxOTQ1MiwianRpIjoicDF3NE1HbnlMTXhKUzg4UCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.6taJL3iJHm2XLfpEQjqD7nstxIBaUkGUXjZ3be0qiyk",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/experiences",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"experiences"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMTAzMDA4LCJleHAiOjE3NDAxMDY2MDgsIm5iZiI6MTc0MDEwMzAwOCwianRpIjoiWmc4bXNYaGkzTWpQREV1ZCIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.wGcOOgrMvDuXaBBZg-hQY3tt7x4XteCP_DbIgJQeOwk",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/applicant/me/education/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"applicant",
-								"me",
-								"education",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL3YxL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwODAwNjY3LCJleHAiOjE3NDA4MDQyNjcsIm5iZiI6MTc0MDgwMDY2NywianRpIjoiY1hZRFZDU3pKY1lUamw4MCIsInN1YiI6IjMiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.Qcrml7zoeoLBn2kt1z1pNHGQnQXd9AGhKxc9XWYsn_M",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}applicant/me/experiences/1",
-							"host": [
-								"{{url}}applicant"
-							],
-							"path": [
-								"me",
-								"experiences",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "jobs",
-			"item": [
-				{
-					"name": "create",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"Mobile  Developer\",\r\n    \"job_category_id\":1,\r\n    \"location_id\":1,\r\n    \"type\":\"OnSite\",\r\n    \"description\":\"blah\",\t\r\n    \"requirements\":\"need skills and good communication\",\r\n    \"num_of_posts\":1,\r\n    \"salary\":\"200000\",\r\n    \"address\":\"insein\",\r\n    \"status\":\"Open\",\r\n    \"skill_ids\":[1,2]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}recruiter/me/jobs",
-							"host": [
-								"{{url}}recruiter"
-							],
-							"path": [
-								"me",
-								"jobs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwNDc4MTE4LCJleHAiOjE3NDA0ODE3MTgsIm5iZiI6MTc0MDQ3ODExOCwianRpIjoiMzZpRklodnk2Q0ZBMk4yNyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.kxGpdBVYcyCkJ5IsH9_V_YvPN1olP2780NgEfkjhP7I",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"title\":\"Junoir Web Developer update\",\r\n    \"job_category_id\":4,\r\n    \"location_id\":1,\r\n    \"type\":\"OnSite\",\r\n    \"description\":\"blah\",\t\r\n    \"requirements\":\"need skills and good communication\",\r\n    \"num_of_posts\":1,\r\n    \"salary\":\"200000\",\r\n    \"address\":\"insein\",\r\n    \"status\":\"Open\",\r\n    \"skill_ids\":[3,4]\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/jobs/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"v1",
-								"jobs",
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get companyId",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}recruiter/me/jobs",
-							"host": [
-								"{{url}}recruiter"
-							],
-							"path": [
-								"me",
-								"jobs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get jobs",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}recruiters/1/jobs",
-							"host": [
-								"{{url}}recruiters"
-							],
-							"path": [
+								"recruiters",
 								"1",
 								"jobs"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMzcyNzQ0LCJleHAiOjE3NDAzNzYzNDQsIm5iZiI6MTc0MDM3Mjc0NCwianRpIjoiM0VYQTdrWTluMGttWmtObyIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.PIxJW8JByZqDIXV99yFd3PUwhHoqicb9HUBF-xPvL20",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/jobs/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"v1",
-								"jobs",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMzk4NDExLCJleHAiOjE3NDA0MDIwMTEsIm5iZiI6MTc0MDM5ODQxMSwianRpIjoiamZ3c1ZzVG9FZ3NLaU1JVSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.YG3Zb_QLFd89mTG2QCAAHW2UtmgEs8ExfviTgvJImA8",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/v1/jobs/3",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"v1",
-								"jobs",
-								"3"
 							]
 						}
 					},
@@ -3949,9 +3153,12 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}jobs",
+							"raw": "{{url}}/jobs",
 							"host": [
-								"{{url}}jobs"
+								"{{url}}"
+							],
+							"path": [
+								"jobs"
 							]
 						}
 					},
@@ -3979,24 +3186,20 @@
 							}
 						],
 						"url": {
-							"raw": "{{url}}jobs/1",
+							"raw": "{{url}}/jobs/1",
 							"host": [
-								"{{url}}jobs"
+								"{{url}}"
 							],
 							"path": [
+								"jobs",
 								"1"
 							]
 						}
 					},
 					"response": []
-				}
-			]
-		},
-		{
-			"name": "save job",
-			"item": [
+				},
 				{
-					"name": "create",
+					"name": "Save Job",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -4026,12 +3229,13 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}jobs/2/save",
+							"raw": "{{url}}/jobs/1/save",
 							"host": [
-								"{{url}}jobs"
+								"{{url}}"
 							],
 							"path": [
-								"2",
+								"jobs",
+								"1",
 								"save"
 							]
 						}
@@ -4039,12 +3243,9 @@
 					"response": []
 				},
 				{
-					"name": "savedJobsList",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
+					"name": "Apply",
 					"request": {
-						"method": "GET",
+						"method": "POST",
 						"header": [
 							{
 								"key": "Content-Type",
@@ -4064,7 +3265,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "",
+							"raw": "{\r\n    \"resume_id\": 3\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -4072,265 +3273,14 @@
 							}
 						},
 						"url": {
-							"raw": "{{url}}applicant/me/saves",
+							"raw": "{{url}}/jobs/1/apply",
 							"host": [
-								"{{url}}applicant"
+								"{{url}}"
 							],
 							"path": [
-								"me",
-								"saves"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		},
-		{
-			"name": "reviews",
-			"item": [
-				{
-					"name": "create",
-					"protocolProfileBehavior": {
-						"disableBodyPruning": true
-					},
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"comment\":\"This company is good\",\r\n    \"rating\":\"5\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}recruiters/2/reviews",
-							"host": [
-								"{{url}}recruiters"
-							],
-							"path": [
-								"2",
-								"reviews"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "update",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjAwNTY3LCJleHAiOjE3NDAyMDQxNjcsIm5iZiI6MTc0MDIwMDU2NywianRpIjoiR3VqZ3d5TmN1cThlRXVzYSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TvIBdQD0a3y54O9tipiwf6BcaqhU2O_F2yeIsf_dfqw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\r\n    \"comment\":\"This company is good update\",\r\n    \"rating\":\"5\"\r\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{url}}recruiters/1/reviews",
-							"host": [
-								"{{url}}recruiters"
-							],
-							"path": [
+								"jobs",
 								"1",
-								"reviews"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "get all",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}accounts",
-							"host": [
-								"{{url}}accounts"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "account review show",
-					"request": {
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Authorization",
-								"value": "Bearer {{token}}",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "{{url}}accounts/2",
-							"host": [
-								"{{url}}accounts"
-							],
-							"path": [
-								"2"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "show",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjAwNTY3LCJleHAiOjE3NDAyMDQxNjcsIm5iZiI6MTc0MDIwMDU2NywianRpIjoiR3VqZ3d5TmN1cThlRXVzYSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TvIBdQD0a3y54O9tipiwf6BcaqhU2O_F2yeIsf_dfqw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "GET",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/reviews/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"reviews",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "delete",
-					"request": {
-						"auth": {
-							"type": "bearer",
-							"bearer": [
-								{
-									"key": "token",
-									"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2F1dGgvc2lnbmluIiwiaWF0IjoxNzQwMjAwNTY3LCJleHAiOjE3NDAyMDQxNjcsIm5iZiI6MTc0MDIwMDU2NywianRpIjoiR3VqZ3d5TmN1cThlRXVzYSIsInN1YiI6IjIiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.TvIBdQD0a3y54O9tipiwf6BcaqhU2O_F2yeIsf_dfqw",
-									"type": "string"
-								}
-							]
-						},
-						"method": "DELETE",
-						"header": [
-							{
-								"key": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							},
-							{
-								"key": "Accept",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"url": {
-							"raw": "http://127.0.0.1:8000/api/reviews/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8000",
-							"path": [
-								"api",
-								"reviews",
-								"2"
+								"apply"
 							]
 						}
 					},
