@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
+use App\Services\Storage\StorageService;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,3 +19,11 @@ Route::middleware('auth')->group(function () {
 });
 
 require __DIR__.'/auth.php';
+
+
+Route::get('uploads/{any}', function ($any) {
+    $storageService = new StorageService();
+
+    return $storageService->getFileAsResponse($any);
+
+})->where('any', '.*');
