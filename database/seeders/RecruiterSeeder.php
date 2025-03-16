@@ -15,11 +15,11 @@ class RecruiterSeeder extends Seeder
     {
         $user = User::create([
             'username' => 'Recruiter',
-            'email'    => 'recruiter@gmail.com',
-            'password' => 'moewaiyan',
+            'email'    => 'recruiter@jobfinder.com',
+            'password' => 'Recruiter123!@#',
             'role_id'  => '3',
         ]);
-
+   
         DB::table('company_profiles')->insert([
             [
 

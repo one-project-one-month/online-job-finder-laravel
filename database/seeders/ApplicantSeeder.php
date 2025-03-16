@@ -15,8 +15,8 @@ class ApplicantSeeder extends Seeder
     {
         $user = User::create([
             'username' => 'Applicant',
-            'email'    => 'applicant@gmail.com',
-            'password' => 'moewaiyan',
+            'email'    => 'applicant@jobfinder.com',
+            'password' => 'Applicant123!@#',
             'role_id'  => '1',
         ]);
 

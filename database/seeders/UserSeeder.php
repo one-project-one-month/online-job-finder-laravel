@@ -13,8 +13,8 @@ class UserSeeder extends Seeder
     {
         User::create([
             'username'     => 'Admin',
-            'email'        => 'admin@gmail.com',
-            'password'     => 'moewaiyan',
+            'email'        => 'admin@jobfinder.com',
+            'password'     => 'Admin123!@#',
             'role_id'      => '2',
             'is_activated' => 1,
         ]);
