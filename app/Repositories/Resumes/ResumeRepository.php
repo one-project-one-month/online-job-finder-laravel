@@ -3,9 +3,15 @@ namespace App\Repositories\Resumes;
 
 use App\Models\Application\Application;
 use App\Models\Resumes\Resume;
+use App\Services\Storage\StorageService;
+use Storage;
 
 class ResumeRepository
 {
+    protected $storageService;
+    public function __construct(StorageService $storageService){
+        $this->storageService=$storageService;
+    }
 
     public function create($data)
     {
@@ -46,22 +52,26 @@ class ResumeRepository
     public function update($userId, $file, $resumeId)
     {
         $resume    = Resume::where('id', $resumeId)->first();
-        $newResume = 'storage/' . $file->store('resumes', 'public');
+       $newResume= $this->storageService->store('resumes', $file);
+       $name      = $file->getClientOriginalName();
         $resume    = $resume->update([
             'user_id'   => $userId,
             'file_path' => $newResume,
+            'name'=>$name
         ]);
         return $resume;
     }
 
     public function delete($id)
     {
-        $Resume           = Resume::findOrFail($id);
+        $resume= Resume::findOrFail($id);
         $existApplication = Application::where('resume_id', $id)->first();
         if ($existApplication) {
             throw new \Exception("You can't delete this resume");
         }
-        $Resume->delete();
-        return $Resume;
+        $path = str_replace(url('uploads') . '/', '', $resume->file_path);
+        $this->storageService->delete($path);
+        $resume->delete();
+        return $resume;
     }
 }
