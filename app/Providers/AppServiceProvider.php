@@ -22,7 +22,8 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('update', [SocialMediaPolicy::class, 'update']);
         Gate::define('delete', [SocialMediaPolicy::class, 'delete']);
 
-        Gate::policy(Review::class, ReviewPolicy::class);
+        Gate::define('update', [ReviewPolicy::class, 'update']);
+        Gate::define('delete', [ReviewPolicy::class, 'delete']);
     }
 }
 

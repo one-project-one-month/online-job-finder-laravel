@@ -2,16 +2,19 @@
 namespace App\Services\Resumes;
 
 use App\Repositories\Resumes\ResumeRepository;
+use App\Services\Storage\StorageService;
 use Illuminate\Support\Facades\Storage;
 
 class ResumeService
 {
 
     protected $resumeRepository;
+    protected $storageService;
 
-    public function __construct(ResumeRepository $resumeRepository)
+    public function __construct(ResumeRepository $resumeRepository,StorageService $storageService)
     {
         $this->resumeRepository = $resumeRepository;
+        $this->storageService = $storageService;
     }
 
     public function createResume($data)
@@ -39,11 +42,8 @@ class ResumeService
     {
         $existResume = $this->getResumeById($resumeId);
         if ($existResume) {
-            $filePath = str_replace('/storage/', '', $existResume->file_path);
-            if (Storage::exists($filePath)) {
-                Storage::delete($filePath);
-            }
-
+        $path = str_replace(url('uploads') . '/', '', $existResume->file_path);
+            $this->storageService->delete($path);
         }
 
         return $this->resumeRepository->update($userId, $file, $resumeId);
@@ -52,10 +52,6 @@ class ResumeService
 
     public function deleteResume($resume)
     {
-        $filePath = str_replace('/storage/', '', $resume->file_path);
-        if (Storage::exists($filePath)) {
-            Storage::delete($filePath);
-        }
         return $this->resumeRepository->delete($resume->id);
     }
 }

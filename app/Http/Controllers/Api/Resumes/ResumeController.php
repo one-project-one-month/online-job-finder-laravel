@@ -8,6 +8,7 @@ use App\Models\Resumes\Resume;
 use App\Services\Resumes\ResumeService;
 use App\Services\Storage\StorageService;
 use Exception;
+use Gate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -66,7 +67,7 @@ class ResumeController extends Controller
         }
     }
 
-    public function getDefaultResume() 
+    public function getDefaultResume()
     {
         $resume = $this->resumeService->getDefaultResume();
         return response()->json([
@@ -116,17 +117,25 @@ class ResumeController extends Controller
         }
     }
 
-    public function update(Request $request, Resume $resume)
+    public function update(Request $request,$id)
     {
         try {
+            if (Gate::denies('update', $id)) {
+                return response()->json([
+                    'message'    => 'Unauthorized action',
+                    'status'     => 'error',
+                    'statusCode' => 403,
+                ], 403);
+            }
             $user = Auth::user();
-            $this->resumeService->updateResume($user->id, $request->file('file_path'), $resume->id);
+
+          $updateFile=  $this->resumeService->updateResume($user->id, $request->file('file_path'), $id);
             return response()->json([
                 'message'    => 'resume update successful',
                 'status'     => 'success',
                 'statusCode' => '200',
                 'data'       => [
-                    'resume' => new ResumeResource($this->resumeService->getResumeById($resume->id)),
+                    'resume' => new ResumeResource($this->resumeService->getResumeById($id)),
                 ],
             ], 200);
         } catch (\Exception $e) {
@@ -140,6 +149,13 @@ class ResumeController extends Controller
 
     public function destroy(Resume $resume)
     {
+        if (Gate::denies('update', $resume->id)) {
+            return response()->json([
+                'message'    => 'Unauthorized action',
+                'status'     => 'error',
+                'statusCode' => 403,
+            ], 403);
+        }
         $resume = $this->resumeService->deleteResume($resume);
         return response()->json([
         ], 204);
